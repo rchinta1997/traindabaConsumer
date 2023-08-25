@@ -1,0 +1,54 @@
+{
+  "name": "train-dhaba-consumer",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "16.14.2",
+    "npm": "8.5.0"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.0.0",
+    "bootstrap": "^5.2.3",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
+    "dayjs": "^1.11.5",
+    "dotenv": "^16.0.3",
+    "razorpay": "^2.8.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.6.0",
+    "react-dom": "^18.2.0",
+    "react-owl-carousel": "^2.3.3",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.8",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "set PORT=3005 && react-scripts start",
+    "build": "set PORT=3005 && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
