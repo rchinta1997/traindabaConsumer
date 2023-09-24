@@ -75,7 +75,7 @@ const Checkout = () => {
         return (f >= .5 - e) ? Math.ceil(n) / p : Math.floor(n) / p;
     }
 
-    if (Object.keys(passengerInfo).length === 0) {
+     if (Object.keys(passengerInfo).length === 0) {
         return null;
     } else {
         return (
