@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import dayjs from "../../helpers/dayjs-helpers";
 import { toast } from "react-toastify";
-import styles from './PNRInfo.css';
-import cartContext from "../../Context/cart-context";
 // const cryptoHelper = require("../../helpers/crypto-helper");
 // const cryptoHelperInstance = new cryptoHelper();
 
@@ -15,34 +13,14 @@ const PNRInfo = () => {
     const [outletData, setOutletData] = useState([]);
     const [passengerInfo, setPassengerInfo] = useState({});
     const [isError, setIsError] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const context = useContext(cartContext);
-    //const [ contextData, setContextData ] = useContext(cartContext);
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-      
-context.cart = context.cart.filter(function(returnableObjects){
-      return returnableObjects.Item_Name !== 'test834';
-});
-
-context.cart.reduce((count, curItem) => {
-  console.log("=========context.cart.reduce==remove==========")
-  console.log(curItem)
-  return count + curItem.quantity;
-}, 0)
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 8000);
         axios
             .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
             .then((response) => {
-              console.log("===============searchByPNR===============")
-              console.log(response.data.body)
                 if (response.data.success) {
-                  setLoading(false);
                     setIsError(false);
                     setPnrData(response.data.body);
                     let passengerInfo = {
@@ -59,13 +37,11 @@ context.cart.reduce((count, curItem) => {
                 } else {
                     setIsError(true);
                     setPnrData(undefined);
-                    setLoading(false);
                 }
             })
             .catch((error) => {
                 console.error("There was an error!", error);
             });
-           
     }, []);
 
     const getRestaurantsInfo = (e) => {
@@ -77,8 +53,6 @@ context.cart.reduce((count, curItem) => {
             .get(process.env.REACT_APP_API_URL + `/Outlets/getOutletsByStationCode/${stationData.code}`)
             .then((response) => {
                 if (response.data.success) {
-                  console.log("==========getOutletsByStationCode==============");
-                  console.log(response);
                     passengerInfo["arrival"] = stationData["arrival"];
                     passengerInfo["arrDate"] = stationData["arrDate"];
                     passengerInfo["halt"] = stationData["halt"];
@@ -117,12 +91,8 @@ context.cart.reduce((count, curItem) => {
         <>
             <SecondBanner></SecondBanner>
             <div className="ritekhana-main-content">
-           {loading? (<div className="loader-container">
-                      <div className="spinner"></div>
-                    </div>):null} 
                 <div className="ritekhana-main-section">
                     <div className="container">
-                
                         <div className="row">
                             <div className="col-md-12">
                                 {isError && (

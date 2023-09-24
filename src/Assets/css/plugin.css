@@ -1765,6 +1765,7 @@ li:hover .ritekhana-listing-style2-btn {
     margin-bottom: 20px;
 }
 .ritekhana-login-box input[type="text"],
+.ritekhana-login-box input[type="number"],
 .ritekhana-login-box input[type="email"],
 .ritekhana-login-box input[type="password"] {
     float: left;

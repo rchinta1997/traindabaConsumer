@@ -1321,6 +1321,7 @@ blockquote i {
     padding: 19px 0px 0px;
 }
 .comment-respond form p input[type="text"],
+.comment-respond form p input[type="number"],
 .comment-respond form p input[type="email"] {
     background-color: transparent;
     border: 1px solid #ececec;
