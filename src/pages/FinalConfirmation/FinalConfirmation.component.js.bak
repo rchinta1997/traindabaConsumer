@@ -3,7 +3,7 @@ import axios from "axios";
 import CartNav from "../Cart/CartNav.component";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import cartContext from "../../Context/cart-context";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FinalConfirmation = () => {
     const context = useContext(cartContext);
@@ -11,18 +11,15 @@ const FinalConfirmation = () => {
     const [itemTotal,setItemTotal]=useState(0);
     const [tax,setTax]=useState(0);
     const [totalAmount,setTotalAmount]=useState(0);
-    const [gst,setGST]=useState(5);
     const navigate = useNavigate();
 
     useEffect(() => {
         setPassengerInfo(JSON.parse(localStorage.getItem("PassengerInfo")));
-        console.log(passegnerInfo)
         let itemvalue=context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2);
-        //const itemTax= context.cart.reduce((acc, item) => acc + ((item.quantity * item.Selling_Price) * item.Tax)/100, 0).toFixed(2);
-        const itemTax = percentage(gst,itemvalue);
-        setTax(round(itemTax,2));
-        setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
-        setItemTotal(round(itemvalue,2));
+        const itemTax= context.cart.reduce((acc, item) => acc + ((item.quantity * item.Selling_Price) * item.Tax)/100, 0).toFixed(2);
+        setTax(itemTax);
+        setTotalAmount(Number(itemvalue)+ Number(itemTax));
+        setItemTotal(itemvalue);
     }, []);
     function loadScript(src) {
         return new Promise((resolve) => {
@@ -38,40 +35,13 @@ const FinalConfirmation = () => {
         });
     }
 
-    async function cash_on_delivery(e){
-        e.preventDefault();
-      alert("COD");
+    async function cash_on_delivery(){
       const res= await sendRequest(1);
       navigate("/OrderConfirmation", { state: { res: res } });
     }
 
-    function percentage(partialValue, totalValue) {
-        return  (partialValue * totalValue)/100;
-     } 
-
-    function round(num, decimalPlaces = 0) {
-        if (num < 0)
-            return -round(-num, decimalPlaces);
-        var p = Math.pow(10, decimalPlaces);
-        var n = num * p;
-        var f = n - Math.floor(n);
-        var e = Number.EPSILON * n;
-    
-        // Determine whether this fraction is a midpoint value.
-        return (f >= .5 - e) ? Math.ceil(n) / p : Math.floor(n) / p;
-    }
-
-    async function clickHandler(event, type){
-        //alert("COD");
-        const res= await sendRequest(1);
-        //navigate("/OrderConfirmation", { state: { res: res } });
-    }
 
     async function sendRequest(paymentType) {
-        let order_response = {           
-            orderDetails:'',
-            paymentDetails:''
-        }
         if(paymentType === 0){
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
 
@@ -85,35 +55,26 @@ const FinalConfirmation = () => {
             MenuItems: context.cart,
             coupons:[],
             orderSource:'TrainDhabaWebsite',
-            payment_Mode:paymentType,
-            Total_Amount: totalAmount
+            payment_Mode:paymentType
         };
         console.log(orderData);
-        console.log("========Razorpay==Start========"+process.env.REACT_APP_API_URL);
         axios
             .post(process.env.REACT_APP_API_URL + "/order/createOrder", orderData)
             .then((response) => {
-                console.log("========createOrder==response========");
-                console.log(response.data.body);
                 if (response.data.success) {
-                    order_response.orderDetails = response.data.body;
-                    order_response.orderDetails.Booking_Date = order_response.orderDetails.Booking_Date;
                     console.log(response.data.body);
-                    console.log("========order_response==response========");
-                    console.log(order_response)
                     if(paymentType === 0){
-                    const amount = Number(response.data.body.Amount_Payable); // Number(response.data.body.Amount_Payable.$numberDecimal.toString());
-                    const id = response.data.body.OrderDetails.id; //  response.data.body.Order_Id; // response.data.body.id;
-                    const currency = response.data.body.OrderDetails.currency; // response.data.body.currency;
+                    const amount = Number(response.data.body.Amount_Payable.$numberDecimal.toString());
+                    const id = response.data.body.id;
+                    const currency = response.data.body.currency;
                     const options = {
-                        key: response.data.body.RAZOR_API_KEY, // Enter the Key ID generated from the Dashboard
+                        key: process.env.REACT_APP_RAZOR_API_KEY, // Enter the Key ID generated from the Dashboard
                         amount: amount * 100 ,
                         currency: currency,
                         name: passegnerInfo.passengerName,
                         description: "Train Dhaba",
                         order_id: id,
                         handler: async function (response) {
-                            console.log("========Razorpay===response===start====");
                             const data = {
                                 orderCreationId: id,
                                 razorpayPaymentId: response.razorpay_payment_id,
@@ -122,12 +83,8 @@ const FinalConfirmation = () => {
                             };
 
                             //const result = await axios.post('/payment/success', data);
-                            console.log("========Razorpay===response=======");
-                            console.log(data);
-                            console.log(response);
-                            //alert(JSON.stringify(response));
-                            order_response.paymentDetails = data;
-                            navigate("/OrderConfirmation", { state: { res: order_response } });
+
+                            alert(response);
                         },
                         prefill: {
                             name: passegnerInfo.passengerName,
@@ -141,13 +98,9 @@ const FinalConfirmation = () => {
                             color: "#61dafb",
                         },
                     };
-                    console.log("========Razorpay==========");
+
                     const paymentObject = new window.Razorpay(options);
                     paymentObject.open();
-                }
-                else
-                {
-                    navigate("/OrderConfirmation", { state: { res: order_response } });
                 }
                 }
                 else{
@@ -206,13 +159,12 @@ const FinalConfirmation = () => {
                             </div>
                         </div>
                         <div className="text-center">
-                             <a onClick={payOnline} className="ritekhana-header-btn" id="rzp-button1">
+                            <a onClick={payOnline} className="ritekhana-header-btn" id="rzp-button1">
                                 Proceed to pay Online
-                            </a> 
-                            
-                         <a  onClick={(event) => clickHandler(event, "Login")}   className="ritekhana-header-btn" id="cod1">
+                            </a>
+                            <a onclick={cash_on_delivery} className="ritekhana-header-btn" id="cod">
                                 Cash On Delivery
-                            </a> 
+                            </a>
                         </div>
                     </div>
                 </div>
