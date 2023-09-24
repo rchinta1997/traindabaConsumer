@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import dayjs from "../../helpers/dayjs-helpers";
+import ConfirmationModal from "../../utility/confirmationmodal.component"
 import {
     Form,
     FormFeedback,
@@ -19,9 +20,46 @@ const MyOrders = () => {
   const [searchValue, setSearchValue] = useState("");
   const [MyOrders, setOrders] = useState([]);
   const [orderStatus, setOrderStatus] = useState('Processing');
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [isConfirmationModalVisible, setConfirmationModalVisible] = useState(false);
+
+  const onCancelOrder = (orderId) => {
+    setSelectedOrderId(orderId);
+    setConfirmationModalVisible(true);
+  };
+
+  const confirmCancelOrder = (orderId) => {
+
+    
+    axios
+        .post(process.env.REACT_APP_API_URL + `/order/getUserOrders/`,orderId)
+        .then((response) => {
+          console.log("===============response received===============")
+          console.log(response)
+            if (response) {
+                const updatedOrders = response.map((order) =>
+                    order.orderId === selectedOrderId ? { ...order, status: 'Cancelled' } : order
+              );
+              setOrders(updatedOrders);
+              setConfirmationModalVisible(false);
+            } else {
+                
+            }
+        })
+        .catch((error) => {
+            console.error("Error occurred while canceling order !", error);
+        });
+   
+  };
+
+  const closeConfirmationModal = () => {
+    setSelectedOrderId(null);
+    setConfirmationModalVisible(false);
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
-  const cancelOrder = () => {    
+  const cancelOrder = (orderId) => {    
     setOrderStatus('Cancelled');
   };
 
@@ -99,7 +137,8 @@ const MyOrders = () => {
                                     {/* <td>{element.Order_Id}</td> */}
                                     <td><Button  >Cancel</Button></td>
                                     <div className="col-md-4 col-sm-4 col-xs-8">
-                        <input type="submit" onClick={() => cancelOrder(element.Order_Id)} value="Cancel Order"></input>
+                                    <button onClick={() => cancelOrder(element.Order_Id)}>Cancel</button>
+
                       </div>
                                 </tr>
                             </tbody>
@@ -113,6 +152,11 @@ const MyOrders = () => {
         </div>       
 
     </div>
+    <ConfirmationModal
+        show={isConfirmationModalVisible}
+        onClose={closeConfirmationModal}
+        onConfirm={confirmCancelOrder}
+      />
      </div>
      </div>
      </div>
