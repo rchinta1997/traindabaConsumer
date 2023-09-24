@@ -67,7 +67,7 @@ const Banner = () => {
               </li>
             </ul>
             <div className="tab-content" id="pills-tabContent">
-              {activeIndex == 0 && (
+              {activeIndex === 0 && (
                 <div
                   className="tab-pane fade show active"
                   id="pills-home"
@@ -92,7 +92,7 @@ const Banner = () => {
                   </form>
                 </div>
               )}
-              {activeIndex == 1 && (
+              {activeIndex === 1 && (
                 <div
                   className="tab-pane fade  show active"
                   id="pills-profile"
@@ -123,7 +123,7 @@ const Banner = () => {
                   </form>
                 </div>
               )}
-              {activeIndex == 2 && (
+              {activeIndex === 2 && (
                 <div
                   className="tab-pane fade  show active"
                   id="pills-contact"
