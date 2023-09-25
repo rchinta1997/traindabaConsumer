@@ -71,11 +71,11 @@ const OrderDetails = (e) => {
   return (
     <div className="ritekhana-main-content home-page">         
     <div className="ritekhana-main-section ritekhana-services-view1-full" >
-    <div class="ritekhana-main-section">
-    <div class="container">
-        <div class="row">
+    <div className="ritekhana-main-section">
+    <div className="container">
+        <div className="row">
 
-            <div class="col-md-6 offset-md-3">
+            <div className="col-md-6 offset-md-3">
             <div className="ritekhana-fancy-title">
                         <h2 className="ritekhana-color">Track Order</h2>                       
                     </div>

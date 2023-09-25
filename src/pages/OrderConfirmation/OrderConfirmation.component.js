@@ -34,7 +34,7 @@ const OrderConfirmation = () => {
             <div className="ritekhana-main-content">
                 <div className="ritekhana-main-section">
                     <div className="container">
-                        <form class="ritekhana-booking-form" id="checkout">
+                        <form className="ritekhana-booking-form" id="checkout">
                             <div className="row">
                                 <div className="col-md-6">
                                     <h5>Train Details</h5>
@@ -92,9 +92,11 @@ const OrderConfirmation = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                               <tr>
                                                <td rowSpan="2">{orderData.Order_Id}</td>
                                                <td></td>
                                                <td>{orderData.Total_Amount}</td>
+                                               </tr> 
                                             </tbody>
                                         </table>
                                     </div>

@@ -1,17 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import dayjs from "../../helpers/dayjs-helpers";
 import ConfirmationModal from "../../utility/confirmationmodal.component"
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
+
 import {
     Form,
     FormFeedback,
     FormGroup,
     Label,
     Input,
-    Button,
-  } from "reactstrap";
+     } from "reactstrap";
   import styles from './MyOrders.css';
 
 
@@ -22,17 +25,26 @@ const MyOrders = () => {
   const [orderStatus, setOrderStatus] = useState('Processing');
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [isConfirmationModalVisible, setConfirmationModalVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const toast = useRef(null);
 
-  const onCancelOrder = (orderId) => {
+  const confirm = () => {
+    confirmCancelOrder(selectedOrderId);
+  }
+  
+  const ignore = () => {
+    setVisible(true);
+  }
+
+  const cancelOrder = (orderId) => {
     setSelectedOrderId(orderId);
-    setConfirmationModalVisible(true);
+    setVisible(true);
   };
 
-  const confirmCancelOrder = (orderId) => {
+  const confirmCancelOrder = (orderId) => {    
 
-    
     axios
-        .post(process.env.REACT_APP_API_URL + `/order/getUserOrders/`,orderId)
+        .post(process.env.REACT_APP_API_URL + `/order/cancelOrders/`,orderId)
         .then((response) => {
           console.log("===============response received===============")
           console.log(response)
@@ -41,32 +53,40 @@ const MyOrders = () => {
                     order.orderId === selectedOrderId ? { ...order, status: 'Cancelled' } : order
               );
               setOrders(updatedOrders);
-              setConfirmationModalVisible(false);
+              setVisible(false);
+              
             } else {
                 
             }
         })
         .catch((error) => {
-            console.error("Error occurred while canceling order !", error);
+            console.error("Error occurred while cancelling order !", error);
+            setVisible(false);
+           // toast.current.show({ severity: 'error', summary: 'Failed', detail: 'Error occurred while cancelling order', life: 3000 });
         });
-   
-  };
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Order Cancelled Successfully', life: 3000 });
+        setOrders([]);
+      };
 
   const closeConfirmationModal = () => {
     setSelectedOrderId(null);
-    setConfirmationModalVisible(false);
+    setVisible(false);
   };
 
   const navigate = useNavigate();
   const location = useLocation();
-  const cancelOrder = (orderId) => {    
-    setOrderStatus('Cancelled');
-  };
 
   useEffect(() => {
+    let order = {
+      "Total_Amount" : "220",
+      "Booking_Date" : "10-09-2023",
+      "Order_Id" : "test--order"
+    }
+    MyOrders.push(order);
     let userid ={
         User_Id:"64e9f28975e4d54ee5428462"
     } ;
+    
     axios
         .post(process.env.REACT_APP_API_URL + `/order/getUserOrders/`,userid)
         .then((response) => {
@@ -134,12 +154,11 @@ const MyOrders = () => {
                                     <td>{element.Order_Id}</td>
                                     <td>{element.Total_Amount.$numberDecimal}</td>
                                     <td>ORDER ACCEPTED</td>
-                                    {/* <td>{element.Order_Id}</td> */}
-                                    <td><Button  >Cancel</Button></td>
-                                    <div className="col-md-4 col-sm-4 col-xs-8">
-                                    <button onClick={() => cancelOrder(element.Order_Id)}>Cancel</button>
-
-                      </div>
+                                    <td>
+                                      {element.Order_Id != null && 
+                                       <button className="btn btn-danger" onClick={()=>cancelOrder(element.Order_Id)} >Cancel</button> 
+                                     }
+                                    </td>
                                 </tr>
                             </tbody>
                         );
@@ -152,14 +171,13 @@ const MyOrders = () => {
         </div>       
 
     </div>
-    <ConfirmationModal
-        show={isConfirmationModalVisible}
-        onClose={closeConfirmationModal}
-        onConfirm={confirmCancelOrder}
-      />
+    
      </div>
      </div>
      </div>
+     <Toast ref={toast} />
+     <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
+                header="Confirmation" icon="pi pi-exclamation-triangle" accept={confirm} reject={ignore} />
     </>
 );
 };
