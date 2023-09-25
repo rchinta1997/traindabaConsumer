@@ -144,7 +144,7 @@ const Checkout = () => {
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
-                                        <CartNav isEditable={false}></CartNav>
+                                        <CartNav isEditable={true} isCartPage={false}></CartNav>
                                         <h6 className="text-right">
                                             Subtotal:{" "}
                                             <span className="final_total">

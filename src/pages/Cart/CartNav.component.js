@@ -6,8 +6,10 @@ const CartNav = (props) => {
     const navigate = useNavigate();
     const context = useContext(cartContext);
     const [isEditable, setIsEditable] = useState(false);
+    const [isCartPage, setIsCartPage] = useState(false);
     useEffect(() => {
         setIsEditable(props.isEditable);
+        setIsCartPage(props.isCartPage);
     }, []);
     const ProceedToCart = () => {
         navigate("/Checkout");
@@ -47,6 +49,7 @@ const CartNav = (props) => {
                                                                             <i className="fa fa-minus"></i>
                                                                         </a>
                                                                     </span>
+                                                                    <span>
                                                                     <input
                                                                         type="text"
                                                                         readOnly
@@ -57,7 +60,7 @@ const CartNav = (props) => {
                                                                         name="qty"
                                                                         title="Qty"
                                                                         className="input-text qty text"
-                                                                    ></input>
+                                                                    ></input></span>
                                                                     <span>
                                                                         {" "}
                                                                         <a
@@ -107,7 +110,7 @@ const CartNav = (props) => {
                                                 : Number(0).toFixed(2)}
                                         </span>
                                     </h5>
-                                    {isEditable && (
+                                    {isEditable && (isCartPage) &&  (
                                         <div className="ritekhana-listing-loadmore-btn">
                                             <a href="#!" onClick={ProceedToCart} className="ritekhana-bgcolor">
                                                 Proceed to Checkout
