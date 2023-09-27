@@ -59,7 +59,7 @@ const Navbar = (props) => {
         return (
             <div className="container d-flex align-items-center justify-content-between"> 
                 <a href="#" className="logo">
-                    <img src="https://traindhaba.com//assets/images/logo.png" alt="" className="img-fluid" onClick={(event) => routeClickHandler(event, "Home")}></img>
+                    <img src="https://traindhaba.com/assets/images/logo.png" alt="" className="img-fluid" onClick={(event) => routeClickHandler(event, "Home")}></img>
                 </a>
     
                 <nav id="navbar" className="navbar">

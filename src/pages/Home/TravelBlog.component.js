@@ -13,7 +13,7 @@ const TravelBlog = () => {
               <div className="box-area ">
                 <div className="travelimg-area">
                   <img
-                    src="https://traindhaba.com//assets/extra-images/travelblog.png"
+                    src="https://traindhaba.com/assets/extra-images/travelblog.png"
                     alt=""
                   ></img>
                 </div>
@@ -24,7 +24,7 @@ const TravelBlog = () => {
               <div className="box-area">
                 <div className="travelimg-area">
                   <img
-                    src="https://traindhaba.com//assets/extra-images/travelblog1.png"
+                    src="https://traindhaba.com/assets/extra-images/travelblog1.png"
                     alt=""
                   ></img>
                 </div>
@@ -35,7 +35,7 @@ const TravelBlog = () => {
               <div className="box-area">
                 <div className="travelimg-area">
                   <img
-                    src="https://traindhaba.com//assets/extra-images/travelblog2.png"
+                    src="https://traindhaba.com/assets/extra-images/travelblog2.png"
                     alt=""
                   ></img>
                 </div>

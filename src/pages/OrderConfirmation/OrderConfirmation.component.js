@@ -83,7 +83,7 @@ const OrderConfirmation = () => {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="ritekhana-recet-order-list">
-                                        <table id="cart_table">
+                                        <table id="order_table">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2"><strong>Order ID #</strong></th>

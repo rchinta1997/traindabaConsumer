@@ -56,7 +56,6 @@ const Checkout = () => {
         setTax(round(itemTax,2));
         setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
         setItemTotal(round(itemvalue,2));
-    
     }, []);
 
     function percentage(partialValue, totalValue) {

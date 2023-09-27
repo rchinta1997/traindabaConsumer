@@ -6,11 +6,13 @@ const CartNav = (props) => {
     const navigate = useNavigate();
     const context = useContext(cartContext);
     const [isEditable, setIsEditable] = useState(false);
-    const [isCartPage, setIsCartPage] = useState(false);
+    const [isCartPage, setIsCartPage] = useState(false);   
     useEffect(() => {
         setIsEditable(props.isEditable);
         setIsCartPage(props.isCartPage);
     }, []);
+    
+
     const ProceedToCart = () => {
         navigate("/Checkout");
     };
@@ -27,7 +29,7 @@ const CartNav = (props) => {
                                             <thead>
                                                 <tr>
                                                     <th>Item Name</th>
-                                                    <th>Qty</th>
+                                                    <th>Quantity</th>
                                                     <th>Price</th>
                                                     <th>Total</th>
                                                     {isEditable && <th></th>}
@@ -40,7 +42,7 @@ const CartNav = (props) => {
                                                         {isEditable && (
                                                             <td className="product-quantity" data-title="quantity">
                                                                 <div className="item_qty buttons_added">
-                                                                    <span>
+                                                                    <span className="wi-33">
                                                                         {" "}
                                                                         <a
                                                                             onClick={context.updateItemInCart.bind(this, cartItem._id, "REMOVE")}
@@ -49,19 +51,10 @@ const CartNav = (props) => {
                                                                             <i className="fa fa-minus"></i>
                                                                         </a>
                                                                     </span>
-                                                                    <span>
-                                                                    <input
-                                                                        type="text"
-                                                                        readOnly
-                                                                        value={cartItem.quantity}
-                                                                        maxLength="2"
-                                                                        max="10"
-                                                                        size="1"
-                                                                        name="qty"
-                                                                        title="Qty"
-                                                                        className="input-text qty text"
-                                                                    ></input></span>
-                                                                    <span>
+                                                                    <span className="wi-33 pdg-l-r-5-pct">
+                                                                        {cartItem.quantity}
+                                                                    </span>
+                                                                    <span className="wi-33">
                                                                         {" "}
                                                                         <a
                                                                             onClick={context.updateItemInCart.bind(this, cartItem._id, "ADD")}
@@ -105,7 +98,7 @@ const CartNav = (props) => {
                                     <h5 className="text-right">
                                         TOTAL ₹{" "}
                                         <span className="final_total">
-                                            {context.cart.length
+                                            {context?.cart.length
                                                 ? context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2)
                                                 : Number(0).toFixed(2)}
                                         </span>
