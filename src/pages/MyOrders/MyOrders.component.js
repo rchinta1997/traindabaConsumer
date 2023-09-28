@@ -77,12 +77,6 @@ const MyOrders = () => {
   const location = useLocation();
 
   useEffect(() => {
-    let order = {
-      "Total_Amount" : "220",
-      "Booking_Date" : "10-09-2023",
-      "Order_Id" : "test--order"
-    }
-    MyOrders.push(order);
     let userid ={
         User_Id:"64e9f28975e4d54ee5428462"
     } ;
