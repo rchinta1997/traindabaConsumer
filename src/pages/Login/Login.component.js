@@ -299,7 +299,7 @@ useEffect(() => {
                             </li>
                         </FormGroup>
                             <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Submit</Button></li>
-                            <div class="forgot-pass">
+                            <div className="forgot-pass">
                                 <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
                             </div>
                             <li><p>Don't have an account? <a href="#" className="ritekhana-color" onClick={(event) => clickHandler(event, "Signup")}>Register Here</a></p></li>
@@ -387,7 +387,7 @@ useEffect(() => {
                          <span className="error">{errors.confirmPassword}</span>
                      </FormGroup>
                          <li><Button type="submit" color="primary" disabled={isLoading?true:false} >{ isLoading && <CircularProgress size={15} color="inherit" />} Submit</Button></li>
-                         <div class="forgot-pass">
+                         <div className="forgot-pass">
                              <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
                          </div>
                          <li><p>Don't have an account? <a href="#" className="ritekhana-color" onClick={(event) => clickHandler(event, "Login")}>Login Here</a></p></li>

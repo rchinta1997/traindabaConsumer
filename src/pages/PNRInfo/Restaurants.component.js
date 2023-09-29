@@ -89,8 +89,6 @@ const Restaurants = (props) => {
                                                             </div>
                                                             <div  className="wi-50 il-flex">
                                                                 {eachData.Item_Name}
-                                                            </div>
-                                                            <div  className="wi-3 il-flex">
                                                                 <a
                                                                     href="javascript:;"
                                                                     onClick={context.addItemToCart.bind(this, eachData)}
@@ -98,6 +96,9 @@ const Restaurants = (props) => {
                                                                 >
                                                                     <i className="fa fa-plus"></i>
                                                                 </a>
+                                                            </div>
+                                                            <div  className="wi-3 il-flex">
+                                                                
                                                             </div>
                                                         </div>
                                                         <div className="wi-100"><small>{eachData.Description}</small></div>

@@ -2602,3 +2602,27 @@ input[type=number]::-webkit-outer-spin-button {
 .il-flex{
     display: inline-flex;
 }
+.mantine-Input-wrapper input[type="search"] {
+    float: left;
+    width: 100%;
+    height: 50px;
+    border-radius: 2px;
+    font-size: 15px;
+    color: #666;
+    padding: 5px 25px;
+    background-color: #ffffff;
+}
+.mantine-Autocomplete-dropdown{
+    top :50px !important;
+
+}
+.boarding-date .MuiInputBase-root{
+    background-color: #FFFFFF;
+}
+.boarding-date .MuiInputBase-root .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+    border : 0px;
+    box-sizing: '';
+}
+.boarding-date .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{    
+    box-sizing: '';
+}

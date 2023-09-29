@@ -1,6 +1,6 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState,useContext,createContext } from "react";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
-import {useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CartNav from "../Cart/CartNav.component";
 import cartContext from "../../Context/cart-context";
 import axios from "axios";
@@ -18,7 +18,12 @@ const Checkout = () => {
     const [email,setEmail]=useState(0);
     const [mobile,setMobile]=useState(0);
     const [gst,setGST]=useState(5);
-    
+    const [dataFromCart, setDataFromCart] = useState('');
+
+  // Function to receive data from the cart component
+  const handleDataFromCart = (data) => {
+    setDataFromCart(data);
+  };
     const finalConfirmation = () => {
 
         localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
@@ -56,7 +61,7 @@ const Checkout = () => {
         setTax(round(itemTax,2));
         setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
         setItemTotal(round(itemvalue,2));
-    }, []);
+    }, [context]);
 
     function percentage(partialValue, totalValue) {
         return  (partialValue * totalValue)/100;
@@ -83,7 +88,7 @@ const Checkout = () => {
                 <div className="ritekhana-main-content">
                     <div className="ritekhana-main-section">
                         <div className="container">
-                            <form class="ritekhana-booking-form" id="checkout" onSubmit={finalConfirmation}>
+                            <form className="ritekhana-booking-form" id="checkout" onSubmit={finalConfirmation}>
                                 <div className="row">
                                     <div className="col-md-6">
                                         <h5>Customer Details</h5>
@@ -143,7 +148,7 @@ const Checkout = () => {
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
-                                        <CartNav isEditable={true} isCartPage={false}></CartNav>
+                                        <CartNav isEditable={true} isCartPage={false} onData={handleDataFromCart}></CartNav>
                                         <h6 className="text-right">
                                             Subtotal:{" "}
                                             <span className="final_total">

@@ -6,13 +6,22 @@ const CartNav = (props) => {
     const navigate = useNavigate();
     const context = useContext(cartContext);
     const [isEditable, setIsEditable] = useState(false);
-    const [isCartPage, setIsCartPage] = useState(false);   
+    const [isCartPage, setIsCartPage] = useState(false);
+    const [itemTotal, setItemTotal] =useState(0);
+    const [inputData, setInputData] = useState('');
+
+  const sendDataToParent = () => {
+    
+    props.onData(inputData); 
+    console.log(inputData);
+  };
     useEffect(() => {
         setIsEditable(props.isEditable);
         setIsCartPage(props.isCartPage);
-    }, []);
+        setItemTotal(props.itemTotal);
+        setInputData(props);
+    }, [context]);
     
-
     const ProceedToCart = () => {
         navigate("/Checkout");
     };
@@ -98,9 +107,10 @@ const CartNav = (props) => {
                                     <h5 className="text-right">
                                         TOTAL ₹{" "}
                                         <span className="final_total">
-                                            {context?.cart.length
-                                                ? context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2)
-                                                : Number(0).toFixed(2)}
+                                                {
+                                                    context.total =  context?.cart.length ? context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2)
+                                                    : Number(0).toFixed(2)
+                                                }
                                         </span>
                                     </h5>
                                     {isEditable && (isCartPage) &&  (
