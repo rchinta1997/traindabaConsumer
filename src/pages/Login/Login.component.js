@@ -74,7 +74,7 @@ const Login = () => {
         password: formData.password,
       };
       axios
-        .post(process.env.REACT_APP_BASE_URL + "/user/authenticate", user)
+        .post(process.env.REACT_APP_API_URL + "/user/authenticate", user)
         .then((response) => {
           if (response.data.success) {
             localStorage.setItem("token", response.data.body.token);
@@ -115,7 +115,7 @@ const Login = () => {
           isActive:true
         };
         axios
-          .post(process.env.REACT_APP_BASE_URL + "/user/create", user)
+          .post(process.env.REACT_APP_API_URL + "/user/create", user)
           .then((response) => {
             console.log(response)
             if (response.data.success) {
