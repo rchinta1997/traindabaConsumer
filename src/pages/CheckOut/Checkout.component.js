@@ -1,17 +1,31 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState,useContext,createContext } from "react";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CartNav from "../Cart/CartNav.component";
 import cartContext from "../../Context/cart-context";
+import axios from "axios";
+
 
 const Checkout = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const context = useContext(cartContext);
     const [passengerInfo, setPassengerInfo] = useState({});
     const [itemTotal,setItemTotal]=useState(0);
     const [tax,setTax]=useState(0);
     const [totalAmount,setTotalAmount]=useState(0);
+    const [name,setName]=useState(0);
+    const [email,setEmail]=useState(0);
+    const [mobile,setMobile]=useState(0);
+    const [gst,setGST]=useState(5);
+    const [dataFromCart, setDataFromCart] = useState('');
+
+  // Function to receive data from the cart component
+  const handleDataFromCart = (data) => {
+    setDataFromCart(data);
+  };
     const finalConfirmation = () => {
+
         localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
         navigate("/Pay");
     };
@@ -20,16 +34,52 @@ const Checkout = () => {
         passengerInfo[key]=value;
         setPassengerInfo({...passengerInfo});
     }
+    const handleChange = (e) => { 
+        //setIsLoading(false);
+        console.log("==============handleChange=============");
+        console.log(e.target.value);
+      let { name, value } = e.target;
+      value = e.target.value
+     // console.log("==============name============="+name);
+     // console.log("==============value============="+value);
+
+      passengerInfo[name]=value;
+      setPassengerInfo({...passengerInfo});
+      /*setPassengerInfo({
+        ...passengerInfo,
+        [name]: e.target.value,
+      });*/
+      console.log(passengerInfo);
+    };
     useEffect(() => {
+        console.log("process.env.GST="+process.env.RAZORPAY_SECRET);
         setPassengerInfo(JSON.parse(localStorage.getItem("PassengerInfo")));
         let itemvalue=context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2);
-        const itemTax= context.cart.reduce((acc, item) => acc + ((item.quantity * item.Selling_Price) * item.Tax)/100, 0).toFixed(2);
-        setTax(itemTax);
-        setTotalAmount(Number(itemvalue)+ Number(itemTax));
-        setItemTotal(itemvalue);
+        //const itemTax= context.cart.reduce((acc, item) => acc + ((item.quantity * item.Selling_Price) * item.Tax)/100, 0).toFixed(2);
+        const itemTax= percentage(gst,itemvalue);
+        console.log("=====itemTax==="+itemTax)
+        setTax(round(itemTax,2));
+        setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
+        setItemTotal(round(itemvalue,2));
+    }, [context]);
+
+    function percentage(partialValue, totalValue) {
+        return  (partialValue * totalValue)/100;
+     } 
+
+    function round(num, decimalPlaces = 0) {
+        if (num < 0)
+            return -round(-num, decimalPlaces);
+        var p = Math.pow(10, decimalPlaces);
+        var n = num * p;
+        var f = n - Math.floor(n);
+        var e = Number.EPSILON * n;
     
-    }, []);
-    if (passengerInfo === {}) {
+        // Determine whether this fraction is a midpoint value.
+        return (f >= .5 - e) ? Math.ceil(n) / p : Math.floor(n) / p;
+    }
+
+     if (Object.keys(passengerInfo).length === 0) {
         return null;
     } else {
         return (
@@ -38,7 +88,7 @@ const Checkout = () => {
                 <div className="ritekhana-main-content">
                     <div className="ritekhana-main-section">
                         <div className="container">
-                            <form class="ritekhana-booking-form" id="checkout" onSubmit={finalConfirmation}>
+                            <form className="ritekhana-booking-form" id="checkout" onSubmit={finalConfirmation}>
                                 <div className="row">
                                     <div className="col-md-6">
                                         <h5>Customer Details</h5>
@@ -52,29 +102,44 @@ const Checkout = () => {
                                                     type="text"
                                                     placeholder="Passenger Name"
                                                     pattern="^[a-zA-Z ]+$"
-                                                    name="name"
-                                                    id="name"
+                                                    name="passengerName"
+                                                    id="passengerName"
                                                     required
-                                                    onKeyUp={(e)=>updateKeyValue('passengerName',e.target.value)}
-                                                    defaultValue={passengerInfo.passengerName}
+                                                    //onKeyUp={(e)=>updateKeyValue('passengerName',e.target.value)}
+                                                    onChange={handleChange}
+                                                    value={passengerInfo.passengerName}
+                                                    //defaultValue={passengerInfo.passengerName}
                                                 ></input>
                                             </li>
                                             <li>
-                                                <input type="text" placeholder="Email" name="email" id="email" required onKeyUp={(e)=>updateKeyValue('email',e.target.value)} defaultValue={passengerInfo.email}></input>
+                                                <input 
+                                                type="text" 
+                                                placeholder="Email" 
+                                                name="email" 
+                                                id="email" 
+                                                required 
+                                               // onKeyUp={(e)=>updateKeyValue('email',e.target.value)} 
+                                                onChange={handleChange}
+                                                value={passengerInfo.email}
+                                                //defaultValue={passengerInfo.email}
+                                                >                                              
+                                                </input>
                                             </li>
                                             <li>
                                                 <input
                                                     type="text"
                                                     placeholder="Mobile Number"
                                                     pattern="^[6789]\d{9,9}$"
-                                                    name="mobile"
-                                                    id="mobile"
+                                                    name="mobileNumber"
+                                                    id="mobileNumber"
                                                     min="10"
                                                     maxLength="10"
                                                     minLength="10"
                                                     required
-                                                    onKeyUp={(e)=>updateKeyValue('mobileNumber',e.target.value)}
-                                                    defaultValue={passengerInfo.mobileNumber}
+                                                    //onKeyUp={(e)=>updateKeyValue('mobileNumber',e.target.value)}
+                                                    onChange={handleChange}
+                                                    value={passengerInfo.mobileNumber}
+                                                    //defaultValue={passengerInfo.mobileNumber}
                                                 ></input>
                                             </li>
                                             <li>
@@ -83,7 +148,7 @@ const Checkout = () => {
                                         </ul>
                                     </div>
                                     <div className="col-md-6">
-                                        <CartNav isEditable={false}></CartNav>
+                                        <CartNav isEditable={true} isCartPage={false} onData={handleDataFromCart}></CartNav>
                                         <h6 className="text-right">
                                             Subtotal:{" "}
                                             <span className="final_total">

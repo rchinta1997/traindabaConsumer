@@ -1,0 +1,30 @@
+
+
+
+
+.btncls{
+    background: transparent;
+    background-color: white;
+    border-color: #ff525a !important;
+    color: #ff525a;
+    display: inline-block;
+    padding: 11px 25px 13px 25px;
+    line-height: 1;
+    border: 2px solid;
+      border-top-color: currentcolor;
+      border-right-color: currentcolor;
+      border-bottom-color: currentcolor;
+      border-left-color: currentcolor;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 22px;
+    cursor: pointer;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    outline: none;
+    width: 40%;
+  }

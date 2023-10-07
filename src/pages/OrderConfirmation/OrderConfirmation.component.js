@@ -1,35 +1,55 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
+import cartContext from "../../Context/cart-context";
 
 const OrderConfirmation = () => {
+    const [orderData, setOrderData] = useState({});
     const [outletName, setOutletName] = useState(null);
+    const [currentDate, setCurrentDate] = useState();
     const location = useLocation();
+    const context = useContext(cartContext);
 
+    
+   
     useEffect(() => {
-        console.log(location.state.res)
+        console.log("===========OrderConfirmation=================")
+        var curr = new Date().toLocaleDateString();
+        console.log(location.state.res);
+        setOrderData(location.state.res.orderDetails);
+        console.log("===========OrderConfirmation================="+JSON.stringify(orderData));      
         setOutletName("Test Outlet");
+        setCurrentDate(curr);
+        context.cart.reduce((count, curItem) => {
+            console.log("=========context.cart.reduce============")
+            console.log(curItem)
+            return count + curItem.quantity;
+        }, 0)
+        context.cart.map((cartItem, index) => {
+            console.log("===========context.cart.map===================="+cartItem._id)
+            context.removeItemFromCart.bind(this, cartItem._id)
+        });
     }, []);
     return (
         <>
             <div className="ritekhana-main-content">
                 <div className="ritekhana-main-section">
                     <div className="container">
-                        <form class="ritekhana-booking-form" id="checkout">
+                        <form className="ritekhana-booking-form" id="checkout">
                             <div className="row">
                                 <div className="col-md-6">
                                     <h5>Train Details</h5>
                                     <ul className="ritekhana-row">
                                         <li>
-                                            Train Name : <strong></strong>
+                                            Train Name : {orderData.Train_Name}<strong></strong>
                                         </li>
                                         <li>
-                                            Station Name : <strong></strong>
+                                            Station Name : {orderData.Coach}<strong></strong>
                                         </li>
                                         <li>
-                                            Berth : <strong></strong>
+                                            Berth : {orderData.Berth}<strong></strong>
                                         </li>
                                         <li>
-                                            Coach : <strong></strong>
+                                            Coach : {orderData.Coach}<strong></strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -37,16 +57,16 @@ const OrderConfirmation = () => {
                                     <h5>Order Details</h5>
                                     <ul className="ritekhana-row">
                                         <li>
-                                            Order Id : <strong></strong>
+                                            Order Id : {orderData.Order_Id}<strong></strong>
                                         </li>
                                         <li>
-                                            Tracking id : <strong></strong>
+                                            Tracking id : {orderData.Order_Id}<strong></strong>
                                         </li>
                                         <li>
-                                            Booking Date : <strong></strong>
+                                            Booking Date : {orderData.Booking_Date}<strong></strong>
                                         </li>
                                         <li>
-                                            Delivery Date : <strong></strong>
+                                            Delivery Date : {orderData.Delivery_Date}<strong></strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -63,7 +83,7 @@ const OrderConfirmation = () => {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="ritekhana-recet-order-list">
-                                        <table id="cart_table">
+                                        <table id="order_table">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2"><strong>Order ID #</strong></th>
@@ -72,7 +92,11 @@ const OrderConfirmation = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                               <tr>
+                                               <td rowSpan="2">{orderData.Order_Id}</td>
+                                               <td></td>
+                                               <td>{orderData.Total_Amount}</td>
+                                               </tr> 
                                             </tbody>
                                         </table>
                                     </div>

@@ -6,3 +6,6 @@ export default React.createContext({
   removeItemFromCart: itemId => {},
   updateItemInCart: (itemId,action) => {}
 });
+
+
+
