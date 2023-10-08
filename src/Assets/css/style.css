@@ -2626,3 +2626,6 @@ input[type=number]::-webkit-outer-spin-button {
 .boarding-date .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{    
     box-sizing: '';
 }
+.ritekhana-banner-caption-view1 .boarding-date form input[type="text"]{
+    height:40px !important;
+}

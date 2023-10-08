@@ -1,31 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AutocompleteComponent from "../../utility/autocomplete.component";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from "@mui/x-date-pickers";
+import cartContext from "../../Context/cart-context";
+import dayjs from "dayjs";
 
 
-const Banner = () => {
+const Banner = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchValue, setSearchValue] = useState([new Date(),new Date()]);
   const [value, setValue] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
+  const context = useContext(cartContext);
   const [boardingDate, setBoardingDate] = useState(new Date());
+  const [trainInfo, setTrainInfo] = useState({});
+  const [type, setType] = useState("trainno");
+
+  const selectedData = (trainInfo) => {
+    context.trainInfo = trainInfo; 
+  }
   const today = new Date();
   const handleDateChange = (val) => {
     if (val[0] !== null && val[1] === null) {
       setBoardingDate((current) => new Date(current.getFullYear() + 1, 1));
     }
     setValue(val);
+    context.trainInfo.travelDate=dayjs(boardingDate).format('DD-MM-YYYY');
+    console.log(context);
   };
   function searchByPNR() {
-    navigate("/PNRInfo", { state: { search: searchValue } });
+    navigate("/PNRInfo", { state: {  searchBy: "PNR" , search: searchValue } });
   }
   function searchByTrainNo() {
-    navigate("/PNRInfo", { state: { search: searchValue } });
+    navigate("/PNRInfo", { state: { searchBy: "TRAIN" , search: context.trainInfo.trainNo+":"+context.trainInfo.travelDate } });
   }
 
+  
+ useEffect(()=>{    
+  console.log("in banner component");
+  console.log(context);
+ }, [context]);
 
   return (
     <div className="ritekhana-banner-one ">
@@ -120,7 +136,7 @@ const Banner = () => {
                   <form method="post" id="train_form">
                     <div className="row">
                       <div className="col-md-4">
-                        <AutocompleteComponent className="col-md-4" />
+                        <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" />
                       </div>
                       <div className="col-md-4 boarding-date">
                         

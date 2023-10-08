@@ -113,21 +113,20 @@ const OrderDetails = (e) => {
                     
                     {MyOrders.map((element) => {
                         console.log("==========Foreach==========");
-                        console.log( element.Total_Amount.$numberDecimal );
+                        console.log( element.Total_Amount?.$numberDecimal );
                         return(
 
                             <tbody>
                                  <tr>
                                     <td>{element.Booking_Date}</td>
                                     <td>{element.Order_Id}</td>
-                                    <td>{element.Total_Amount.$numberDecimal}</td>
+                                    <td>{element?.Total_Amount?.$numberDecimal}</td>
                                     <td>ORDER ACCEPTED</td>
                                     {/* <td>{element.Order_Id}</td> */}
                                    
                                 </tr>
                             </tbody>
-                        );
-                        
+                        );          
                         
                         })}
                                                         
