@@ -80,6 +80,14 @@ const FinalConfirmation = () => {
             return;
         }
     }
+    let user = JSON.parse(localStorage.getItem("user"));
+    if(user !== undefined){
+        let userId = user?.id ? user.id+"" : "";
+        passegnerInfo.user_Id=  userId ;
+    }
+    if(passegnerInfo.pnrNumber){
+        passegnerInfo.pnr=passegnerInfo.pnrNumber;
+    }
         let orderData = {
             passegnerInfo: passegnerInfo,
             MenuItems: context.cart,

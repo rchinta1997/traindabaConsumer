@@ -23,7 +23,13 @@ const CartNav = (props) => {
     }, [context]);
     
     const ProceedToCart = () => {
-        navigate("/Checkout");
+        let user = localStorage.getItem("user");
+        if(user !== undefined){
+            navigate("/Checkout");
+        }else{
+            navigate("/Login");
+        }
+        
     };
     return (
         <>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import dayjs from "../../helpers/dayjs-helpers";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import { toast } from "react-toastify";
 import styles from './PNRInfo.css';
 import cartContext from "../../Context/cart-context";
@@ -162,6 +163,11 @@ const PNRInfo = () => {
       passengerInfo["vendorId"] = eachOutlet["VendorId"];
       passengerInfo["stationId"] = eachOutlet["Station_Id"];
       passengerInfo["outletId"] = eachOutlet["_id"];
+     
+      dayjs.extend(customParseFormat);
+      const formattedDate = dayjs().format("YYYY-MM-DD");
+      passengerInfo["booking_Date"] = formattedDate;
+      passengerInfo["delivery_Date"] = selectedStationData.schArrivalDate;
       setPassengerInfo({ ...passengerInfo });
       localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
       navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
