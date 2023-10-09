@@ -24,8 +24,10 @@ const Restaurants = (props) => {
             .then((response) => {
                 if (response.data.success) {
                     let isActiveData = _.filter(response.data.body, function (o) {
+                        o["isGST"] = o["Tax"] && o["Tax"] !== '' ? true : false;
                         return o.isActive;
                     });
+
                     setMenuItems(isActiveData);
                     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                     

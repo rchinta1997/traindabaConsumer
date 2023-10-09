@@ -102,9 +102,10 @@ const FinalConfirmation = () => {
                     console.log("========order_response==response========");
                     console.log(order_response)
                     if(paymentType === 0){
-                    const amount = Number(response.data.body.Amount_Payable); // Number(response.data.body.Amount_Payable.$numberDecimal.toString());
-                    const id = response.data.body.OrderDetails.id; //  response.data.body.Order_Id; // response.data.body.id;
-                    const currency = response.data.body.OrderDetails.currency; // response.data.body.currency;
+
+                    const amount = response.data.body.Amount_Payable ? Number(response.data.body.Amount_Payable.$numberDecimal.toString()) :  Number(response.data.body.Amount_Payable) ; // Number(response.data.body.Amount_Payable.$numberDecimal.toString());
+                    const id = response.data.body.OrderDetails? response.data.body.OrderDetails.id : response.data.body.Order_Id; //  response.data.body.Order_Id; // response.data.body.id;
+                    const currency =response.data.body.OrderDetails ? response.data.body.OrderDetails.currency : 'INR'; // response.data.body.currency;
                     const options = {
                         key: response.data.body.RAZOR_API_KEY, // Enter the Key ID generated from the Dashboard
                         amount: amount * 100 ,

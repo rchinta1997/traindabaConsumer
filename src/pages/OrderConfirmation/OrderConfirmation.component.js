@@ -9,12 +9,15 @@ const OrderConfirmation = () => {
     const location = useLocation();
     const context = useContext(cartContext);
 
-    
-   
+       
     useEffect(() => {
         console.log("===========OrderConfirmation=================")
         var curr = new Date().toLocaleDateString();
         console.log(location.state.res);
+        let amount = '';
+        if(typeof location.state.res?.orderDetails?.Total_Amount == 'object'){
+            location.state.res.orderDetails.Total_Amount = location.state.res.orderDetails?.Total_Amount?.$numericeDecimal;
+        }
         setOrderData(location.state.res.orderDetails);
         console.log("===========OrderConfirmation================="+JSON.stringify(orderData));      
         setOutletName("Test Outlet");
@@ -57,10 +60,10 @@ const OrderConfirmation = () => {
                                     <h5>Order Details</h5>
                                     <ul className="ritekhana-row">
                                         <li>
-                                            Order Id : {orderData.Order_Id}<strong></strong>
+                                            Order Id : {orderData?.Order_Id}<strong></strong>
                                         </li>
                                         <li>
-                                            Tracking id : {orderData.Order_Id}<strong></strong>
+                                            Tracking id : {orderData?.Order_Id}<strong></strong>
                                         </li>
                                         <li>
                                             Booking Date : {orderData.Booking_Date}<strong></strong>
@@ -86,7 +89,7 @@ const OrderConfirmation = () => {
                                         <table id="order_table">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="2"><strong>Order ID #</strong></th>
+                                                    <th colspan="2">Order ID #</th>
                                                     
                                                     <th colspan="2">Total</th>
                                                 </tr>

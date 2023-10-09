@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useContext, useEffect } from "react";
 import Navbar from "../Navbar/Navbar.component";
 import Banner from "../SearchBanner/Banner.component";
 import DownloadLinks from "./DownloadLinks.component";
@@ -14,11 +14,18 @@ import TravelBlog from "./TravelBlog.component";
 import VendorRegistration from "./VendorRegistration.component";
 import Login from "../Login/Login.component";
 import TrackOrder from "../TrackOrder/TrackOrder.component";
+import cartContext from "../../Context/cart-context";
 
 const HomePage = () => {
+  
+  const context = useContext(cartContext);
   console.log("====HomePage======")
   const _token = localStorage.getItem("token");
   console.log("====_token======"+_token)
+
+  useEffect(() => {
+    
+  }, [context]);
   if(_token)
   {
     return (

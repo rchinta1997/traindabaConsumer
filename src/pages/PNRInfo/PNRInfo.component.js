@@ -6,6 +6,9 @@ import dayjs from "../../helpers/dayjs-helpers";
 import { toast } from "react-toastify";
 import styles from './PNRInfo.css';
 import cartContext from "../../Context/cart-context";
+
+import { format, parse } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 // const cryptoHelper = require("../../helpers/crypto-helper");
 // const cryptoHelperInstance = new cryptoHelper();
 
@@ -20,7 +23,23 @@ const PNRInfo = () => {
   //const [ contextData, setContextData ] = useContext(cartContext);
   const location = useLocation();
   const navigate = useNavigate();
-
+  
+  const convertUtcToIst= (inputDate) => {
+    // Parse the input date as UTC
+    const parsedDateUtc = parse(inputDate, 'yyyy-MM-dd HH:mm', new Date(), {
+      timeZone: 'UTC',
+    });
+  
+    // Convert UTC time to IST (Indian Standard Time, UTC+5:30)
+    const convertedDateIst = utcToZonedTime(parsedDateUtc, 'Asia/Kolkata');
+  
+    // Format the converted date in "dd-MM-yyyy HH:mm" format
+    const formattedDateIst = format(convertedDateIst, 'dd-MM-yyyy HH:mm', {
+      timeZone: 'Asia/Kolkata',
+    });
+  
+    return formattedDateIst;
+  }
   useEffect(() => {
 
     context.cart = context.cart.filter(function (returnableObjects) {
@@ -36,38 +55,80 @@ const PNRInfo = () => {
     setTimeout(() => {
       setLoading(false);
     }, 8000);
-    axios
-      .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
-      .then((response) => {
-        console.log("===============searchByPNR===============")
-        console.log(response.data.body)
-        if (response.data.success) {
-          setLoading(false);
-          setIsError(false);
-          setPnrData(response.data.body);
+    
+    if(location.state.searchBy === 'PNR'){
+      axios
+        .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
+        .then((response) => {
+          console.log("===============searchByPNR===============")
+          console.log(response.data.body)
+          if (response.data.success) {
+            setLoading(false);
+            setIsError(false);
+            setPnrData(response.data.body);
+            let passengerInfo = {
+              pnrNumber: location.state.search,
+              user_Id : "",
+              name:"",
+              email:"",
+              mobileNumber:"",
+              vendorId:"",
+              outletId:"",
+              Comment:"",
+              pnr:"",
+              booking_Date:"",
+              delivery_Date:"",
+              stationCode:"",
+              stationName:"",
+              journeyDate: response.data.body.trainInfo.dt,
+              coachPosition: response.data.body.seatInfo.coach,
+              berthNo: response.data.body.seatInfo.berth,
+              noOfSeats: response.data.body.seatInfo.noOfSeats,
+              trainNo: response.data.body.trainInfo.trainNo,
+              trainName: response.data.body.trainInfo.name
+            };
+            setPassengerInfo(passengerInfo);
+            localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+          } else {
+            setIsError(true);
+            setPnrData(undefined);
+            setLoading(false);
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+      }
+      if(location.state.searchBy === 'TRAIN'){
+        context?.trainInfo?.stations.forEach(element => {
+          let istTime = convertUtcToIst(element.arrival.replace(' UTC', ''));
+          element.schArrivalDate = istTime.split(" ")[0];
+          element.schArrivalTime = istTime.split(" ")[1];
+          element.halt = element.haltMinutes;
+        });
+        console.log(context);
+        if(context?.trainInfo?.stations){
           let passengerInfo = {
-            pnrNumber: location.state.search,
-            journeyDate: response.data.body.trainInfo.dt,
-            coachPosition: response.data.body.seatInfo.coach,
-            berthNo: response.data.body.seatInfo.berth,
-            noOfSeats: response.data.body.seatInfo.noOfSeats,
-            trainNo: response.data.body.trainInfo.trainNo,
-            trainName: response.data.body.trainInfo.name
+            journeyDate: context?.trainInfo?.travelDate,
+            trainNo: context?.trainInfo?.trainNo,
+            trainName: context?.trainInfo?.trainName,
+            stations: context?.trainInfo?.stations,
+            trainInfo:context?.trainInfo
           };
+          let pnrData = passengerInfo;
+          pnrData.trainInfo.dt = passengerInfo.journeyDate;
+          setPnrData(pnrData);
           setPassengerInfo(passengerInfo);
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
-        } else {
-          setIsError(true);
-          setPnrData(undefined);
-          setLoading(false);
         }
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
+              
+           
+        }
 
-  }, []);
 
+
+    }, []);
+  
   const getRestaurantsInfo = (e) => {
     let stationData = pnrData.stations[e.target.value];
     console.log(dayjs().unix());
@@ -97,21 +158,21 @@ const PNRInfo = () => {
     let scheduledDate = selectedStationData.schArrivalDate + " " + selectedStationData.schArrivalTime;
     let scheduledunixTime = dayjs(scheduledDate).subtract(eachOutlet.Order_Timing, "minute").unix();
     let currentDate = dayjs().unix();
-    if (currentDate < scheduledunixTime) {
+   // if (currentDate < scheduledunixTime) {
       passengerInfo["vendorId"] = eachOutlet["VendorId"];
       passengerInfo["stationId"] = eachOutlet["Station_Id"];
       passengerInfo["outletId"] = eachOutlet["_id"];
       setPassengerInfo({ ...passengerInfo });
       localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
       navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
-    } else {
-      //toast.info("Restaurant will not deliver");
-      passengerInfo["VendorId"] = undefined;
-      passengerInfo["StationId"] = undefined;
-      passengerInfo["OutletId"] = undefined;
-      setPassengerInfo({ ...passengerInfo });
-      navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
-    }
+    // } else {
+    //   //toast.info("Restaurant will not deliver");
+    //   passengerInfo["VendorId"] = undefined;
+    //   passengerInfo["StationId"] = undefined;
+    //   passengerInfo["OutletId"] = undefined;
+    //   setPassengerInfo({ ...passengerInfo });
+    //   navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
+    // }
   };
   const fetchTrainData = (query) => {
     try {

@@ -146,7 +146,7 @@ const MyOrders = () => {
                                  <tr>
                                     <td>{element.Booking_Date}</td>
                                     <td>{element.Order_Id}</td>
-                                    <td>{element.Total_Amount.$numberDecimal}</td>
+                                    <td>{element?.Total_Amount?.$numberDecimal}</td>
                                     <td>ORDER ACCEPTED</td>
                                     <td>
                                       {element.Order_Id != null && 
