@@ -25,7 +25,6 @@ const Checkout = () => {
     setDataFromCart(data);
   };
     const finalConfirmation = () => {
-
         localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
         navigate("/Pay");
     };
@@ -40,10 +39,15 @@ const Checkout = () => {
         console.log(e.target.value);
       let { name, value } = e.target;
       value = e.target.value
-     // console.log("==============name============="+name);
-     // console.log("==============value============="+value);
+      console.log("==============name============="+name);
+      console.log("==============value============="+value);
 
       passengerInfo[name]=value;
+      if(name === 'passengerName'){     
+        passengerInfo['user_Id'] = value;
+        passengerInfo['name'] = value;
+      }
+     
       setPassengerInfo({...passengerInfo});
       /*setPassengerInfo({
         ...passengerInfo,
@@ -62,7 +66,7 @@ const Checkout = () => {
         setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
         setItemTotal(round(itemvalue,2));
     }, [context]);
-
+    
     function percentage(partialValue, totalValue) {
         return  (partialValue * totalValue)/100;
      } 

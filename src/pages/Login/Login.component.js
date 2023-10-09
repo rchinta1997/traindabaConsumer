@@ -1,4 +1,4 @@
-import React,  { useRef,  useState,useEffect } from "react";
+import React,  { useRef,  useState,useEffect, useContext } from "react";
 import {
     Form,
     FormFeedback,
@@ -13,6 +13,7 @@ import { CircularProgress } from "@material-ui/core"
 import OpenNotification from "../../components/Notifications"
 import MantineReactTableComponent from "../../utility/mantineReactTable.component"
 import styles from './Login.css';
+import cartContext from "../../Context/cart-context";
 
 
 const Login = () => {
@@ -22,7 +23,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState({});
   const [isLoginPage, setIsLoginPage] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const context = useContext(cartContext);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -79,7 +82,14 @@ const Login = () => {
           if (response.data.success) {
             localStorage.setItem("token", response.data.body.token);
             localStorage.setItem("user", JSON.stringify(response.data.body));
-            navigate("/");
+
+            if(context?.cart?.length > 0){              
+              navigate("/Checkout");
+            }else{
+              setLoggedIn(true);
+              navigate("/");
+            }
+            
           }
           else
           {
@@ -120,8 +130,8 @@ const Login = () => {
             console.log(response)
             if (response.data.success) {
               setIsLoading(false);
-              //localStorage.setItem("token", response.data.body.token);
-              //localStorage.setItem("user", JSON.stringify(response.data.body));
+              localStorage.setItem("token", response.data.body.token);
+              localStorage.setItem("user", JSON.stringify(response.data.body));
               navigate("/");
             }
             else
@@ -226,7 +236,8 @@ if (mobileRex.test(e.target.value)) {
 
 useEffect(() => {
     scrollToElement();
-  }, []);
+    
+  }, [context]);
 
   const scrollToElement = () => {
     console.log("======elementRef.current=====");
@@ -255,8 +266,9 @@ useEffect(() => {
     <div className="ritekhana-main-content home-page">         
   <div className="ritekhana-main-section ritekhana-services-view1-full" ref={elementRef}>
         <div className="container" >         
+        {loggedIn}
         {/* <button onClick={scrollToElement}>Scroll to Element</button> */}
-          {isLoginPage ?   <div className="row">
+          {isLoginPage && !loggedIn ?   <div className="row">
                 <div className="col-12 col-md-12">
                     <div className="ritekhana-fancy-title">
                         <h2 className="ritekhana-color">Login</h2>                       
