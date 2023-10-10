@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import cartContext from "../../Context/cart-context";
-import { convertDateFormat } from "../../utility/utils"; 
+import cartContext from "../../Context/cart-context"; 
 import dayjs from "../../helpers/dayjs-helpers";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import utc from "dayjs/plugin/utc";
