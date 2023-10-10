@@ -5,6 +5,7 @@ export default React.createContext({
   addItemToCart: cartItem => {},
   removeItemFromCart: itemId => {},
   updateItemInCart: (itemId,action) => {},
+  setEmptyCart: (itemId,action) => {},
   trainInfo:{},
   passengerInfo:{},
 });

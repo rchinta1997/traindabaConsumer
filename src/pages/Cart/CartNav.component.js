@@ -24,7 +24,7 @@ const CartNav = (props) => {
     
     const ProceedToCart = () => {
         let user = localStorage.getItem("user");
-        if(user !== undefined){
+        if(user){
             navigate("/Checkout");
         }else{
             navigate("/Login");

@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import CartContext from "./cart-context";
-import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM } from "./reducers";
+import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART } from "./reducers";
 
 const GlobalState = (props) => {
     const [cartState, dispatch] = useReducer(cartItemsReducer, { cart: [] });
@@ -25,6 +25,12 @@ const GlobalState = (props) => {
             dispatch({ type: UPDATE_ITEM, itemId: itemId,actionType:actionType });
         }, 700);
     };
+    const setEmptyCart = (itemId,actionType) => {
+        setTimeout(() => {
+            // setCart(updatedCart);
+            dispatch({ type: EMPTY_CART, actionType:actionType });
+        }, 700);
+    };
     return (
         <CartContext.Provider
             value={{
@@ -32,6 +38,7 @@ const GlobalState = (props) => {
                 addItemToCart: addItemToCart,
                 removeItemFromCart: removeItemFromCart,
                 updateItemInCart: updateItemInCart,
+                setEmptyCart: setEmptyCart,
             }}
         >
             {props.children}
