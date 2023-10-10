@@ -1,6 +1,7 @@
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const UPDATE_ITEM = "UPDATE_ITEM";
+export const EMPTY_CART = "EMPTY_CART";
 
 const addItemToCart = (menuItem, state) => {
     const updatedCart = [...state.cart];
@@ -53,6 +54,17 @@ const updateItemInCart = (itemId, actionType, state) => {
     return { ...state, cart: updatedCart };
 };
 
+const setCartEmpty = (actionType, state) => {
+    const updatedCart = [...state.cart];
+    console.log("---------Emptying cart---------");
+    console.log(updatedCart);
+    
+    if (actionType === "EMPTY_CART") {
+        updatedCart = [];
+    }
+    return { ...state, cart: updatedCart };
+};
+
 export const cartItemsReducer = (state, action) => {
     switch (action.type) {
         case ADD_ITEM:
@@ -61,6 +73,8 @@ export const cartItemsReducer = (state, action) => {
             return removeItemFromCart(action.itemId, state);
         case UPDATE_ITEM:
             return updateItemInCart(action.itemId, action.actionType, state);
+        case EMPTY_CART:
+            return setCartEmpty(action.actionType, state);
         default:
             return state;
     }

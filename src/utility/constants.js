@@ -1,4 +1,4 @@
-export const CA_URL = process?.env?.REACT_APP_SIGN_IN_AS_CLIENT_URL
+//export const CA_URL = process?.env?.REACT_APP_SIGN_IN_AS_CLIENT_URL
 // export const CA_URL = 'http://localhost:3001/'
 export const COLORS = {
   primary: "#522363",

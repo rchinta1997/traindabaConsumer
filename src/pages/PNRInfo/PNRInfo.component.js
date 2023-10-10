@@ -165,7 +165,7 @@ const PNRInfo = () => {
       passengerInfo["outletId"] = eachOutlet["_id"];
      
       dayjs.extend(customParseFormat);
-      const formattedDate = dayjs().format("YYYY-MM-DD");
+      const formattedDate = dayjs().format("YYYY-MM-DD hh:mm:ss");
       passengerInfo["booking_Date"] = formattedDate;
       passengerInfo["delivery_Date"] = selectedStationData.schArrivalDate;
       setPassengerInfo({ ...passengerInfo });
