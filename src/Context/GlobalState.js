@@ -25,7 +25,7 @@ const GlobalState = (props) => {
             dispatch({ type: UPDATE_ITEM, itemId: itemId,actionType:actionType });
         }, 700);
     };
-    const setEmptyCart = (itemId,actionType) => {
+    const setEmptyCart = (actionType) => {
         setTimeout(() => {
             // setCart(updatedCart);
             dispatch({ type: EMPTY_CART, actionType:actionType });

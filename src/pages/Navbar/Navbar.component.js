@@ -9,7 +9,7 @@ const Navbar = (props) => {
     const navigate = useNavigate();
     useEffect(() => {
         console.log(context);
-    }, []);
+    }, [context]);
 
     const ProceedToCart = () => {
         navigate("/cart");

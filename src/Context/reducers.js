@@ -55,7 +55,7 @@ const updateItemInCart = (itemId, actionType, state) => {
 };
 
 const setCartEmpty = (actionType, state) => {
-    const updatedCart = [...state.cart];
+    let updatedCart = [...state.cart];
     console.log("---------Emptying cart---------");
     console.log(updatedCart);
     
