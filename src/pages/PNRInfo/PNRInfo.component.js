@@ -88,6 +88,10 @@ const PNRInfo = () => {
               trainNo: response.data.body.trainInfo.trainNo,
               trainName: response.data.body.trainInfo.name
             };
+            let user = JSON.parse(localStorage.getItem("user"));
+            if(user !== undefined){
+              passengerInfo.email = user.emailID;
+            }
             setPassengerInfo(passengerInfo);
             localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
           } else {
@@ -159,7 +163,7 @@ const PNRInfo = () => {
     let scheduledDate = selectedStationData.schArrivalDate + " " + selectedStationData.schArrivalTime;
     let scheduledunixTime = dayjs(scheduledDate).subtract(eachOutlet.Order_Timing, "minute").unix();
     let currentDate = dayjs().unix();
-   // if (currentDate < scheduledunixTime) {
+  // if (currentDate < scheduledunixTime) {
       passengerInfo["vendorId"] = eachOutlet["VendorId"];
       passengerInfo["stationId"] = eachOutlet["Station_Id"];
       passengerInfo["outletId"] = eachOutlet["_id"];
@@ -167,18 +171,17 @@ const PNRInfo = () => {
       dayjs.extend(customParseFormat);
       const formattedDate = dayjs().format("YYYY-MM-DD hh:mm:ss");
       passengerInfo["booking_Date"] = formattedDate;
-      passengerInfo["delivery_Date"] = selectedStationData.schArrivalDate;
+      passengerInfo["delivery_Date"] = scheduledDate;
       setPassengerInfo({ ...passengerInfo });
       localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
       navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
-    // } else {
-    //   //toast.info("Restaurant will not deliver");
-    //   passengerInfo["VendorId"] = undefined;
-    //   passengerInfo["StationId"] = undefined;
-    //   passengerInfo["OutletId"] = undefined;
-    //   setPassengerInfo({ ...passengerInfo });
-    //   navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
-    // }
+    /*} else {
+      passengerInfo["VendorId"] = undefined;
+      passengerInfo["StationId"] = undefined;
+      passengerInfo["OutletId"] = undefined;
+      setPassengerInfo({ ...passengerInfo });
+      navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
+    }*/
   };
   const fetchTrainData = (query) => {
     try {

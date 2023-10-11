@@ -6,7 +6,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 
-const OrderConfirmation = () => {
+const OrderConfirmation = (props) => {
     const [orderData, setOrderData] = useState({});
     const [outletName, setOutletName] = useState(null);
     const [currentDate, setCurrentDate] = useState();
@@ -23,18 +23,18 @@ const OrderConfirmation = () => {
         if(typeof orderDetails == 'object'){
             if(typeof orderDetails?.Booking_Date == 'string'){
                 dayjs.extend(customParseFormat);
-                orderDetails.Booking_Date = dayjs().format('YYYY-MM-DD hh:mm');
+                orderDetails.Booking_Date = dayjs().format('YYYY-MM-DD HH:mm');
             }
             if(typeof orderDetails?.Delivery_Date == 'string'){
                 dayjs.extend(utc);
                 dayjs.extend(timezone);
                 const dayjsLocal = dayjs(orderDetails.Delivery_Date);
                 const dayjsIst = dayjsLocal.tz('Asia/Calcutta');
-                orderDetails.Delivery_Date = dayjsIst.format('YYYY-MM-DD hh:mm');
+                orderDetails.Delivery_Date = dayjsIst.format('YYYY-MM-DD HH:mm');
             }            
             if(typeof orderDetails?.Total_Amount == 'object'){
                 location.state.res.orderDetails.Total_Amount = location.state.res.orderDetails?.Total_Amount?.$numberDecimal;
-                context.setEmptyCart.bind(this, "", "EMPTY_CART");
+                context.setEmptyCart("EMPTY_CART");
             }
         }
         setOrderData(location.state.res.orderDetails);
@@ -48,10 +48,7 @@ const OrderConfirmation = () => {
         }, 0)
         context.cart.map((cartItem, index) => {
             console.log("===========context.cart.map===================="+cartItem._id)
-            context.removeItemFromCart.bind(this, cartItem._id)
-            console.log(context.cart);
-            
-            context.cart = [];
+            context.setEmptyCart("REMOVE")
             console.log(context.cart);
         });
     }, [context]);
