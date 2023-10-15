@@ -10,7 +10,7 @@ const Cart = () => {
             <SecondBanner></SecondBanner>
             <div className="ritekhana-main-content">
                 <div className="ritekhana-main-section">
-            <CartNav  isEditable={true}></CartNav>
+            <CartNav  isEditable={true} isCartPage={true}></CartNav>
             </div>
             </div>
         </>

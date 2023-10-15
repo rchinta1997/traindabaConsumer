@@ -4,5 +4,12 @@ export default React.createContext({
   cart: [],
   addItemToCart: cartItem => {},
   removeItemFromCart: itemId => {},
-  updateItemInCart: (itemId,action) => {}
+  removeCartItemInCart: itemId => {},
+  updateItemInCart: (itemId,action) => {},
+  setEmptyCart: (action) => {},
+  trainInfo:{},
+  passengerInfo:{},
 });
+
+
+

@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import CartContext from "./cart-context";
-import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM } from "./reducers";
+import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART, REMOVE_CART_ITEM } from "./reducers";
 
 const GlobalState = (props) => {
     const [cartState, dispatch] = useReducer(cartItemsReducer, { cart: [] });
@@ -19,10 +19,25 @@ const GlobalState = (props) => {
         }, 700);
     };
 
+    const removeCartItemInCart = (itemId) => {
+        setTimeout(() => {
+            // setCart(updatedCart);
+            dispatch({ type: REMOVE_CART_ITEM, itemId: itemId });
+        }, 700);
+    };
+
+    
+
     const updateItemInCart = (itemId,actionType) => {
         setTimeout(() => {
             // setCart(updatedCart);
             dispatch({ type: UPDATE_ITEM, itemId: itemId,actionType:actionType });
+        }, 700);
+    };
+    const setEmptyCart = (actionType) => {
+        setTimeout(() => {
+            // setCart(updatedCart);
+            dispatch({ type: EMPTY_CART, actionType:actionType });
         }, 700);
     };
     return (
@@ -31,7 +46,9 @@ const GlobalState = (props) => {
                 cart: cartState.cart,
                 addItemToCart: addItemToCart,
                 removeItemFromCart: removeItemFromCart,
+                removeCartItemInCart: removeCartItemInCart,
                 updateItemInCart: updateItemInCart,
+                setEmptyCart: setEmptyCart,
             }}
         >
             {props.children}

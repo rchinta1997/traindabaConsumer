@@ -13,8 +13,21 @@ const Restaurants = (props) => {
     const [menuItems, setMenuItems] = useState([]);
     const [outletData, setOutletData] = useState({});
 
-    const ProceedToCart = () => {
-        navigate("/Cart");
+    const ProceedToCart = () => {       
+        var _user = JSON.parse(localStorage.getItem("user"));
+       
+        console.log("_user",_user);
+        if(!_user || _user == null || _user == undefined)
+        {
+            localStorage.setItem("isProccedToPay",1);
+            alert("Please login, before going to procced to pay");
+            navigate("/login");
+        }
+        else
+        {
+            navigate("/Cart");
+        }
+      
     };
 
     useEffect(() => {
@@ -24,8 +37,17 @@ const Restaurants = (props) => {
             .then((response) => {
                 if (response.data.success) {
                     let isActiveData = _.filter(response.data.body, function (o) {
+                        console.log("gst",o["isGST"]);
+                        if(o["isGST"] == undefined)
+                        {
+                            o["isGST"] = o["Tax"] && o["Tax"] !== '' ? true : false;
+                        }
+                        o["Selling_Price"] = Math.round( o["Selling_Price"]);
+                       
+                       
                         return o.isActive;
                     });
+
                     setMenuItems(isActiveData);
                     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                     
@@ -41,8 +63,8 @@ const Restaurants = (props) => {
             <SecondBanner></SecondBanner>
             <div className="ritekhana-main-content">
                 <div className="ritekhana-main-section">
-                    <div className="container">
-                        <div className="row">
+                    <div className="c-container">
+                        <div className="row wi-100">
                             <div className="col-md-9">
                                 <h5>{outletData.OutletName}</h5> <br></br>
                                 Min Order : <b>{outletData.Min_Order}</b> <br></br>
@@ -61,46 +83,53 @@ const Restaurants = (props) => {
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                                <div className="ritekhana-listing ritekhana-listing-style3">
-                                    <ul className="ritekhana-row">
+                                <div className="ritekhana-listing-style3 ritekhana-row">
+                                    
                                         {menuItems.map((eachData, index) => {
                                             return (
-                                                <li key={index} className="ritekhana-column-12">
+                                                <div key={index} className="ritekhana-column-12">
                                                     <figure>
+                                                        {/* <img className="cart-item__image" src={process.env.REACT_APP_API_URL+"/files/"+ eachData.Logo_Id?.filename} /> */}
                                                         <img className="cart-item__image" src={require("../../Assets/Images/no-image-icon.png")} />
                                                     </figure>
                                                     <div className="ritekhana-listing-style3-text">
-                                                        <span>
-                                                            {eachData.Is_Vegetarian && (
-                                                                <>
+                                                        <div>
+                                                            <div className="wi-3 il-flex">
+                                                                {eachData.Is_Vegetarian && (
+                                                                    <>
+                                                                        <img
+                                                                            style={{ width: "20px", paddingRight: "2px" }}
+                                                                            src={require("../../Assets/Images/veg.png")}
+                                                                        />
+                                                                    </>
+                                                                )}
+                                                                {eachData.Is_Non_Vegetarian && (
                                                                     <img
                                                                         style={{ width: "20px", paddingRight: "2px" }}
-                                                                        src={require("../../Assets/Images/veg.png")}
+                                                                        src={require("../../Assets/Images/non-veg.png")}
                                                                     />
-                                                                </>
-                                                            )}
-                                                            {eachData.Is_Non_Vegetarian && (
-                                                                <img
-                                                                    style={{ width: "20px", paddingRight: "2px" }}
-                                                                    src={require("../../Assets/Images/non-veg.png")}
-                                                                />
-                                                            )}
-                                                            {eachData.Item_Name}
-                                                            <a
-                                                                href="javascript:;"
-                                                                onClick={context.addItemToCart.bind(this, eachData)}
-                                                                className="ritekhana-bgcolor"
-                                                            >
-                                                                <i className="fa fa-plus"></i>
-                                                            </a>
-                                                        </span>
-                                                        <small>{eachData.Description}</small>
-                                                        <strong className="ritekhana-bgcolor">₹ {eachData.Selling_Price}</strong>
+                                                                )}
+                                                            </div>
+                                                            <div  className="wi-50 il-flex">
+                                                                {eachData.Item_Name}
+                                                                <a
+                                                                    href="javascript:;"
+                                                                    onClick={context.addItemToCart.bind(this, eachData)}
+                                                                    className="ritekhana-bgcolor"
+                                                                >
+                                                                    <i className="fa fa-plus"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div  className="wi-3 il-flex">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div className="wi-100"><small>{eachData.Description}</small></div>
+                                                        <div className="wi-20"><strong className="ritekhana-bgcolor">₹ {eachData.Selling_Price}</strong></div>
                                                     </div>
-                                                </li>
+                                                </div>
                                             );
                                         })}
-                                    </ul>
                                 </div>
                             </div>
                         </div>

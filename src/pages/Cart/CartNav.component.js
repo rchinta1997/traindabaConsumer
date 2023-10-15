@@ -6,11 +6,30 @@ const CartNav = (props) => {
     const navigate = useNavigate();
     const context = useContext(cartContext);
     const [isEditable, setIsEditable] = useState(false);
+    const [isCartPage, setIsCartPage] = useState(false);
+    const [itemTotal, setItemTotal] =useState(0);
+    const [inputData, setInputData] = useState('');
+
+  const sendDataToParent = () => {
+    
+    props.onData(inputData); 
+    console.log(inputData);
+  };
     useEffect(() => {
         setIsEditable(props.isEditable);
-    }, []);
+        setIsCartPage(props.isCartPage);
+        setItemTotal(props.itemTotal);
+        setInputData(props);
+    }, [context]);
+    
     const ProceedToCart = () => {
-        navigate("/Checkout");
+        let user = localStorage.getItem("user");
+        if(user){
+            navigate("/Checkout");
+        }else{
+            navigate("/Login");
+        }
+        
     };
     return (
         <>
@@ -25,7 +44,7 @@ const CartNav = (props) => {
                                             <thead>
                                                 <tr>
                                                     <th>Item Name</th>
-                                                    <th>Qty</th>
+                                                    <th>Quantity</th>
                                                     <th>Price</th>
                                                     <th>Total</th>
                                                     {isEditable && <th></th>}
@@ -38,7 +57,7 @@ const CartNav = (props) => {
                                                         {isEditable && (
                                                             <td className="product-quantity" data-title="quantity">
                                                                 <div className="item_qty buttons_added">
-                                                                    <span>
+                                                                    <span className="wi-33">
                                                                         {" "}
                                                                         <a
                                                                             onClick={context.updateItemInCart.bind(this, cartItem._id, "REMOVE")}
@@ -47,18 +66,10 @@ const CartNav = (props) => {
                                                                             <i className="fa fa-minus"></i>
                                                                         </a>
                                                                     </span>
-                                                                    <input
-                                                                        type="text"
-                                                                        readOnly
-                                                                        value={cartItem.quantity}
-                                                                        maxLength="2"
-                                                                        max="10"
-                                                                        size="1"
-                                                                        name="qty"
-                                                                        title="Qty"
-                                                                        className="input-text qty text"
-                                                                    ></input>
-                                                                    <span>
+                                                                    <span className="wi-33 pdg-l-r-5-pct">
+                                                                        {cartItem.quantity}
+                                                                    </span>
+                                                                    <span className="wi-33">
                                                                         {" "}
                                                                         <a
                                                                             onClick={context.updateItemInCart.bind(this, cartItem._id, "ADD")}
@@ -89,7 +100,7 @@ const CartNav = (props) => {
                                                         </td>
                                                         {isEditable && (
                                                             <td>
-                                                                <a href="javascript:;" onClick={context.removeItemFromCart.bind(this, cartItem._id)}>
+                                                                <a href="javascript:;" onClick={context.removeCartItemInCart.bind(this, cartItem._id)}>
                                                                     <i className="fa fa-trash" style={{ color: "red" }}></i>
                                                                 </a>
                                                             </td>
@@ -102,12 +113,13 @@ const CartNav = (props) => {
                                     <h5 className="text-right">
                                         TOTAL ₹{" "}
                                         <span className="final_total">
-                                            {context.cart.length
-                                                ? context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2)
-                                                : Number(0).toFixed(2)}
+                                                {
+                                                    context.total =  context?.cart.length ? context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2)
+                                                    : Number(0).toFixed(2)
+                                                }
                                         </span>
                                     </h5>
-                                    {isEditable && (
+                                    {isEditable && (isCartPage) &&  (
                                         <div className="ritekhana-listing-loadmore-btn">
                                             <a href="#!" onClick={ProceedToCart} className="ritekhana-bgcolor">
                                                 Proceed to Checkout

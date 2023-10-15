@@ -1,18 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AutocompleteComponent from "../../utility/autocomplete.component";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import cartContext from "../../Context/cart-context";
+import dayjs from "dayjs";
 
 
-const Banner = () => {
+const Banner = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
-  const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState([new Date(),new Date()]);
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();  
+  const context = useContext(cartContext);
+  const [boardingDate, setBoardingDate] = useState(new Date());
+  const [trainInfo, setTrainInfo] = useState({});
+  const [type, setType] = useState("trainno");
 
-  function searchByPNR() {
-    navigate("/PNRInfo", { state: { search: searchValue } });
+  const selectedData = (trainInfo) => {
+    context.trainInfo = trainInfo; 
   }
+  const today = new Date();
+  const handleDateChange = (val) => {
+    if (val[0] !== null && val[1] === null) {
+      setBoardingDate((current) => new Date(current.getFullYear() + 1, 1));
+    }
+    setValue(val);
+    context.trainInfo.travelDate=dayjs(boardingDate).format('DD-MM-YYYY');
+    console.log(context);
+  };
+  function searchByPNR() {
+    navigate("/PNRInfo", { state: {  searchBy: "PNR" , search: searchValue } });
+  }
+  function searchByTrainNo() {
+    navigate("/PNRInfo", { state: { searchBy: "TRAIN" , search: context.trainInfo.trainNo+":"+context.trainInfo.travelDate } });
+  }
+
+  
+ useEffect(()=>{    
+  console.log("in banner component");
+  console.log(context);
+ }, [context]);
 
   return (
     <div className="ritekhana-banner-one ">
+      
+    
       <div className="ritekhana-banner-one-layer">
         <img
           src={require("../../Assets/Images/Website background image.png")}
@@ -67,7 +101,7 @@ const Banner = () => {
               </li>
             </ul>
             <div className="tab-content" id="pills-tabContent">
-              {activeIndex == 0 && (
+              {activeIndex === 0 && (
                 <div
                   className="tab-pane fade show active"
                   id="pills-home"
@@ -92,7 +126,7 @@ const Banner = () => {
                   </form>
                 </div>
               )}
-              {activeIndex == 1 && (
+              {activeIndex === 1 && (
                 <div
                   className="tab-pane fade  show active"
                   id="pills-profile"
@@ -102,28 +136,30 @@ const Banner = () => {
                   <form method="post" id="train_form">
                     <div className="row">
                       <div className="col-md-4">
-                        <input
-                          type="text"
-                          name="train_no"
-                          placeholder="Enter Train Number"
-                        ></input>
+                        <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" />
                       </div>
-                      <div className="col-md-4">
-                        <input
-                          type="text"
-                          name="boarding_date"
-                          id="boarding_date"
-                          placeholder="Boarding Date"
-                        ></input>
+                      <div className="col-md-4 boarding-date">
+                        
+                             <LocalizationProvider dateAdapter={AdapterDateFns}>
+                              <DatePicker
+                                placeholder="Boarding Date"
+                                value={boardingDate}
+                                minDate={today} 
+                                onChange={handleDateChange}
+                                renderInput={(params) => <input {...params} />}
+                              />
+                              </LocalizationProvider>
+
                       </div>
+                      
                       <div className="col-md-4">
-                        <input type="submit" value="Order Food"></input>
+                        <input type="submit" onClick={() => searchByTrainNo()} value="Order Food"></input>
                       </div>
                     </div>
                   </form>
                 </div>
               )}
-              {activeIndex == 2 && (
+              {activeIndex === 2 && (
                 <div
                   className="tab-pane fade  show active"
                   id="pills-contact"
@@ -146,13 +182,14 @@ const Banner = () => {
                     </div>
                   </form>
                 </div>
+                
               )}
             </div>
             <p className="partner">
               Authorised{" "}
               <img
                 className="bg-white"
-                src="https://traindhaba.com//assets/images/irctc-logo.png"
+                src="https://traindhaba.com/assets/images/irctc-logo.png"
                 width="20px"
                 height="20px"
                 alt="IRCTC"
@@ -163,6 +200,7 @@ const Banner = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

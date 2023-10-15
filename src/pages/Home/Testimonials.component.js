@@ -24,7 +24,7 @@ const Testimonials = () => {
                   </span>
                   <figure>
                     <img
-                      src="https://traindhaba.com/admin//uploads/6214e73417f74.jpg"
+                      src="https://traindhaba.com/admin/uploads/6214e73417f74.jpg"
                       alt=""
                     ></img>
                     <figcaption>
