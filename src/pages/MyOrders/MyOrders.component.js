@@ -77,8 +77,13 @@ const MyOrders = () => {
   const location = useLocation();
 
   useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let User_Id = "";
+    if(user !== undefined){
+      User_Id= user.User_Id;
+    }
     let userid ={
-        User_Id:"64e9f28975e4d54ee5428462"
+        User_Id:User_Id
     } ;
     
     axios
