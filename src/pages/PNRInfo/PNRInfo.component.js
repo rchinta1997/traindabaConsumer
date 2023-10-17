@@ -62,7 +62,7 @@ const PNRInfo = () => {
         .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
         .then((response) => {
           console.log("===============searchByPNR===============")
-          console.log(response.data.body)
+          console.log(response.data.body)          
           if (response.data.success) {
             setLoading(false);
             setIsError(false);
@@ -149,6 +149,8 @@ const PNRInfo = () => {
           passengerInfo["arrDate"] = stationData["arrDate"];
           passengerInfo["halt"] = stationData["halt"];
           passengerInfo["code"] = stationData["code"];
+          passengerInfo["stationName"] = stationData["name"];
+        
           setPassengerInfo({ ...passengerInfo });
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
           setOutletData(response.data.body);

@@ -13,8 +13,21 @@ const Restaurants = (props) => {
     const [menuItems, setMenuItems] = useState([]);
     const [outletData, setOutletData] = useState({});
 
-    const ProceedToCart = () => {
-        navigate("/Cart");
+    const ProceedToCart = () => {       
+        var _user = JSON.parse(localStorage.getItem("user"));
+       
+        console.log("_user",_user);
+        if(!_user || _user == null || _user == undefined)
+        {
+            localStorage.setItem("isProccedToPay",1);
+            alert("Please login, before going to procced to pay");
+            navigate("/login");
+        }
+        else
+        {
+            navigate("/Cart");
+        }
+      
     };
 
     useEffect(() => {
@@ -24,7 +37,14 @@ const Restaurants = (props) => {
             .then((response) => {
                 if (response.data.success) {
                     let isActiveData = _.filter(response.data.body, function (o) {
-                        o["isGST"] = o["Tax"] && o["Tax"] !== '' ? true : false;
+                        console.log("gst",o["isGST"]);
+                        if(o["isGST"] == undefined)
+                        {
+                            o["isGST"] = o["Tax"] && o["Tax"] !== '' ? true : false;
+                        }
+                        o["Selling_Price"] = Math.round( o["Selling_Price"]);
+                       
+                       
                         return o.isActive;
                     });
 
@@ -69,6 +89,7 @@ const Restaurants = (props) => {
                                             return (
                                                 <div key={index} className="ritekhana-column-12">
                                                     <figure>
+                                                        {/* <img className="cart-item__image" src={process.env.REACT_APP_API_URL+"/files/"+ eachData.Logo_Id?.filename} /> */}
                                                         <img className="cart-item__image" src={require("../../Assets/Images/no-image-icon.png")} />
                                                     </figure>
                                                     <div className="ritekhana-listing-style3-text">

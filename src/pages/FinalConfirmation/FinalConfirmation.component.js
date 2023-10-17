@@ -4,6 +4,7 @@ import CartNav from "../Cart/CartNav.component";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import cartContext from "../../Context/cart-context";
 import { json, useNavigate } from "react-router-dom";
+import {calculateTotalAmt} from "../../utility/helper" 
 
 const FinalConfirmation = () => {
     const context = useContext(cartContext);
@@ -17,11 +18,13 @@ const FinalConfirmation = () => {
     useEffect(() => {
         setPassengerInfo(JSON.parse(localStorage.getItem("PassengerInfo")));
         console.log(passegnerInfo)
-        let itemvalue=context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2);
+        const priceObj = calculateTotalAmt(context.cart);
+        
         //const itemTax= context.cart.reduce((acc, item) => acc + ((item.quantity * item.Selling_Price) * item.Tax)/100, 0).toFixed(2);
-        const itemTax = percentage(gst,itemvalue);
+        let itemvalue = priceObj.itemvalue;
+        const itemTax = priceObj.itemTax; // percentage(gst,(itemvalue-itemValueWithouGST));
         setTax(round(itemTax,2));
-        setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
+        setTotalAmount(Math.round(Number(itemvalue)+ Number(itemTax))); // setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
         setItemTotal(round(itemvalue,2));
     }, []);
     function loadScript(src) {
@@ -68,6 +71,8 @@ const FinalConfirmation = () => {
     }
 
     async function sendRequest(paymentType) {
+        let _user = JSON.parse(localStorage.getItem("user"));
+        console.log("_user",_user);
         let order_response = {           
             orderDetails:'',
             paymentDetails:''
@@ -96,8 +101,7 @@ const FinalConfirmation = () => {
             payment_Mode:paymentType,
             Total_Amount: totalAmount+""
         };
-        console.log(orderData);
-        console.log("========Razorpay==Start========"+process.env.REACT_APP_API_URL);
+        console.log(orderData);      
         axios
             .post(process.env.REACT_APP_API_URL + "/order/createOrder", orderData)
             .then((response) => {
@@ -120,7 +124,7 @@ const FinalConfirmation = () => {
                         currency: currency,
                         name: passegnerInfo.passengerName,
                         description: "Train Dhaba",
-                        order_id: id,
+                        order_id: response.data.body.RazorPayOrderID, // id,
                         handler: async function (response) {
                             console.log("========Razorpay===response===start====");
                             const data = {

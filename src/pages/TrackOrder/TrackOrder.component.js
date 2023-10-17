@@ -25,8 +25,9 @@ const TrackOrder = () => {
 
 function getOrderDetailsByOrderId(orderId)
 {
+    let _user = JSON.parse(localStorage.getItem("user"));   
     let userid ={
-        User_Id:"64e9f28975e4d54ee5428462",
+        User_Id:_user.id,
         Order_Id:orderId
     } ;
     axios

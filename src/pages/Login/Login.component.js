@@ -14,6 +14,7 @@ import OpenNotification from "../../components/Notifications"
 import MantineReactTableComponent from "../../utility/mantineReactTable.component"
 import styles from './Login.css';
 import cartContext from "../../Context/cart-context";
+import { Toast } from 'primereact/toast';
 
 
 const Login = () => {
@@ -26,6 +27,7 @@ const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const context = useContext(cartContext);
+  const toast = useRef(null);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -128,10 +130,15 @@ const Login = () => {
           .post(process.env.REACT_APP_API_URL + "/user/create", user)
           .then((response) => {
             console.log(response)
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
             if (response.data.success) {
               setIsLoading(false);
               localStorage.setItem("token", response.data.body.token);
               localStorage.setItem("user", JSON.stringify(response.data.body));
+
+             
+              toast.current.show({ severity: 'success', summary: 'Success', detail: 'Registration Successful.', life: 3000 });
               navigate("/");
             }
             else
@@ -415,6 +422,7 @@ useEffect(() => {
         </div>
     </div>
    </div> 
+   <Toast ref={toast} />
     </>
   );
 };
