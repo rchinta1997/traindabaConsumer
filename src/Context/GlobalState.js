@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import CartContext from "./cart-context";
-import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART } from "./reducers";
+import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART, REMOVE_CART_ITEM } from "./reducers";
 
 const GlobalState = (props) => {
     const [cartState, dispatch] = useReducer(cartItemsReducer, { cart: [] });
@@ -18,6 +18,15 @@ const GlobalState = (props) => {
             dispatch({ type: REMOVE_ITEM, itemId: itemId });
         }, 700);
     };
+
+    const removeCartItemInCart = (itemId) => {
+        setTimeout(() => {
+            // setCart(updatedCart);
+            dispatch({ type: REMOVE_CART_ITEM, itemId: itemId });
+        }, 700);
+    };
+
+    
 
     const updateItemInCart = (itemId,actionType) => {
         setTimeout(() => {
@@ -37,6 +46,7 @@ const GlobalState = (props) => {
                 cart: cartState.cart,
                 addItemToCart: addItemToCart,
                 removeItemFromCart: removeItemFromCart,
+                removeCartItemInCart: removeCartItemInCart,
                 updateItemInCart: updateItemInCart,
                 setEmptyCart: setEmptyCart,
             }}

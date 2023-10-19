@@ -7,6 +7,7 @@ import ConfirmationModal from "../../utility/confirmationmodal.component"
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
+import {convertDateTimeToIST,convertDateToIST,convertIsoToIst} from '../../utility/helper'
 
 import {
     Form,
@@ -77,8 +78,9 @@ const MyOrders = () => {
   const location = useLocation();
 
   useEffect(() => {
+    let _user = JSON.parse(localStorage.getItem("user"));
     let userid ={
-        User_Id:"64e9f28975e4d54ee5428462"
+        User_Id:_user.id
     } ;
     
     axios
@@ -89,8 +91,12 @@ const MyOrders = () => {
             if (response.data.success) {
                 //setIsError(false);
                 //setPnrData(response.data.body);
+                response.data.body.forEach((element)=>{                    
+                     element.Delivery_Date = convertIsoToIst(element.Delivery_Date);  
+                     element.Booking_Date = convertIsoToIst(element.Booking_Date);
+                });
                 setOrders(response.data.body);
-                console.log("=============== ordersmy===============")
+                console.log("=============== ordersmy==============="+response.data.body)
                 console.log(MyOrders);
                 let passengerInfo = {
                     pnrNumber: location.state.search,

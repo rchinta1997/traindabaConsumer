@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CartNav from "../Cart/CartNav.component";
 import cartContext from "../../Context/cart-context";
 import axios from "axios";
+import {calculateTotalAmt} from "../../utility/helper" 
 
 
 const Checkout = () => {
@@ -58,12 +59,14 @@ const Checkout = () => {
     useEffect(() => {
         console.log("process.env.GST="+process.env.RAZORPAY_SECRET);
         setPassengerInfo(JSON.parse(localStorage.getItem("PassengerInfo")));
-        let itemvalue=context.cart.reduce((acc, item) => acc + item.quantity * item.Selling_Price, 0).toFixed(2);
+        const priceObj = calculateTotalAmt(context.cart);
+        console.log("priceobj",priceObj);
+        
         //const itemTax= context.cart.reduce((acc, item) => acc + ((item.quantity * item.Selling_Price) * item.Tax)/100, 0).toFixed(2);
-        const itemTax= percentage(gst,itemvalue);
-        console.log("=====itemTax==="+itemTax)
+        let itemvalue = priceObj.itemvalue;
+        const itemTax = priceObj.itemTax; // percentage(gst,(itemvalue-itemValueWithouGST));
         setTax(round(itemTax,2));
-        setTotalAmount(round(Number(itemvalue)+ Number(itemTax),2));
+        setTotalAmount(Math.round(Number(itemvalue)+ Number(itemTax))); //round(Number(itemvalue)+ Number(itemTax),2));
         setItemTotal(round(itemvalue,2));
     }, [context]);
     

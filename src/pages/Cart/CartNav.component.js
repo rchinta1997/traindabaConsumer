@@ -100,7 +100,7 @@ const CartNav = (props) => {
                                                         </td>
                                                         {isEditable && (
                                                             <td>
-                                                                <a href="javascript:;" onClick={context.removeItemFromCart.bind(this, cartItem._id)}>
+                                                                <a href="javascript:;" onClick={context.removeCartItemInCart.bind(this, cartItem._id)}>
                                                                     <i className="fa fa-trash" style={{ color: "red" }}></i>
                                                                 </a>
                                                             </td>
