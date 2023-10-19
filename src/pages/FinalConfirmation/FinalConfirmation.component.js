@@ -101,7 +101,8 @@ const FinalConfirmation = () => {
             payment_Mode:paymentType,
             Total_Amount: totalAmount+""
         };
-        console.log(orderData);      
+        console.log(orderData);
+        console.log("========Razorpay==Start========"+process.env.REACT_APP_API_URL);
         axios
             .post(process.env.REACT_APP_API_URL + "/order/createOrder", orderData)
             .then((response) => {
