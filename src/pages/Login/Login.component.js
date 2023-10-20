@@ -85,7 +85,16 @@ const Login = () => {
             localStorage.setItem("token", response.data.body.token);
             localStorage.setItem("user", JSON.stringify(response.data.body));
 
-            if(context?.cart?.length > 0){              
+            if(context?.cart?.length > 0){    
+              let passengerData = localStorage.getItem("PassengerInfo");
+              if(passengerData)
+              {
+                 let passengerInfo = JSON.parse(passengerData);
+                 passengerInfo["email"] = response.data.body?.emailID;
+                 passengerInfo["mobileNumber"] = response.data.body?.mobileNumber;
+                 localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+              }
+             
               navigate("/Checkout");
             }else{
               setLoggedIn(true);

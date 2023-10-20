@@ -10,6 +10,7 @@ import {
     Button,
 } from "reactstrap";
 import styles from './TrackOrder.css';
+import { convertDateTimeToIST, convertDateToIST, convertIsoToIst } from '../../utility/helper'
 
 
 const TrackOrder = () => {
@@ -100,7 +101,7 @@ const TrackOrder = () => {
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Date</th>
+                                                    <th>Booking Date</th>
                                                     <th>Order ID</th>
                                                     <th>Order Price</th>
                                                     <th>Status</th>
@@ -115,7 +116,7 @@ const TrackOrder = () => {
 
                                                     <tbody>
                                                         <tr>
-                                                            <td>{element.Booking_Date}</td>
+                                                            <td>{convertIsoToIst(element.Booking_Date)}</td>
                                                             <td>{element.Order_Id}</td>
                                                             <td>{element?.Total_Amount?.$numberDecimal}</td>
                                                             <td>ORDER ACCEPTED</td>
