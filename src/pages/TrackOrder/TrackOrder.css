@@ -28,3 +28,40 @@
     outline: none;
     width: 40%;
   }
+
+  .card{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    height: 200px;
+    width: 800px;
+    margin:20px;
+  }
+  h1{
+    font-size: 20px;
+    padding: 11px 25px 13px 25px;
+  }
+  .input-fields{
+    width: 400px ;
+    padding: 10px ;
+    margin: 10px ;
+    height: 100px;
+    background-color: #ffff;
+    border-radius:2px;
+   
+    
+  }
+  .search-fields-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
