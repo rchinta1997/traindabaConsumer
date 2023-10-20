@@ -85,7 +85,16 @@ const Login = () => {
             localStorage.setItem("token", response.data.body.token);
             localStorage.setItem("user", JSON.stringify(response.data.body));
 
-            if(context?.cart?.length > 0){              
+            if(context?.cart?.length > 0){    
+              let passengerData = localStorage.getItem("PassengerInfo");
+              if(passengerData)
+              {
+                 let passengerInfo = JSON.parse(passengerData);
+                 passengerInfo["email"] = response.data.body?.emailID;
+                 passengerInfo["mobileNumber"] = response.data.body?.mobileNumber;
+                 localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+              }
+             
               navigate("/Checkout");
             }else{
               setLoggedIn(true);
@@ -317,7 +326,7 @@ useEffect(() => {
                             <i className="login-box-iconin far fa-eye" onClick={togglePasswordVisibility}></i> 
                             </li>
                         </FormGroup>
-                            <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Submit</Button></li>
+                            <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Login</Button></li>
                             <div className="forgot-pass">
                                 <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
                             </div>

@@ -10,6 +10,7 @@ import cartContext from "../../Context/cart-context";
 
 import { format, parse } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
+
 // const cryptoHelper = require("../../helpers/crypto-helper");
 // const cryptoHelperInstance = new cryptoHelper();
 
@@ -88,12 +89,17 @@ const PNRInfo = () => {
               trainNo: response.data.body.trainInfo.trainNo,
               trainName: response.data.body.trainInfo.name
             };
-            let user = JSON.parse(localStorage.getItem("user"));
-            if(user !== undefined){
+            let userdata = localStorage.getItem("user");
+            if(userdata)
+            {
+              let user = JSON.parse(userdata);
               passengerInfo.email = user.emailID;
-            }
+              passengerInfo.mobileNumber = user.mobileNumber;
+            }          
+           
             setPassengerInfo(passengerInfo);
             localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+            console.log("PassengerInfo",JSON.parse(localStorage.getItem("PassengerInfo")));
           } else {
             setIsError(true);
             setPnrData(undefined);

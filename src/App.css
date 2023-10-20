@@ -2321,13 +2321,16 @@ input[type=number]::-webkit-outer-spin-button {
 .navbar .dropdown ul li {
   min-width: 200px;
   list-style: none;
+
 }
 .navbar .dropdown ul a {
-  padding: 10px 20px;
+  padding: 5px 5px;
   font-size: 14px;
   text-transform: none;
   color: #493c3e;
+  
 }
+
 .navbar .dropdown ul a i {
   font-size: 12px;
 }
@@ -2480,3 +2483,4 @@ input[type=number]::-webkit-outer-spin-button {
     height: 150vh;
   }
 }
+
