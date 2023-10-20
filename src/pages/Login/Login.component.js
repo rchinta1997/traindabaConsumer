@@ -317,7 +317,7 @@ useEffect(() => {
                             <i className="login-box-iconin far fa-eye" onClick={togglePasswordVisibility}></i> 
                             </li>
                         </FormGroup>
-                            <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Submit</Button></li>
+                            <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Login</Button></li>
                             <div className="forgot-pass">
                                 <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
                             </div>

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./Navbar.css";
-
+import './Navbar.css'
 import { useNavigate } from "react-router-dom";
 import cartContext from "../../Context/cart-context";
 
 const Navbar = (props) => {
     var istokenexists = false;
     const context = useContext(cartContext);
-    const[showProfile, setShowProfile]=useState(false);
+    const [showProfile, setShowProfile] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
         console.log(context);
@@ -53,44 +52,46 @@ const Navbar = (props) => {
 
     const toggleProfile = () => {
         setShowProfile(!showProfile);
-      };
-    
+    };
+
     return (
         <div className="container d-flex align-items-center justify-content-between">
             <a href="#" className="logo">
                 <img src="https://traindhaba.com/assets/images/logo.png" alt="" className="img-fluid" onClick={(event) => routeClickHandler(event, "Home")}></img>
             </a>
-
             <nav id="navbar" className="navbar">
                 <ul>
                     <li>
                         <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>
-                            <i className="fa fa-user"></i> Track Order{" "}
+                            Track Order{" "}
                         </a>
                     </li>
                     {istokenexists ? <li>
                         <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
-                            <i className="fa fa-user"></i> My Orders{" "}
+                            My Orders{" "}
                         </a>
                     </li> : null}
                     <li className="dropdown">
                         <a href="#rail_tools_area">
-                            <span>Rail Tools</span> <i className="fa fa-solid fa-angle-down"></i>
+                            <span onClick={toggleProfile}>Rail Tools</span>
+                            {showProfile}
                         </a>
-                        <ul>
-                            <li>
-                                <a href="#">PNR Status</a>
-                            </li>
-                            <li>
-                                <a href="#">Train Running Status</a>
-                            </li>
-                            <li>
-                                <a href="#">Live Station</a>
-                            </li>
-                            <li>
-                                <a href="#">Train Schedule</a>
-                            </li>
-                        </ul>
+                        {showProfile && (
+                            <ul>
+                                <li>
+                                    <a href="#">PNR Status</a>
+                                </li>
+                                <li>
+                                    <a href="#">Train Running Status</a>
+                                </li>
+                                <li>
+                                    <a href="#">Live Station</a>
+                                </li>
+                                <li>
+                                    <a href="#">Train Schedule</a>
+                                </li>
+                            </ul>
+                        )}
                     </li>
 
                     {/* { istokenexists ?<li>                           
@@ -182,35 +183,37 @@ const Navbar = (props) => {
 
                     <li className="dropdown">
                         <a href="#">
-                            <span className="fa fa-user" onClick={toggleProfile }>
-                                {showProfile?null:null}
+                            <span className="fa fa-user" onClick={toggleProfile}>
+                                {showProfile}
                             </span>
                         </a>
-                        {showProfile&&(
+                        {showProfile && (
                             <ul>
-                            <li>
-                                <a href="#">Account</a>
-                            </li>
-                            <li>
-                                <a href="#">Settings</a>
-                            </li>
-                            <li>
-                                {istokenexists ? <li>
-                                    <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
-                                        Logout{" "}
+                                <li>
+                                    <a href="#">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings</a>
+                                </li>
+                                <li>
+                                    {istokenexists ? <li>
+                                        <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
+                                            Logout{" "}
 
-                                    </a>
-                                </li> : null}
-                                {!istokenexists ? <li>
-                                    <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
-                                        Login{" "}
-                                    </a>
-                                </li> : null}
-                            </li>
-                        </ul>
+                                        </a>
+                                    </li> : null}
+                                    {!istokenexists ? <li>
+                                        <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
+                                            Login{" "}
+                                        </a>
+                                    </li> : null}
+                                </li>
+                            </ul>
                         )}
-                        
+
                     </li>
+
+
 
                     {/* { istokenexists ?<li>
                             <a href="#"  onClick={(event) => routeClickHandler(event, "Logout")}>

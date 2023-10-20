@@ -10,7 +10,7 @@ const Profile = () => {
             </a>
             <ul>
                 <li>
-                    <a href="#">Account</a>
+                    <a href="#">Profile</a>
                 </li>
                 <li>
                     <a href="#">Settings</a>
