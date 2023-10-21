@@ -104,7 +104,7 @@ const TrackOrder = () => {
                                                     <th>Booking Date</th>
                                                     <th>Order ID</th>
                                                     <th>Order Price</th>
-                                                    <th>Status</th>
+                                                    <th>Order Status</th>
                                                     <th>Payment Type</th>
                                                 </tr>
                                             </thead>
