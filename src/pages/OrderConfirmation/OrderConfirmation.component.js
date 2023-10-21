@@ -1,8 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import cartContext from "../../Context/cart-context";
+import cartContext from "../../Context/cart-context"; 
+import dayjs from "../../helpers/dayjs-helpers";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
-const OrderConfirmation = () => {
+const OrderConfirmation = (props) => {
     const [orderData, setOrderData] = useState({});
     const [outletName, setOutletName] = useState(null);
     const [currentDate, setCurrentDate] = useState();
@@ -15,8 +19,23 @@ const OrderConfirmation = () => {
         var curr = new Date().toLocaleDateString();
         console.log(location.state.res);
         let amount = '';
-        if(typeof location.state.res?.orderDetails?.Total_Amount == 'object'){
-            location.state.res.orderDetails.Total_Amount = location.state.res.orderDetails?.Total_Amount?.$numericeDecimal;
+        let orderDetails =location.state.res?.orderDetails;
+        if(typeof orderDetails == 'object'){
+            if(typeof orderDetails?.Booking_Date == 'string'){
+                dayjs.extend(customParseFormat);
+                orderDetails.Booking_Date = dayjs().format('YYYY-MM-DD HH:mm');
+            }
+            if(typeof orderDetails?.Delivery_Date == 'string'){
+                dayjs.extend(utc);
+                dayjs.extend(timezone);
+                const dayjsLocal = dayjs(orderDetails.Delivery_Date);
+                const dayjsIst = dayjsLocal.tz('Asia/Calcutta');
+                orderDetails.Delivery_Date = dayjsIst.format('YYYY-MM-DD HH:mm');
+            }            
+            if(typeof orderDetails?.Total_Amount == 'object'){
+                location.state.res.orderDetails.Total_Amount = location.state.res.orderDetails?.Total_Amount?.$numberDecimal;
+                context.setEmptyCart("EMPTY_CART");
+            }
         }
         setOrderData(location.state.res.orderDetails);
         console.log("===========OrderConfirmation================="+JSON.stringify(orderData));      
@@ -29,9 +48,10 @@ const OrderConfirmation = () => {
         }, 0)
         context.cart.map((cartItem, index) => {
             console.log("===========context.cart.map===================="+cartItem._id)
-            context.removeItemFromCart.bind(this, cartItem._id)
+            context.setEmptyCart("REMOVE")
+            console.log(context.cart);
         });
-    }, []);
+    }, [context]);
     return (
         <>
             <div className="ritekhana-main-content">
@@ -98,7 +118,7 @@ const OrderConfirmation = () => {
                                                <tr>
                                                <td rowSpan="2">{orderData.Order_Id}</td>
                                                <td></td>
-                                               <td>{orderData.Total_Amount}</td>
+                                               <td>Rs. {orderData.Total_Amount}</td>
                                                </tr> 
                                             </tbody>
                                         </table>

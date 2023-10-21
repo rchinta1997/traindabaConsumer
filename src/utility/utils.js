@@ -1,9 +1,10 @@
 // Here maintain commonly used methods
-import { REGX_TYPE } from "./constants"
+import { PATTERN, REGX_TYPE } from "./constants"
 import { format, differenceInYears } from 'date-fns'
 import { IS_REMEMBER_ME, USERNAME, ACTIONS, DATE_FORMAT } from "./constants"
-import moment from 'moment'
+import { moment, SESSION_TYPES_ENUM } from 'moment'
 import 'moment-timezone';
+
 
 const { ADD, UPDATE, DELETE } = ACTIONS
 
@@ -78,4 +79,9 @@ export const isString = obj => typeof (obj) === 'string'
 export const scrollToBottom = (className) => {
   let messageBody = document.querySelector(className);
   messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+}
+
+export const convertDateFormat= (toFormat, inputDate) => {
+    let formattedDate = moment(inputDate).format(toFormat);
+  return formattedDate;
 }

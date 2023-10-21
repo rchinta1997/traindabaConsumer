@@ -14,6 +14,7 @@ import OpenNotification from "../../components/Notifications"
 import MantineReactTableComponent from "../../utility/mantineReactTable.component"
 import styles from './Login.css';
 import cartContext from "../../Context/cart-context";
+import { Toast } from 'primereact/toast';
 
 
 const Login = () => {
@@ -26,6 +27,7 @@ const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const context = useContext(cartContext);
+  const toast = useRef(null);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -83,7 +85,16 @@ const Login = () => {
             localStorage.setItem("token", response.data.body.token);
             localStorage.setItem("user", JSON.stringify(response.data.body));
 
-            if(context?.cart?.length > 0){              
+            if(context?.cart?.length > 0){    
+              let passengerData = localStorage.getItem("PassengerInfo");
+              if(passengerData)
+              {
+                 let passengerInfo = JSON.parse(passengerData);
+                 passengerInfo["email"] = response.data.body?.emailID;
+                 passengerInfo["mobileNumber"] = response.data.body?.mobileNumber;
+                 localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+              }
+             
               navigate("/Checkout");
             }else{
               setLoggedIn(true);
@@ -128,10 +139,15 @@ const Login = () => {
           .post(process.env.REACT_APP_API_URL + "/user/create", user)
           .then((response) => {
             console.log(response)
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
             if (response.data.success) {
               setIsLoading(false);
               localStorage.setItem("token", response.data.body.token);
               localStorage.setItem("user", JSON.stringify(response.data.body));
+
+             
+              toast.current.show({ severity: 'success', summary: 'Success', detail: 'Registration Successful.', life: 3000 });
               navigate("/");
             }
             else
@@ -310,7 +326,7 @@ useEffect(() => {
                             <i className="login-box-iconin far fa-eye" onClick={togglePasswordVisibility}></i> 
                             </li>
                         </FormGroup>
-                            <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Submit</Button></li>
+                            <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Login</Button></li>
                             <div className="forgot-pass">
                                 <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
                             </div>
@@ -415,6 +431,7 @@ useEffect(() => {
         </div>
     </div>
    </div> 
+   <Toast ref={toast} />
     </>
   );
 };
