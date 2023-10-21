@@ -1,3 +1,5 @@
+import { JsonInput } from "@mantine/core";
+
 export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const UPDATE_ITEM = "UPDATE_ITEM";
@@ -17,6 +19,7 @@ const addItemToCart = (menuItem, state) => {
         updatedItem.quantity++;
         updatedCart[updatedItemIndex] = updatedItem;
     }
+    localStorage.setItem("currentMenuItem", JSON.stringify(menuItem));
     return { ...state, cart: updatedCart };
 };
 

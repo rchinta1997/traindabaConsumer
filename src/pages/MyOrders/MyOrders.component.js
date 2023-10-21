@@ -7,7 +7,7 @@ import ConfirmationModal from "../../utility/confirmationmodal.component"
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import {convertDateTimeToIST,convertDateToIST,convertIsoToIst} from '../../utility/helper'
+import {convertDateTimeToIST,convertDateToIST,convertIsoToIst,convertLocalDate} from '../../utility/helper'
 
 import {
     Form,
@@ -98,7 +98,7 @@ function getUserOrder()
               //setPnrData(response.data.body);
               response.data.body.forEach((element)=>{                    
                    element.Delivery_Date = convertIsoToIst(element.Delivery_Date);  
-                   element.Booking_Date = convertIsoToIst(element.Booking_Date);
+                   element.Booking_Date = convertLocalDate(element.Booking_Date);
               });
               setOrders(response.data.body);
               console.log("=============== ordersmy==============="+response.data.body)
@@ -132,6 +132,7 @@ function getUserOrder()
                             <th>Date</th>
                             <th>Order ID</th>
                             <th>Order Price</th>
+                            <th>Payment Type</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -148,6 +149,7 @@ function getUserOrder()
                                     <td>{element.Booking_Date}</td>
                                     <td>{element.Order_Id}</td>
                                     <td>{element?.Total_Amount?.$numberDecimal}</td>
+                                    <td>{element.Payment_Mode}</td>
                                     <td>{element.Order_Status_Id.OrderStatus}</td>
                                     <td>
                                       {element.Order_Id != null && 
