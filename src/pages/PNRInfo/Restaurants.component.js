@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import axios from "axios";
 import _ from "lodash";
 import { useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import CartContext from "../../Context/cart-context";
+import { Toast } from 'primereact/toast';
 
 const Restaurants = (props) => {
     const location = useLocation();
@@ -15,6 +16,8 @@ const Restaurants = (props) => {
 
     const [selectedRange, setSelectedRange] = useState('all'); 
     const [isAddItemMsg, setIsAddItemMsg] = useState(false); 
+    const toast = useRef(null);
+
 
     const handleRangeChange = (event) => {
       setSelectedRange(event.target.value);
@@ -32,15 +35,22 @@ const Restaurants = (props) => {
       }
     });
 
-    const cartItems = context.cart.map((item,index) =>{
-      
-        console.log("context items=",index);   
+
+    const cartItems = context.cart.map((item,index) =>{ 
+        if(localStorage.getItem("currentMenuItem") != undefined && localStorage.getItem("currentMenuItem") != null && localStorage.getItem("currentMenuItem") != "")
+        {           
+            if(localStorage.getItem("currentMenuItem") != undefined && localStorage.getItem("currentMenuItem") != null && localStorage.getItem("currentMenuItem") != "")
+            {           
+                let _menuItem = JSON.parse(localStorage.getItem("currentMenuItem"));
+                toast.current.show({ severity: 'success', summary: 'Success', detail: 'You added '+_menuItem.Item_Name+' successfully.', life: 3000 });
+                console.log("context items=",_menuItem.Item_Name);   
+                localStorage.setItem("currentMenuItem","");
+            }   
+        }     
+       
        return false;
     });
 
-    const addItemMsg = (item) => {
-        alert("You are added item successfully.")
-    }
 
     const ProceedToCart = () => {       
         var _user = JSON.parse(localStorage.getItem("user"));
@@ -60,7 +70,7 @@ const Restaurants = (props) => {
     };
 
     useEffect(() => {
-        setOutletData(location.state.MenuData);
+        setOutletData(location.state.MenuData);        
         axios
             .get(process.env.REACT_APP_API_URL + `/MenuItems/getMenuItemsByOutlet/${location.state.MenuData._id}`)
             .then((response) => {
@@ -89,8 +99,7 @@ const Restaurants = (props) => {
 
     return (
         <>
-            <SecondBanner></SecondBanner>
-             
+
             <div className="ritekhana-main-content">
                 <div className="ritekhana-main-section">
                     <div className="c-container">
@@ -101,45 +110,54 @@ const Restaurants = (props) => {
         <div className='container'>
         <div className="row">
             <div className="radio-button-group">
+
         <div className="radio-button">
             <label>
               <input
                 type="radio"
                 value="all"
                 checked={selectedRange === 'all'}
-                onChange={handleRangeChange}
+                onChange={handleRangeChange}            
+
                 className="radio-input-group"
               />
               All Items
             </label>
           </div>
-          <div className="radio-button">
+          <div className="radio-button">    
+
             <label className="pl-2">
               <input
                 type="radio"
                 value="veg"
                 checked={selectedRange === 'veg'}
                 onChange={handleRangeChange}
+
                 className="radio-input-group"
               />
               Veg
             </label>
           </div>
           <div className="radio-button">
+
             <label className="pl-2">
               <input
                 type="radio"
                 value="nonveg"
                 checked={selectedRange === 'nonveg'}
                 onChange={handleRangeChange}
-                className="radio-input-group"
+
+                className="radio-input"
+
               />
               Non Veg
             </label>
           </div>
         </div>     
           </div>
+
           </div>
+
                                 Min Order : <b>{outletData.Min_Order}</b> <br></br>
                                 Min Timing : <b>{outletData.Order_Timing}</b>
                             </div>
@@ -154,6 +172,7 @@ const Restaurants = (props) => {
                             }
                               </div>
                         </div>
+                      
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="ritekhana-listing-style3 ritekhana-row">
@@ -209,6 +228,7 @@ const Restaurants = (props) => {
                     </div>
                 </div>
             </div>
+            <Toast ref={toast} />
         </>
     );
 };
