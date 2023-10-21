@@ -66,7 +66,7 @@ const OrderConfirmation = (props) => {
                                             Train Name : {orderData.Train_Name}<strong></strong>
                                         </li>
                                         <li>
-                                            Station Name : {orderData.Coach}<strong></strong>
+                                            Station Name : {orderData.StationName}<strong></strong>
                                         </li>
                                         <li>
                                             Berth : {orderData.Berth}<strong></strong>
