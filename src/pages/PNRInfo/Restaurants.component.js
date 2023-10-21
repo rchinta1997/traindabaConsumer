@@ -18,6 +18,7 @@ const Restaurants = (props) => {
     const [isAddItemMsg, setIsAddItemMsg] = useState(false); 
     const toast = useRef(null);
 
+
     const handleRangeChange = (event) => {
       setSelectedRange(event.target.value);
     };
@@ -34,6 +35,7 @@ const Restaurants = (props) => {
       }
     });
 
+
     const cartItems = context.cart.map((item,index) =>{ 
         if(localStorage.getItem("currentMenuItem") != undefined && localStorage.getItem("currentMenuItem") != null && localStorage.getItem("currentMenuItem") != "")
         {           
@@ -49,7 +51,6 @@ const Restaurants = (props) => {
        return false;
     });
 
-  
 
     const ProceedToCart = () => {       
         var _user = JSON.parse(localStorage.getItem("user"));
@@ -98,7 +99,7 @@ const Restaurants = (props) => {
 
     return (
         <>
-            <SecondBanner></SecondBanner>           
+
             <div className="ritekhana-main-content">
                 <div className="ritekhana-main-section">
                     <div className="c-container">
@@ -108,44 +109,55 @@ const Restaurants = (props) => {
                                  {/* Veg NonVeg */}
         <div className='container'>
         <div className="row">
+            <div className="radio-button-group">
+
         <div className="radio-button">
             <label>
               <input
                 type="radio"
                 value="all"
                 checked={selectedRange === 'all'}
-                onChange={handleRangeChange}
-                className="radio-input"
+                onChange={handleRangeChange}            
+
+                className="radio-input-group"
               />
               All Items
             </label>
           </div>
-          <div className="radio-button">
-            <label>
+          <div className="radio-button">    
+
+            <label className="pl-2">
               <input
                 type="radio"
                 value="veg"
                 checked={selectedRange === 'veg'}
                 onChange={handleRangeChange}
-                className="radio-input"
+
+                className="radio-input-group"
               />
               Veg
             </label>
           </div>
           <div className="radio-button">
-            <label>
+
+            <label className="pl-2">
               <input
                 type="radio"
                 value="nonveg"
                 checked={selectedRange === 'nonveg'}
                 onChange={handleRangeChange}
+
                 className="radio-input"
+
               />
               Non Veg
             </label>
           </div>
         </div>     
           </div>
+
+          </div>
+
                                 Min Order : <b>{outletData.Min_Order}</b> <br></br>
                                 Min Timing : <b>{outletData.Order_Timing}</b>
                             </div>

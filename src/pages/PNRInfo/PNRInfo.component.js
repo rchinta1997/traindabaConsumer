@@ -207,9 +207,8 @@ const PNRInfo = () => {
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
         </div>) : null}
-        <div className="ritekhana-main-section">
+        <div className="outer-container">
           <div className="container">
-
             <div className="row">
               <div className="col-md-12">
                 {isError && (
@@ -219,6 +218,7 @@ const PNRInfo = () => {
                 )}
                 {!isError && pnrData !== undefined && (
                   <>
+                  <div class="outer-container">
                     <table className="table table-bordered table-sm">
                       <tbody>
                         <tr>
@@ -234,11 +234,9 @@ const PNRInfo = () => {
                         </tr>
                       </tbody>
                     </table>
-
-                    <div className="ritekhana-contact-form">
-                      <h4>Select your Boarding Station</h4>
-                      <ul>
-                        <li>
+                    <div className="card shadow px-3 py-4 my-4">
+                      <h4 className="card-title mb-4 text-center">Select your Boarding Station</h4>
+                      <div class="card-body stc_body">
                           <select name="boarding_station" className="form-control" onChange={getRestaurantsInfo}>
                             <option>Select Boarding Station</option>
                             {pnrData.stations.map((eachData, index) => {
@@ -250,116 +248,41 @@ const PNRInfo = () => {
                               );
                             })}
                           </select>
-                        </li>
-                      </ul>
+                        </div>
+                    </div>
                     </div>
                   </>
                 )}
-                <div className="ritekhana-resturant ritekhana-resturant-view1">
-                  <ul className="row">
-                    {outletData.length > 0 &&
+               < div class="vendor-list-container">
+            {outletData.length > 0 &&
                       outletData.map((eachOutlet) => {
                         return (
-                          <li className="col-md-6">
-                            <div className="ritekhana-resturant-view1-wrap">
-                              <div className="ritekhana-resturant-view1-text">
-                                <h2>
-                                  <a href="#">{eachOutlet.OutletName}</a>{" "}
-                                  <span className="ritekhana-color">
-                                    Delivery Time {eachOutlet.Order_Timing} Min
-                                  </span>
-                                </h2>
-                                <p>Min Order: {eachOutlet.Min_Order}</p>
-                                <a
-                                  href="javascript:void(0)"
-                                  onClick={(event) => getMenubyRestaurant(event, eachOutlet)}
-                                  className="ritekhana-resturant-view1-btn ritekhana-bgcolor"
-                                >
-                                  Order Now
-                                </a>
-                              </div>
-                            </div>
-                          </li>
-                        );
-                      })}
-                  </ul>
-                </div>
+                          <>
+                          <div class="vendor-card shadow px-3 py-4">
+                          <div class="vendor-logo">
+                          <img src={eachOutlet.image} alt="outlets-images"/>
+                      </div>
+                      <div class="vendor-content">
+                          <div class="vendor-name">{eachOutlet.OutletName}</div>
+                          <div class="vendor-order">Min Order:{eachOutlet.Min_Order}</div>
+                          <div class="card-text mt-2">Delivery Time {eachOutlet.Order_Timing} Min</div>
+                          <a href="#" class="order-now-button" onClick={(event) => getMenubyRestaurant(event, eachOutlet)}>Order Now</a>
+                      </div>
+                      </div>
+                      </>
+                        )
+               
+                      })
+                    }
+            </div>
+            
+            </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <div className="ritekhana-main-section">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-               
-
-                <div className="ritekhana-resturant ritekhana-resturant-view1">
-                  <ul className="row">
-                    <li className="col-md-6">
-                      <div className="ritekhana-resturant-view1-wrap">
-                        <div className="ritekhana-resturant-view1-text">
-                          <h2>
-                            <a href="#">SHREE ANAND RESTAURANT</a>{" "}
-                            <span className="ritekhana-color">
-                              Delivery Time 70 Min
-                            </span>
-                          </h2>
-                          <p>Min Order: 149</p>
-                          <a
-                            href="https://traindhaba.com/menu/89"
-                            className="ritekhana-resturant-view1-btn ritekhana-bgcolor"
-                          >
-                            Order Now
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="col-md-6">
-                      <div className="ritekhana-resturant-view1-wrap">
-                        <div className="ritekhana-resturant-view1-text">
-                          <h2>
-                            <a href="#">ANAND VEG TREAT</a>{" "}
-                            <span className="ritekhana-color">
-                              Delivery Time 45 Min
-                            </span>
-                          </h2>
-                          <p>Min Order: 149</p>
-                          <a
-                            href="https://traindhaba.com/menu/109"
-                            className="ritekhana-resturant-view1-btn ritekhana-bgcolor"
-                          >
-                            Order Now
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="col-md-6">
-                      <div className="ritekhana-resturant-view1-wrap">
-                        <div className="ritekhana-resturant-view1-text">
-                          <h2>
-                            <a href="#">Jain Veg Family Restro</a>{" "}
-                            <span className="ritekhana-color">
-                              Delivery Time 45 Min
-                            </span>
-                          </h2>
-                          <p>Min Order: 70</p>
-                          <a
-                            href="https://traindhaba.com/menu/111"
-                            className="ritekhana-resturant-view1-btn ritekhana-bgcolor"
-                          >
-                            Order Now
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-      </div>
+        
+    
     </>
   );
 };
