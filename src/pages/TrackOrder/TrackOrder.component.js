@@ -105,6 +105,7 @@ const TrackOrder = () => {
                                                     <th>Order ID</th>
                                                     <th>Order Price</th>
                                                     <th>Status</th>
+                                                    <th>Payment Type</th>
                                                 </tr>
                                             </thead>
 
@@ -120,7 +121,7 @@ const TrackOrder = () => {
                                                             <td>{element.Order_Id}</td>
                                                             <td>{element?.Total_Amount?.$numberDecimal}</td>
                                                             <td>{element?.Order_Status_Id?.OrderStatus}</td>
-                                                         
+                                                             <td>{element.Payment_Mode}</td>
 
                                                         </tr>
                                                     </tbody>
