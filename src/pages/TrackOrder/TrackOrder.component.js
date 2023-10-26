@@ -120,7 +120,7 @@ const TrackOrder = () => {
                                                             <td>{convertIsoToIst(element.Booking_Date)}</td>
                                                             <td>{element.Order_Id}</td>
                                                             <td>{element?.Total_Amount?.$numberDecimal}</td>
-                                                            <td>{element?.Order_Status_Id?.OrderStatus}</td>
+                                                            <td>{element?.Order_Status_Id?.OrderStatus.replace("ORDER_","")}</td>
                                                              <td>{element.Payment_Mode}</td>
 
                                                         </tr>

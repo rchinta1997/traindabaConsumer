@@ -19,6 +19,7 @@ const Navbar = (props) => {
 
 
     const routeClickHandler = (event, type) => {
+    
         if (type === "Login") {
             navigate("/Login");
         }
@@ -28,15 +29,16 @@ const Navbar = (props) => {
         else if (type === "MyOrders") {
             navigate("/MyOrders");
         }
-        else if (type === "Profile") {
-            navigate("/Profile");
+        else if (type === "My Account") {
+            //navigate("/Profile");
         }
         else if (type === "Logout") {
             localStorage.removeItem("token");
+            localStorage.removeItem("user");
             navigate("/Login");
         }
-        else if (type === "OrderStatus") {
-            navigate("/orderstatus");
+        else if (type === "Profile") {
+            navigate("/Profile");
         }
         else {
             navigate("/");
@@ -61,16 +63,21 @@ const Navbar = (props) => {
             </a>
             <nav id="navbar" className="navbar">
                 <ul>
-                    <li>
+                  
+                    {istokenexists ? <li>
                         <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>
                             Track Order{" "}
                         </a>
-                    </li>
-                    {istokenexists ? <li>
+                    </li> :  <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
+                                            Login{" "}
+                                        </a>}                       
+                      
+                  
+                    {/* {istokenexists ? <li>
                         <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
                             My Orders{" "}
                         </a>
-                    </li> : null}
+                    </li> : null} */}
                     <li className="dropdown">
                         <a href="#rail_tools_area">
                             <span onClick={toggleProfile}>Rail Tools</span>
@@ -93,6 +100,31 @@ const Navbar = (props) => {
                             </ul>
                         )}
                     </li>
+
+                    {istokenexists ? <li className="dropdown">
+                        
+                        <a href="#" >
+                           My Account{" "}
+                        </a>
+                        <ul>
+                                <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "Profile")}>
+                                        Profile{" "}
+                                    </a>
+                                </li>
+                                <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
+                                        My Orders{" "}
+                                    </a>
+                                </li>
+                                <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
+                                            Logout{" "}
+
+                                        </a>
+                                </li>                            
+                            </ul>
+                    </li> : null}
 
                     {/* { istokenexists ?<li>                           
    
@@ -181,7 +213,7 @@ const Navbar = (props) => {
                        </li>: null } */}
 
 
-                    <li className="dropdown">
+                    {/* <li className="dropdown">
                         <a href="#">
                             <span className="fa fa-user" onClick={toggleProfile}>
                                 {showProfile}
@@ -211,7 +243,7 @@ const Navbar = (props) => {
                             </ul>
                         )}
 
-                    </li>
+                    </li> */}
 
 
 
