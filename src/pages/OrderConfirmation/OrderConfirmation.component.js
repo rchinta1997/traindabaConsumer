@@ -97,9 +97,9 @@ const OrderConfirmation = (props) => {
                             </div>
                             <div className="row">
                                 <h6 className="text-right">
-                                    Outlet Name:{" "}
+                                    Payment Mode:{" "}
                                     <span className="final_total">
-                                        <b>{outletName} </b> &nbsp; {orderData.Payment_Mode}
+                                        <b>{orderData.Payment_Mode} </b> &nbsp; 
                                     </span>
                                 </h6>
                             </div>

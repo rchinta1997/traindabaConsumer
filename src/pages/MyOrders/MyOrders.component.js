@@ -99,6 +99,7 @@ function getUserOrder()
               response.data.body.forEach((element)=>{                    
                    element.Delivery_Date = convertIsoToIst(element.Delivery_Date);  
                    element.Booking_Date = convertLocalDate(element.Booking_Date);
+                   element.Order_Status_Id.OrderStatus = element.Order_Status_Id.OrderStatus.replace("ORDER_","");
               });
               setOrders(response.data.body);
               console.log("=============== ordersmy==============="+response.data.body)
