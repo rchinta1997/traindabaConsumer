@@ -110,6 +110,7 @@ const FinalConfirmation = () => {
                 console.log("========createOrder==response========");
                 console.log(response.data.body);
                 if (response.data.success) {
+                    order_response.passegnerInfo = passegnerInfo;
                     order_response.orderDetails = response.data.body;
                     order_response.orderDetails.Booking_Date = order_response.orderDetails.Booking_Date;
                     console.log(response.data.body);
