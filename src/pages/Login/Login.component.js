@@ -26,6 +26,8 @@ const Login = () => {
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [validEmailMsg,setValidEmailMsg]  = useState("");
   const context = useContext(cartContext);
   const toast = useRef(null);
 
@@ -62,6 +64,72 @@ const Login = () => {
       [name]: value,
     });
   };
+
+
+  const handleForgotPassword = (e) => { 
+    setEmail("");
+    setIsLoading(false);
+    setIsForgotPassword(true);
+};
+
+const handleForgotPasswordEmail = (e) => { 
+  setEmail(e.target.value);
+  //setIsLoading(false);
+  //setIsForgotPassword(true);
+};
+
+const handleLogin = (e) => { 
+  //setIsLoading(false);
+  setIsLoginPage(true);
+  setIsForgotPassword(false);
+};
+
+const handleForgotPasswordSubmit = (e) => {
+  e.preventDefault();
+  const emailRex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  // Perform form validation
+  // If there are no errors, you can proceed with form submission
+  setValidEmailMsg("");
+  if (!email) {
+    setValidEmailMsg('Please enter email address');
+  }
+
+  if (email && !emailRex.test(email)) {
+    setValidEmailMsg('Invalid email address');
+  }
+  if (email && emailRex.test(email)) {
+ 
+    let user = {
+      email: email,        
+     
+    };
+    axios
+      .post(process.env.REACT_APP_API_URL + "/user/forgotpassword", user)
+      .then((response) => {
+        console.log("response=",response.data)
+        if (response.data) {
+          toast.current.show({ severity: 'success', summary: 'Success', detail: 'New password has sent to your registered email address.', life: 3000 });
+          setTimeout(()=>{
+            setIsForgotPassword(false);
+            setIsLoading(false);
+           
+          },2000);
+        }
+        else
+        {
+          //alert(response.data.error);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+    };
+    // Perform your form submission logic here
+    console.log('Form submitted successfully');
+  
+};
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -104,7 +172,9 @@ const Login = () => {
           }
           else
           {
-            alert(response.data.error);
+            toast.current.show({ severity: 'error', summary: 'Error', detail: response.data.error, life: 3000 });
+   
+            //alert(response.data.error);
           }
         })
         .catch((error) => {
@@ -251,6 +321,7 @@ if (mobileRex.test(e.target.value)) {
 };
 
 useEffect(() => {
+    setValidEmailMsg("");
     scrollToElement();
     
   }, [context]);
@@ -265,10 +336,12 @@ useEffect(() => {
     scrollToElement();
         if(type === "Signup")
         {
+            setIsLoading(false);
             setIsLoginPage(false);
         }
         else
         {
+            setIsLoading(false);
             setIsLoginPage(true);
         }
 
@@ -284,7 +357,8 @@ useEffect(() => {
         <div className="container" >         
         {loggedIn}
         {/* <button onClick={scrollToElement}>Scroll to Element</button> */}
-          {isLoginPage && !loggedIn ?   <div className="row">
+          {isLoginPage && !loggedIn && !isForgotPassword ?   
+          <div className="row">
                 <div className="col-12 col-md-12">
                     <div className="ritekhana-fancy-title">
                         <h2 className="ritekhana-color">Login</h2>                       
@@ -328,7 +402,7 @@ useEffect(() => {
                         </FormGroup>
                             <li><Button color="primary"  disabled={isLoading?true:false}>{ isLoading && <CircularProgress size={15} color="inherit" />} Login</Button></li>
                             <div className="forgot-pass">
-                                <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
+                                <a href="javascript:;" className="fg_show" onClick={handleForgotPassword} >Forgot Password?</a><br></br>
                             </div>
                             <li><p>Don't have an account? <a href="#" className="ritekhana-color" onClick={(event) => clickHandler(event, "Signup")}>Register Here</a></p></li>
                     </Form>
@@ -337,7 +411,9 @@ useEffect(() => {
                     </div>
                 </div>
 
-            </div> :
+            </div> : null}
+
+          {!isLoginPage && !loggedIn   && !isForgotPassword ?
              <div className="row">
              <div className="col-12 col-md-12">
                  <div className="ritekhana-fancy-title">
@@ -416,7 +492,7 @@ useEffect(() => {
                      </FormGroup>
                          <li><Button type="submit" color="primary" disabled={isLoading?true:false} >{ isLoading && <CircularProgress size={15} color="inherit" />} Submit</Button></li>
                          <div className="forgot-pass">
-                             <a href="javascript:;" className="fg_show">Forgot Password?</a><br></br>
+                             <a href="javascript:;" className="fg_show" onClick={handleForgotPassword}>Forgot Password?</a><br></br>
                          </div>
                          <li><p>Don't have an account? <a href="#" className="ritekhana-color" onClick={(event) => clickHandler(event, "Login")}>Login Here</a></p></li>
                  </Form>
@@ -425,8 +501,35 @@ useEffect(() => {
                  </div>
              </div>
 
-         </div>} 
-         
+        </div>:null} 
+         { isForgotPassword ?
+          <div className="row">
+          <div className="col-12 col-md-12">
+              <div className="ritekhana-fancy-title">
+                  <h2 className="ritekhana-color">Forgot Password</h2>                       
+              </div>
+              <div className="ritekhana-login-box-wrap">
+              <div className="ritekhana-login-box">
+              <div class="fg_password" >
+                                <h2>Forgot Password</h2>
+                                <ul>
+                                    <li><Input type="email" placeholder="Email Address" id="email" name="email" value={email}
+                                 onChange={handleForgotPasswordEmail} required=""/> <i className="login-box-iconin email far fa-envelope"></i></li>
+                                 <span className="error">{validEmailMsg}</span>
+                                    <div className="forgot-pass">
+                                        <a href="#" className="ritekhana-header-btn" id="reset_pwd" onClick={handleForgotPasswordSubmit} disabled={isLoading?true:false} >{ isLoading && <CircularProgress size={15} color="inherit" />}Reset Password</a>
+                                    </div>
+                                    <div className="forgot-pass">
+                                        <a href="javascript:;" className="login_show" onClick={handleLogin}>Click here to Login</a><br></br>
+                                    </div>
+                                </ul>
+                            </div>
+              </div>
+              </div>
+          </div>
+
+      </div>
+          :null}  
            
         </div>
     </div>

@@ -45,6 +45,17 @@ function convertIsoToIst (date) {
    
  };
 
+ function convertDeliveryDate(date){
+   if(date)
+   {
+      let splitArr = date.split(" ");
+      let splitDate = splitArr[0].split("-");
+      let localDate = splitDate[2] +"/"+ splitDate[1]+"/"+splitDate[0]+"  "+formatTime(splitArr[1]);
+      return localDate;
+   }
+   return date;
+}
+
  function convertLocalDate (date) {   
    if(date)
    {   
@@ -109,4 +120,4 @@ function calculateTotalAmt(cart)
         return priceObj;
 }
 
-export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate}
+export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate,convertDeliveryDate}
