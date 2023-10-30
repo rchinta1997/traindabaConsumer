@@ -45,6 +45,19 @@ function convertIsoToIst (date) {
    
  };
 
+ function convertLocalDate (date) {   
+   if(date)
+   {   
+      var dateFormat = 'DD/MM/YYYY h:mm A';
+      var testDateUtc = moment.utc(date);
+      var localDate = testDateUtc.local();
+      console.log("localDate=",localDate.format(dateFormat)); 
+      return localDate.format(dateFormat);
+   }
+   return date;
+   
+ };
+
 
 function calculateItemTax(sellingPrice)
 {  
@@ -60,6 +73,12 @@ function roundValue(value)
 function percentage(partialValue, totalValue) {
    return  (partialValue * totalValue)/100;
 } 
+
+function formatTime(timeString) {
+   const [hourString, minute] = timeString.split(":");
+   const hour = +hourString % 24;
+   return (hour % 12 || 12) + ":" + minute + (hour < 12 ? " AM" : " PM");
+}
 
 function calculateTotalAmt(cart)
 {
@@ -90,4 +109,4 @@ function calculateTotalAmt(cart)
         return priceObj;
 }
 
-export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt}
+export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate}

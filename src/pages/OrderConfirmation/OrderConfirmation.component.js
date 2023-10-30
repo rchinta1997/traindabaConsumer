@@ -66,7 +66,7 @@ const OrderConfirmation = (props) => {
                                             Train Name : {orderData.Train_Name}<strong></strong>
                                         </li>
                                         <li>
-                                            Station Name : {orderData.Coach}<strong></strong>
+                                            Station Name : {orderData.StationName}<strong></strong>
                                         </li>
                                         <li>
                                             Berth : {orderData.Berth}<strong></strong>
@@ -99,7 +99,7 @@ const OrderConfirmation = (props) => {
                                 <h6 className="text-right">
                                     Outlet Name:{" "}
                                     <span className="final_total">
-                                        <b>{outletName} </b>
+                                        <b>{outletName} </b> &nbsp; {orderData.Payment_Mode}
                                     </span>
                                 </h6>
                             </div>
