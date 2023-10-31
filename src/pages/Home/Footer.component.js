@@ -1,6 +1,29 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const routeClickHandler = (event, type) => {
+       // navigate("/TrackOrder",{ state: { orderId: orderId }});
+    
+        if (type === "Call_Back") {
+            navigate("/Contact/Call back Request");
+        }
+        else if (type === "Cancellation") {
+            navigate("/Contact/Cancellation Order Request");
+        }
+        else if (type === "Feedback") {
+            navigate("/Contact/Feedback");
+        }
+       
+
+
+    }
+
+
     return (
         <footer id="ritekhana-footer" className="ritekhana-footer-one">
         <div className="ritekhana-footer-widget">
@@ -22,10 +45,10 @@ const Footer = () => {
                         <div className="ritekhana-footer-title"><h3>Help  Support</h3></div>
                         <ul>
                             <li><a href="#">Track Order</a></li>
-                            <li><a href="#">Offers</a></li>
-                            <li><a href="#">Call back Request</a></li>
-                            <li><a href="#">Cancellation Request</a></li>
-                            <li><a href="#">Feedback/Complaint</a></li>
+                            <li><a href="#" >Offers</a></li>
+                            <li><a href="#" onClick={(event) => routeClickHandler(event, "Call_Back")}>Call back Request</a></li>
+                            <li><a href="#" onClick={(event) => routeClickHandler(event, "Cancellation")}>Cancellation Request</a></li>
+                            <li><a href="#" onClick={(event) => routeClickHandler(event, "Feedback")}>Feedback/Complaint</a></li>
                             <li><a href="https://traindhaba.com/contact">Contact</a></li>
                         </ul>
                     </aside>

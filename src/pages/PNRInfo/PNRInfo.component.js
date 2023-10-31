@@ -10,6 +10,7 @@ import cartContext from "../../Context/cart-context";
 
 import { format, parse } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
+import {checkDeliveryDateWithOutletData} from "../../utility/helper"
 
 // const cryptoHelper = require("../../helpers/crypto-helper");
 // const cryptoHelperInstance = new cryptoHelper();
@@ -182,7 +183,9 @@ const PNRInfo = () => {
       passengerInfo["delivery_Date"] = scheduledDate;
       setPassengerInfo({ ...passengerInfo });
       localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
-      navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
+
+      checkDeliveryDateWithOutletData(scheduledDate, eachOutlet)
+      //navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
     /*} else {
       passengerInfo["VendorId"] = undefined;
       passengerInfo["StationId"] = undefined;
