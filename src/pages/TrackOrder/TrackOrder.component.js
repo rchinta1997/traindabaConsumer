@@ -10,7 +10,7 @@ import {
     Button,
 } from "reactstrap";
 import styles from './TrackOrder.css';
-import { convertDateTimeToIST, convertDateToIST, convertIsoToIst } from '../../utility/helper'
+import { convertDateTimeToIST, convertDateToIST, convertIsoToIst,convertDeliveryDate } from '../../utility/helper'
 
 
 const TrackOrder = () => {
@@ -18,8 +18,14 @@ const TrackOrder = () => {
     const [searchValue, setSearchValue] = useState("");
     const [MyOrders, setOrders] = useState([])
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
+        console.log(location.state?.orderId);
+        if(location.state?.orderId)
+        {
+            getOrderDetailsByOrderId(location.state?.orderId);
+        }
         // getOrderDetailsByOrderId("");
 
     }, []);
@@ -39,6 +45,9 @@ const TrackOrder = () => {
                 if (response.data.success) {
                     //setIsError(false);
                     //setPnrData(response.data.body);
+
+                   
+
                     setOrders(response.data.body);
                     console.log("=============== ordersmy===============")
                     console.log(MyOrders);
@@ -102,6 +111,8 @@ const TrackOrder = () => {
                                             <thead>
                                                 <tr>
                                                     <th>Booking Date</th>
+                                                    <th>Delivery Date</th>
+                                                    <th>Outlet Name</th>
                                                     <th>Order ID</th>
                                                     <th>Order Price</th>
                                                     <th>Order Status</th>
@@ -118,9 +129,11 @@ const TrackOrder = () => {
                                                     <tbody>
                                                         <tr>
                                                             <td>{convertIsoToIst(element.Booking_Date)}</td>
+                                                            <td>{convertDeliveryDate(element.Delivery_Date)}</td>
+                                                            <td>{element.Outlet_Id.OutletName}</td>
                                                             <td>{element.Order_Id}</td>
-                                                            <td>{element?.Total_Amount?.$numberDecimal}</td>
-                                                            <td>{element?.Order_Status_Id?.OrderStatus}</td>
+                                                            <td>Rs. {element?.Total_Amount?.$numberDecimal}/-</td>
+                                                            <td>{element?.Order_Status_Id?.OrderStatus.replace("ORDER_","")}</td>
                                                              <td>{element.Payment_Mode}</td>
 
                                                         </tr>

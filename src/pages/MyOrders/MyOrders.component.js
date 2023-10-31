@@ -28,6 +28,7 @@ const MyOrders = () => {
   const [isConfirmationModalVisible, setConfirmationModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const toast = useRef(null);
+  const navigate = useNavigate();
 
   const confirm = () => {
     confirmCancelOrder(selectedOrderId);
@@ -72,7 +73,11 @@ const MyOrders = () => {
     setVisible(false);
   };
 
-  const navigate = useNavigate();
+  const handleTrackOrder = (orderId) => {
+       navigate("/TrackOrder",{ state: { orderId: orderId }});
+  };
+
+
   const location = useLocation();
 
   useEffect(() => {
@@ -99,6 +104,7 @@ function getUserOrder()
               response.data.body.forEach((element)=>{                    
                    element.Delivery_Date = convertIsoToIst(element.Delivery_Date);  
                    element.Booking_Date = convertLocalDate(element.Booking_Date);
+                   element.Order_Status_Id.OrderStatus = element.Order_Status_Id.OrderStatus.replace("ORDER_","");
               });
               setOrders(response.data.body);
               console.log("=============== ordersmy==============="+response.data.body)
@@ -129,7 +135,7 @@ function getUserOrder()
                 <table>
                     <thead>
                         <tr>
-                            <th>Date</th>
+                            <th>Booking Date</th>                          
                             <th>Order ID</th>
                             <th>Order Price</th>
                             <th>Payment Type</th>
@@ -146,9 +152,9 @@ function getUserOrder()
 
                             <tbody>
                                  <tr>
-                                    <td>{element.Booking_Date}</td>
-                                    <td>{element.Order_Id}</td>
-                                    <td>{element?.Total_Amount?.$numberDecimal}</td>
+                                    <td>{element.Booking_Date}</td>                                 
+                                    <td><a href="#" className="ritekhana-color" onClick={()=>handleTrackOrder(element.Order_Id)}>{element.Order_Id}</a></td>
+                                    <td>Rs. {element?.Total_Amount?.$numberDecimal}/-</td>
                                     <td>{element.Payment_Mode}</td>
                                     <td>{element.Order_Status_Id.OrderStatus}</td>
                                     <td>

@@ -15,6 +15,8 @@ import Checkout from "./pages/CheckOut/Checkout.component";
 import FinalConfirmation from "./pages/FinalConfirmation/FinalConfirmation.component";
 import TrackOrder from "./pages/TrackOrder/TrackOrder.component";
 import MyOrders from "./pages/MyOrders/MyOrders.component";
+import Profile from "./pages/Profile/Profile.component";
+import ChangePassword from "./pages/Profile/ChangePassword.component";
 
 import "./Assets/css/bootstrap.css";
 import "./Assets/css/fontawesome-all.css";
@@ -58,8 +60,7 @@ function App() {
                     <Route path="/trainrunningstatus" element={<TrainRunningStatus/>}/>
                     <Route path="/livestation" element={<LiveStation/>}/>
                     <Route path="/trainschedule" element={<TrainSchedule/>}/>
-
-                  
+                    <Route path="/Profile" element={<Profile />} />
                 </Routes>
                 <Footer></Footer>
             </div>

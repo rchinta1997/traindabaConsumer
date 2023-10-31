@@ -5,6 +5,7 @@ import dayjs from "../../helpers/dayjs-helpers";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import axios from "axios";
 
 const OrderConfirmation = (props) => {
     const [orderData, setOrderData] = useState({});
@@ -38,6 +39,7 @@ const OrderConfirmation = (props) => {
             }
         }
         setOrderData(location.state.res.orderDetails);
+        sendOrderStatusEmail(location.state.res.passegnerInfo);
         console.log("===========OrderConfirmation================="+JSON.stringify(orderData));      
         setOutletName("Test Outlet");
         setCurrentDate(curr);
@@ -52,6 +54,36 @@ const OrderConfirmation = (props) => {
             console.log(context.cart);
         });
     }, [context]);
+
+
+    const sendOrderStatusEmail = (passegnerInfo) => {
+        let orderdata = {
+            "orderId":orderData._id,
+            "email":passegnerInfo.email
+                }
+        axios
+        .post(process.env.REACT_APP_API_URL + "/order/sendOrderSuccessEmail", orderdata)
+        .then((response) => {
+          console.log(response)          
+          if (response.data.success) {
+                      
+           
+          }
+          else
+          {
+            
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    };
+
+
+
+
+
+
     return (
         <>
             <div className="ritekhana-main-content">
@@ -97,9 +129,9 @@ const OrderConfirmation = (props) => {
                             </div>
                             <div className="row">
                                 <h6 className="text-right">
-                                    Outlet Name:{" "}
+                                    Payment Mode:{" "}
                                     <span className="final_total">
-                                        <b>{outletName} </b> &nbsp; {orderData.Payment_Mode}
+                                        <b>{orderData.Payment_Mode} </b> &nbsp; 
                                     </span>
                                 </h6>
                             </div>

@@ -99,7 +99,8 @@ const FinalConfirmation = () => {
             coupons:[],
             orderSource:'TrainDhabaWebsite',
             payment_Mode:paymentType,
-            Total_Amount: totalAmount+""
+            Total_Amount: totalAmount+"",
+            gst: tax
         };
         console.log(orderData);
         console.log("========Razorpay==Start========"+process.env.REACT_APP_API_URL);
@@ -109,6 +110,7 @@ const FinalConfirmation = () => {
                 console.log("========createOrder==response========");
                 console.log(response.data.body);
                 if (response.data.success) {
+                    order_response.passegnerInfo = passegnerInfo;
                     order_response.orderDetails = response.data.body;
                     order_response.orderDetails.Booking_Date = order_response.orderDetails.Booking_Date;
                     console.log(response.data.body);
