@@ -33,7 +33,7 @@ const HomePage = () => {
       <>
         
         <Banner></Banner>
-        <div className="ritekhana-main-content home-page">
+     
          {/* <PNRInfo></PNRInfo>     
         <OrderConfirmation></OrderConfirmation>     
         <Restaurants></Restaurants>   
@@ -41,12 +41,12 @@ const HomePage = () => {
                */}
           
           <HowToOrder></HowToOrder>         
-          <RailTools></RailTools>
+          {/* <RailTools></RailTools> */}
           <Testimonials></Testimonials>
           <VendorRegistration></VendorRegistration>
           <DownloadLinks></DownloadLinks>
           <TravelBlog></TravelBlog>
-        </div>
+       
         <HowToOrderGuide></HowToOrderGuide>
        
       </>
@@ -58,18 +58,18 @@ const HomePage = () => {
       <>
         
          <Banner></Banner> 
-        <div className="ritekhana-main-content home-page">
+ 
         {/* <PNRInfo></PNRInfo>     
         <OrderConfirmation></OrderConfirmation>     
         <Restaurants></Restaurants>            */}
           <Login></Login>  
           <HowToOrder></HowToOrder>       
-          <RailTools></RailTools>
+          {/* <RailTools></RailTools> */}
           <Testimonials></Testimonials>
           <VendorRegistration></VendorRegistration>
           <DownloadLinks></DownloadLinks>
           <TravelBlog></TravelBlog>
-        </div>
+
         <HowToOrderGuide></HowToOrderGuide>
        
       </>

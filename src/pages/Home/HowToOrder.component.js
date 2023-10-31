@@ -2,51 +2,59 @@ import React, { useState } from "react";
 
 
 const HowToOrder = () => {
-  return (
-    <>
-    <div className="ritekhana-main-section ritekhana-services-view1-full">
-        <div className="container">
-            <div className="row">
-                <div className="col-12 col-md-12">
-                    <div className="ritekhana-fancy-title">
-                        <h2 className="ritekhana-color">How to order food?</h2>
-                        <span>TrainDhaba is a trusted and efficient e-catering partner of IRCTC which aims to deliver your favorite food in 3 easy ways.</span>
+    return (
+        <>
+            <section className="order-food pdtb-80">
+                <div className="container">
+                    <div className="row mb-4">
+                        <div className="col-md-8 offset-md-2 text-center">
+                            <h2 className="heading mb-4">How to order food?</h2>
+                            <p className="head">
+                                TrainDhaba is a trusted and efficient e-catering partner of IRCTC
+                                which aims to deliver your favorite food in 3 easy ways.
+                            </p>
+                        </div>
                     </div>
-                    <div className="ritekhana-services ritekhana-services-view1">
-                        <ul className="col-12 row">
-                            <li className="col-4">
-                                <i className="fa fa-solid fa-train ritekhana-color"></i>
-                                <h2 ><a href="#">ENTER</a></h2>
-                                <p className="d-none d-md-block">Enter PNR/Train number details and choose your delivery station</p>
-                                <p className="d-md-none" style={{fontSize: "12px"}}>Enter PNR/Train number details and choose your delivery station</p>
-                            </li>
-                            <li className="col-4">
-                                <i className="fa fa-hamburger ritekhana-color"></i>
-                                <h2><a href="#">MENU</a></h2>
-                                <p className="d-none d-md-block">Search for your favorite restaurant and order the food of your choice.</p>
-                                <p className="d-md-none" style={{fontSize: "12px"}}>Search for your favorite restaurant and order the food of your choice.</p>
-
-                            </li>
-                            <li className="col-4">
-                                <i className="far fa-money-bill-alt ritekhana-color"></i>
-                                <h2><a href="#">ORDER</a></h2>
-                                <p className="d-none d-md-block">Search for your favorite restaurant and order the food of your choice.</p>
-                                <p className="d-md-none" style={{fontSize: "12px"}}>Search for your favorite restaurant and order the food of your choice.</p>
-                            </li>
-                            {/* <li className="col-3">
-                                <i className="fa fa-truck-moving ritekhana-color"></i>
-                                <h2><a href="#">ENJOY DELIVARY</a></h2>
-                                <p>Get food on your seat</p>
-                            </li> */}
-                        </ul>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <div className="order-food-item">
+                                <p className="mb-4">
+                                <img src={require("../../Assets/Images/icon-1.png")} alt="" />
+                                </p>
+                                <h4>ENTER</h4>
+                                <p>Enter PNR/Train number details and choose your delivery station</p>
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="order-food-item">
+                                <p className="mb-4">
+                                <img src={require("../../Assets/Images/icon-2.png")} alt="" />
+                                </p>
+                                <h4>MENU</h4>
+                                <p>
+                                    Search for your favorite restaurant and order the food of your
+                                    choice.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="order-food-item">
+                                <p className="mb-4">
+                                    <img src={require("../../Assets/Images/icon-3.png")} alt="" />
+                                </p>
+                                <h4>ORDER</h4>
+                                <p>
+                                    Search for your favorite restaurant and order the food of your
+                                    choice.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-            </div>
-        </div>
-    </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default HowToOrder;
