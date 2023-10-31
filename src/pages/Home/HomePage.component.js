@@ -15,6 +15,7 @@ import VendorRegistration from "./VendorRegistration.component";
 import Login from "../Login/Login.component";
 import TrackOrder from "../TrackOrder/TrackOrder.component";
 import cartContext from "../../Context/cart-context";
+import Contact from "../Contact/Contact.component";
 
 
 const HomePage = () => {

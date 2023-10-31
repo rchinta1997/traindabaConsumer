@@ -120,4 +120,11 @@ function calculateTotalAmt(cart)
         return priceObj;
 }
 
-export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate,convertDeliveryDate}
+function checkDeliveryDateWithOutletData(scheduledDate, outletData)
+{
+   console.log("scheduledDate",scheduledDate);
+   let _scheduleDate = new Date(scheduledDate);
+   console.log("_scheduleDate",_scheduleDate);
+}
+
+export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate,convertDeliveryDate,checkDeliveryDateWithOutletData}
