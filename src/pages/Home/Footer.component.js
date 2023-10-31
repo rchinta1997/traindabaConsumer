@@ -115,7 +115,7 @@ const Footer = () => {
 
                             <p>Phone: 040- 40077374</p>
                             <p>Email:support@traindhaba.com</p>
-                            <p>For partners enquires: info@traindha.com</p>
+                            <p>For partners enquires: info@traindhaba.com</p>
                         </div>
                     </div>
                 </div>
