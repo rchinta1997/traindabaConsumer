@@ -17,6 +17,7 @@ import TrackOrder from "./pages/TrackOrder/TrackOrder.component";
 import MyOrders from "./pages/MyOrders/MyOrders.component";
 import Profile from "./pages/Profile/Profile.component";
 import ChangePassword from "./pages/Profile/ChangePassword.component";
+import Contact from "./pages/Contact/Contact.component";
 
 import "./Assets/css/bootstrap.css";
 import "./Assets/css/fontawesome-all.css";
@@ -61,6 +62,7 @@ function App() {
                     <Route path="/livestation" element={<LiveStation/>}/>
                     <Route path="/trainschedule" element={<TrainSchedule/>}/>
                     <Route path="/Profile" element={<Profile />} />
+                    <Route path="/Contact/:type" element={<Contact />} /> 
                 </Routes>
                 <Footer></Footer>
             </div>

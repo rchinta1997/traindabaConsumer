@@ -1,6 +1,29 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const routeClickHandler = (event, type) => {
+       // navigate("/TrackOrder",{ state: { orderId: orderId }});
+    
+        if (type === "Call_Back") {
+            navigate("/Contact/Call back Request");
+        }
+        else if (type === "Cancellation") {
+            navigate("/Contact/Cancellation Order Request");
+        }
+        else if (type === "Feedback") {
+            navigate("/Contact/Feedback");
+        }
+       
+
+
+    }
+
+
     return (
         <>
         <footer>
