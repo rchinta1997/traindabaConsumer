@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import './Navbar.css'
 import { useNavigate } from "react-router-dom";
 import cartContext from "../../Context/cart-context";
+import {Link} from 'react-router-dom'
 
 const Navbar = (props) => {
     var istokenexists = false;
@@ -85,18 +86,26 @@ const Navbar = (props) => {
                         </a>
                         {showProfile && (
                             <ul>
+                                <Link to="/pnrstatus">
                                 <li>
-                                    <a href="#">PNR Status</a>
+                                    PNR Status
                                 </li>
+                                </Link>
+                                <Link to="/trainrunningstatus">
                                 <li>
-                                    <a href="#">Train Running Status</a>
+                                    Train Running Status
                                 </li>
+                                </Link>
+                                <Link to="/livestation">
                                 <li>
-                                    <a href="#">Live Station</a>
+                                    Live Station
                                 </li>
+                                </Link>
+                                <Link to="/trainschedule">
                                 <li>
-                                    <a href="#">Train Schedule</a>
+                                  Train Schedule
                                 </li>
+                                </Link>
                             </ul>
                         )}
                     </li>

@@ -30,6 +30,10 @@ import "./Assets/css/color.css";
 import "./Assets/css/responsive.css";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation.component";
 import OrderStatus from "./pages/MyOrders/OrderStatus.component";
+import PnrStaus from "./pages/RailTools/PNRSataus.Component";
+import TrainRunningStatus from "./pages/RailTools/TrainRunningStatus.component";
+import LiveStation from "./pages/RailTools/LiveStation.component";
+import TrainSchedule from "./pages/RailTools/TrainSchedule.component";
 //import "./webpack.config";
 
 function App() {
@@ -53,9 +57,12 @@ function App() {
                     <Route path="/TrackOrder" element={<TrackOrder />} />
                     <Route path="/MyOrders" element={<MyOrders />} />
                     <Route path="/orderstatus" component={<OrderStatus/>} />
+                    <Route path="/pnrstatus" element={<PnrStaus/>}/>
+                    <Route path="/trainrunningstatus" element={<TrainRunningStatus/>}/>
+                    <Route path="/livestation" element={<LiveStation/>}/>
+                    <Route path="/trainschedule" element={<TrainSchedule/>}/>
                     <Route path="/Profile" element={<Profile />} />
-                    <Route path="/Contact/:type" element={<Contact />} />
-                  
+                    <Route path="/Contact/:type" element={<Contact />} /> 
                 </Routes>
                 <Footer></Footer>
             </div>
