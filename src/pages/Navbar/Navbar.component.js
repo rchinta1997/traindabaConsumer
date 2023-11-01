@@ -275,7 +275,7 @@ const Navbar = (props) => {
                     <li>
                         <a href="#!" onClick={ProceedToCart}>
                             <i className="fa fa-shopping-cart"></i>
-                            <span className="fa-layers-counter ritekhana-bgcolor cart-count" style={{ borderRadius: "6px" }}>
+                            <span className="cart-count" style={{ borderRadius: "6px" }}>
                                 {context.cart.reduce((count, curItem) => {
                                     return count + curItem.quantity;
                                 }, 0)}{" "}

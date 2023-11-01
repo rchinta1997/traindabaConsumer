@@ -181,8 +181,6 @@ const FinalConfirmation = () => {
     return (
         <>
             <SecondBanner></SecondBanner>
-            <div className="ritekhana-main-content">
-                <div className="ritekhana-main-section">
                     <div className="container">
                         <div className="ritekhana-dashboard-box">
                             <span className="ritekhana-dashboard-section-title">Confirm your deatils</span>
@@ -231,8 +229,7 @@ const FinalConfirmation = () => {
                             </a> 
                         </div>
                     </div>
-                </div>
-            </div>
+                
         </>
     );
 };

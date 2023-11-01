@@ -169,9 +169,6 @@ const checkValidation = () => {
 
     return (
         <>
-         <div>
-         <div className="ritekhana-main-content home-page">         
-            <div className="ritekhana-main-section">
                 <div className="container">
                     <div className="ritekhana-row">
                             <div className="ritekhana-column-3 ritekhana-right-padd">
@@ -241,9 +238,6 @@ const checkValidation = () => {
 
                     </div>
                 </div>
-            </div>
-            </div>
-         </div>
          <Toast ref={toast} />
         </>
     );

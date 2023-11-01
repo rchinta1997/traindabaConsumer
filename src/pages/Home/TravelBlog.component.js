@@ -15,7 +15,7 @@ const TravelBlog = () => {
         </p>
       </div>
     </div>
-    <div className="row owl-carousel">
+    <div className="row">
       <div className="col-md-4">
         <div className="blog-item">
           <p className="mb-4">
