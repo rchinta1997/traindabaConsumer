@@ -323,6 +323,13 @@ footer a:hover{
 
 @media screen and (max-width: 767px) {
 
+    header{
+        min-height: auto;
+        background: url(../src/Assets/Images/header-bg.png) no-repeat center top;
+        background-size: cover;
+        padding-bottom: 30px;
+    }
+
     .header-title{
         font-size: 30px;
         line-height: 42px;
