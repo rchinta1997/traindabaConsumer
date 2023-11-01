@@ -95,9 +95,7 @@ const Restaurants = (props) => {
     return (
         <>
 
-            <div className="ritekhana-main-content">
-                <div className="ritekhana-main-section">
-                    <div className="c-container">
+                    <div className="container">
                         <div className="row wi-100">
                             <div className="col-md-9">
                                 <h5>{outletData.OutletName}</h5> <br></br>
@@ -221,8 +219,6 @@ const Restaurants = (props) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
             <Toast ref={toast} />
         </>
     );

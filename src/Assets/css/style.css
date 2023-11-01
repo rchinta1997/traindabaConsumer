@@ -2821,12 +2821,14 @@ img {
     .card{
         width:420px;
     }
-    .btn{
+    
+    /* .btn{
         margin-left: 15px;
-    }
+    } */
     
 }
 @media screen and (max-width:400px) {
+
 
     .card{
         width:350px;

@@ -12,7 +12,7 @@ const HowToOrderGuide = () => {
               </h3>
               <p className="fs-24 mt-3">Want to know how to Order Food in Train...</p>
             </div>
-            <div className="col-md-4 text-right xs-text-center">
+            <div className="col-md-4 xs-btn-center">
               <button type="button" className="btn btn-primary btn-lg mt-4" data-toggle="modal" data-target=".bd-example-modal-lg">
                 Guide Me
               </button>

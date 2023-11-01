@@ -16,7 +16,7 @@ const VendorRegistration = () => {
           on train. And grow your business widely.
         </p>
       </div>
-      <div className="col-md-4 text-right xs-text-center">
+      <div className="col-md-4 xs-btn-center">
         <a href="https://traindhaba.com/contact" className="btn btn-primary btn-lg mt-5 xs-mt-15">
           Sign Up?
         </a>

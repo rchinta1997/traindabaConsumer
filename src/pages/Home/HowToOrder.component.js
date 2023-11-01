@@ -16,7 +16,7 @@ const HowToOrder = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-4 col-4">
                             <div className="order-food-item">
                                 <p className="mb-4">
                                 <img src={require("../../Assets/Images/icon-1.png")} alt="" />
@@ -25,7 +25,7 @@ const HowToOrder = () => {
                                 <p>Enter PNR/Train number details and choose your delivery station</p>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-4 col-4">
                             <div className="order-food-item">
                                 <p className="mb-4">
                                 <img src={require("../../Assets/Images/icon-2.png")} alt="" />
@@ -37,7 +37,7 @@ const HowToOrder = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-4 col-4">
                             <div className="order-food-item">
                                 <p className="mb-4">
                                     <img src={require("../../Assets/Images/icon-3.png")} alt="" />

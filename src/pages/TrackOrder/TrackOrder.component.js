@@ -15,6 +15,7 @@ import { convertDateTimeToIST, convertDateToIST, convertIsoToIst,convertDelivery
 
 const TrackOrder = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    
     const [searchValue, setSearchValue] = useState("");
     const [MyOrders, setOrders] = useState([])
     const navigate = useNavigate();
@@ -80,9 +81,6 @@ const TrackOrder = () => {
     };
 
     return (
-        <div className="ritekhana-main-content home-page">
-            <div className="ritekhana-main-section ritekhana-services-view1-full" >
-                <div className="ritekhana-main-section">
                     <div className="container">
                         <div className="row">
 
@@ -163,9 +161,6 @@ const TrackOrder = () => {
 
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     );
 };
 

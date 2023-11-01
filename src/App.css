@@ -60,6 +60,14 @@ img{
     line-height: normal;
 }
 
+/* .btn-primary{
+    background: linear-gradient(90deg, rgba(241,35,4,1) 0%, rgba(249,129,50,1) 100%);
+}
+
+.btn-primary:hover{
+    background: #DD2803;
+} */
+
 header{
     min-height: 100vh;
     background: url(../src/Assets/Images/header-bg.png) no-repeat left top;
@@ -149,15 +157,15 @@ header{
 }
 
 .guide-section .btn-primary{
-    color: #DD2803;
-    background-color: #FFF;
-    border-color: #FFF;
+    color: #DD2803 !important;
+    background-color: #FFF !important;
+    border-color: #FFF !important;
     font-weight: 600;
 }
 .guide-section .btn-primary:hover{
-    color: #FFF;
-    background-color: #DD2803;
-    border-color: #DD2803;
+    color: #FFF !important;
+    background-color: #DD2803 !important;
+    border-color:  #DD2803 !important;
 }
 
 .linear-gradiant{
@@ -275,15 +283,52 @@ footer a:hover{
     max-width: 24px;
 }
 
-.btn-primary{
-    background: linear-gradient(90deg, rgba(241,35,4,1) 0%, rgba(249,129,50,1) 100%);
+.xs-btn-center{
+    text-align: right;
 }
 
-.btn-primary:hover{
-    background: #DD2803;
+#header.header-scrolled, #header.header-inner-pages{
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
+.navbar a, .navbar a:focus{
+    color: #454545 !important;
+}
+.cart-count{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #DD2803;
+    text-align: center;
+    color: #FFFFFF;
+    margin-left: 2px;
+}
+.mobile-nav-toggle {
+    color: #454545 !important;
+}
+
+.page-title-section{
+    padding: 120px 0 50px 0;
+    background: linear-gradient(90deg, rgba(241,35,4,1) 0%, rgba(249,129,50,1) 100%);
+    color: #FFFFFF;
+} 
+.page-title-section h2{
+    font-size: 36px;
+    font-weight: 500;
+}
+.page-main-container{
+    padding: 30px 0px;
+}
+
 
 @media screen and (max-width: 767px) {
+
+    header{
+        min-height: auto;
+        background: url(../src/Assets/Images/header-bg.png) no-repeat center top;
+        background-size: cover;
+        padding-bottom: 30px;
+    }
 
     .header-title{
         font-size: 30px;
@@ -309,12 +354,12 @@ footer a:hover{
         line-height: normal;
     }
     .order-food-item{
-        padding:30px;
+        padding:10px;
         margin-bottom: 15px;
         min-height: auto;
     }
     .order-food-item img{
-        max-height: 72px;
+        max-height: 48px;
     }
     .pdtb-80, .pdtb-50 {
         padding-top: 30px;
@@ -329,6 +374,12 @@ footer a:hover{
     }
     .xs-text-center{
         text-align: center !important;
+    }
+    .xs-btn-center{
+        text-align: center !important;
+    }
+    .xs-mt-3{
+        margin-top: 0px !important;
     }
     .xs-mt-30{
         margin-top: 30px;

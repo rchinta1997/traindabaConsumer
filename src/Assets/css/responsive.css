@@ -53,26 +53,26 @@
 
 /* Media 420Px Start */
 @media (max-width: 767px) {
-	.ritekhana-header-one { position: static; float: left; width: 100%; background-color: #222; }
+	/* .ritekhana-header-one { position: static; float: left; width: 100%; background-color: #222; }
 	#main-nav { position: absolute; left: 0px; top: 100%; min-width: 230px; z-index: 9999; }
 	.ritekhana-menu-link { display: inline-block; }
 	#main-nav { display: none; } .sm-blue { background: #ffffff; }
 	.ritekhana-navigation,.ritekhana-navigation .sm-blue li.megamenu-wrap { position: relative; }
 	.ritekhana-navigation .ritekhana-megamenu [class*="col-md-"] { flex: 0 0 100%; max-width: 100%; width: 100%; }
 	.ritekhana-navigation .ritekhana-megamenu { float: left; background-color: #fff !important; position: relative; z-index: 9; padding: 10px 10px !important; }
-	.ritekhana-logo { width: 100%; margin-right: 0px; text-align: center; margin-bottom: 20px; }
+	.ritekhana-logo { width: 100%; margin-right: 0px; text-align: center; margin-bottom: 20px; } */
 
 	/* Main Grid */
-	.ritekhana-main-content .col-md-4,.ritekhana-main-content .col-md-3,
+	/* .ritekhana-main-content .col-md-4,.ritekhana-main-content .col-md-3,
 	.ritekhana-main-content .ritekhana-column-4,.ritekhana-main-content .ritekhana-column-3 { float: none; display: inline-block; vertical-align: top; margin-right: -4px; width: 50%; flex: 0 0 50%; max-width: 50%; }
 	.ritekhana-main-content .col-md-7,.ritekhana-main-content .col-md-5,.ritekhana-main-content .col-md-6,
 	.ritekhana-main-content .ritekhana-column-7,.ritekhana-main-content .ritekhana-column-5,.ritekhana-main-content .ritekhana-column-6 { width: 100%; float: left; flex: 0 0 100%; max-width: 100%; }
 	.col-md-12,.ritekhana-main-content .col-md-8,.ritekhana-main-content .col-md-9,
-	.ritekhana-column-12,.ritekhana-main-content .ritekhana-column-8,.ritekhana-main-content .ritekhana-column-9 { float: left; width: 100%; max-width: 100%; flex: auto; }
+	.ritekhana-column-12,.ritekhana-main-content .ritekhana-column-8,.ritekhana-main-content .ritekhana-column-9 { float: left; width: 100%; max-width: 100%; flex: auto; } */
 	
 	/* Content */
 	/*.ritekhana-banner-caption-view1 { display: none; }*/
-	.home-page{
+	/* .home-page{
 		margin-top: -150px;
 		padding: 0px 0px 20px 0px;
 	}
@@ -117,45 +117,45 @@
 	.ritekhana-myorders-list figure > a ~ figcaption { margin-left: 0px; float: left; width: 100%; }
 	.ritekhana-myorders-list-title,.ritekhana-myorders-list figure > a,.ritekhana-account-packages-list ul li { width: 100%; }
 	.ritekhana-left-padd { padding-left: 15px; }
-	.ritekhana-account-packages { padding-left: 0px; padding-right: 0px; }
+	.ritekhana-account-packages { padding-left: 0px; padding-right: 0px; } */
 
 
 	/* Footer */
-	.ritekhana-footer-widget .widget { flex: 0 0 50%; max-width: 50%; }
+	/* .ritekhana-footer-widget .widget { flex: 0 0 50%; max-width: 50%; }
 	.ritekhana-copyright { text-align: center; }
 	.ritekhana-copyright p { width: 100%; margin-bottom: 15px; }
-	.ritekhana-footer-social { display: inline-block; float: none; }
+	.ritekhana-footer-social { display: inline-block; float: none; } */
 
 
 }
 
 /* Media 300Px Start */
 @media (max-width: 540px) {
-	.ritekhana-header-btn { padding: 9px 13px 9px 13px; font-size: 12px; }
-	.ritekhana-user-section { width: 100%; text-align: center; } .ritekhana-user-section li { float: none; display: inline-block; }
+	/* .ritekhana-header-btn { padding: 9px 13px 9px 13px; font-size: 12px; }
+	.ritekhana-user-section { width: 100%; text-align: center; } .ritekhana-user-section li { float: none; display: inline-block; } */
 
 	/* Main Grid */
-	.ritekhana-main-content .col-md-4,.ritekhana-main-content .col-md-3,
-	.ritekhana-main-content .ritekhana-column-4,.ritekhana-main-content .ritekhana-column-3 { width: 100%; flex: 0 0 100%; max-width: 100%; }
+	/* .ritekhana-main-content .col-md-4,.ritekhana-main-content .col-md-3,
+	.ritekhana-main-content .ritekhana-column-4,.ritekhana-main-content .ritekhana-column-3 { width: 100%; flex: 0 0 100%; max-width: 100%; } */
 	
 	/* Content */
-	.ritekhana-erorr404 h3 { font-size: 100px; }
+	/* .ritekhana-erorr404 h3 { font-size: 100px; }
 	.ritekhana-breadcrumb { margin-left: -160px; }
-	.ritekhana-listing-style1-left, .ritekhana-listing-style1-right,.ritekhana-booking-form li,.comment-respond form p { width: 100%; }
+	.ritekhana-listing-style1-left, .ritekhana-listing-style1-right,.ritekhana-booking-form li,.comment-respond form p { width: 100%; } */
 
 	/* Footer */
-	.ritekhana-footer-widget .widget { flex: 0 0 100%; max-width: 100%; }
+	/* .ritekhana-footer-widget .widget { flex: 0 0 100%; max-width: 100%; }
 	#hero .partner img{
 		width: 20px;
 		height: 20px;
-	}
+	} */
 }
 
 /* Media 940Px Start */
-@media screen and (min-width: 991px) and (max-width: 1054px) {
+/* @media screen and (min-width: 991px) and (max-width: 1054px) {
 	#hero .partner img{
 		width: 20px;
 		height: 20px;
 	}
 	
-}
+} */
