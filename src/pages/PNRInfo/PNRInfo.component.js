@@ -161,7 +161,7 @@ const PNRInfo = () => {
           setPassengerInfo({ ...passengerInfo });
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
           setOutletData(response.data.body);
-        }
+                  }
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -185,7 +185,7 @@ const PNRInfo = () => {
       localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
 
       checkDeliveryDateWithOutletData(scheduledDate, eachOutlet)
-      //navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
+      navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
     /*} else {
       passengerInfo["VendorId"] = undefined;
       passengerInfo["StationId"] = undefined;
