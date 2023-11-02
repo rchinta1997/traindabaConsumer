@@ -94,7 +94,10 @@ const Restaurants = (props) => {
 
     return (
         <>
-
+<div className="page-title-section">
+                <div className="container"><h2>Outlets</h2></div>
+            </div>
+            <div className="page-main-container">
                     <div className="container">
                         <div className="row wi-100">
                             <div className="col-md-9">
@@ -218,6 +221,7 @@ const Restaurants = (props) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
             <Toast ref={toast} />
         </>

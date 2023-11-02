@@ -15,18 +15,17 @@ const PnrStaus = () => {
 
             <div className="page-main-container">
                 <div className="container">
-
                         <div className='row'>
-                            <div className='col-md-8 offset-1'>
+                            <div className='col-md-8 offset-md-2'>
                                 <div class="card shadow">
-                                    <div class="card-body stc_body">
-                                        <h4 class="card-title mb-3 ml-2">Check PNR Current Status</h4>
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-5">Check PNR Current Status</h4>
                                         <form>
                                             <div className='row align-items-center'>
-                                                <div className='form-group  col-md-6'>
+                                                <div className='form-group col-md-6'>
                                                     <input className="form-control input-fields" type="number" placeholder='Enter 10 digit PNR number' />
                                                 </div>
-                                                <div className='form-group  col-md-6'>
+                                                <div className='form-group col-md-6'>
                                                     <button type="submit" className="btn btn-primary">Check Status</button>
                                                 </div>
 

@@ -40,7 +40,7 @@ const CartNav = (props) => {
                     {context.cart.length > 0 && (
                         <div className="col-md-12">
                             <div className="ritekhana-recet-order-list">
-                                <table id="cart_table">
+                                <table className="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Item Name</th>

@@ -10,7 +10,7 @@ import cartContext from "../../Context/cart-context";
 
 import { format, parse } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
-import {checkDeliveryDateWithOutletData} from "../../utility/helper"
+import { checkDeliveryDateWithOutletData } from "../../utility/helper"
 
 // const cryptoHelper = require("../../helpers/crypto-helper");
 // const cryptoHelperInstance = new cryptoHelper();
@@ -27,21 +27,21 @@ const PNRInfo = () => {
   const toast = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
-  
-  const convertUtcToIst= (inputDate) => {
+
+  const convertUtcToIst = (inputDate) => {
     // Parse the input date as UTC
     const parsedDateUtc = parse(inputDate, 'yyyy-MM-dd HH:mm', new Date(), {
       timeZone: 'UTC',
     });
-  
+
     // Convert UTC time to IST (Indian Standard Time, UTC+5:30)
     const convertedDateIst = utcToZonedTime(parsedDateUtc, 'Asia/Kolkata');
-  
+
     // Format the converted date in "dd-MM-yyyy HH:mm" format
     const formattedDateIst = format(convertedDateIst, 'dd-MM-yyyy HH:mm', {
       timeZone: 'Asia/Kolkata',
     });
-  
+
     return formattedDateIst;
   }
   useEffect(() => {
@@ -59,31 +59,31 @@ const PNRInfo = () => {
     setTimeout(() => {
       setLoading(false);
     }, 8000);
-    
-    if(location.state.searchBy === 'PNR'){
+
+    if (location.state.searchBy === 'PNR') {
       axios
         .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
         .then((response) => {
           console.log("===============searchByPNR===============")
-          console.log(response.data.body)          
+          console.log(response.data.body)
           if (response.data.success) {
             setLoading(false);
             setIsError(false);
             setPnrData(response.data.body);
             let passengerInfo = {
               pnrNumber: location.state.search,
-              user_Id : "",
-              name:"",
-              email:"",
-              mobileNumber:"",
-              vendorId:"",
-              outletId:"",
-              Comment:"",
-              pnr:"",
-              booking_Date:"",
-              delivery_Date:"",
-              stationCode:"",
-              stationName:"",
+              user_Id: "",
+              name: "",
+              email: "",
+              mobileNumber: "",
+              vendorId: "",
+              outletId: "",
+              Comment: "",
+              pnr: "",
+              booking_Date: "",
+              delivery_Date: "",
+              stationCode: "",
+              stationName: "",
               journeyDate: response.data.body.trainInfo.dt,
               coachPosition: response.data.body.seatInfo.coach,
               berthNo: response.data.body.seatInfo.berth,
@@ -92,16 +92,15 @@ const PNRInfo = () => {
               trainName: response.data.body.trainInfo.name
             };
             let userdata = localStorage.getItem("user");
-            if(userdata)
-            {
+            if (userdata) {
               let user = JSON.parse(userdata);
               passengerInfo.email = user.emailID;
               passengerInfo.mobileNumber = user.mobileNumber;
-            }          
-           
+            }
+
             setPassengerInfo(passengerInfo);
             localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
-            console.log("PassengerInfo",JSON.parse(localStorage.getItem("PassengerInfo")));
+            console.log("PassengerInfo", JSON.parse(localStorage.getItem("PassengerInfo")));
           } else {
             setIsError(true);
             setPnrData(undefined);
@@ -111,37 +110,37 @@ const PNRInfo = () => {
         .catch((error) => {
           console.error("There was an error!", error);
         });
+    }
+    if (location.state.searchBy === 'TRAIN') {
+      context?.trainInfo?.stations.forEach(element => {
+        let istTime = convertUtcToIst(element.arrival.replace(' UTC', ''));
+        element.schArrivalDate = istTime.split(" ")[0];
+        element.schArrivalTime = istTime.split(" ")[1];
+        element.halt = element.haltMinutes;
+      });
+      console.log(context);
+      if (context?.trainInfo?.stations) {
+        let passengerInfo = {
+          journeyDate: context?.trainInfo?.travelDate,
+          trainNo: context?.trainInfo?.trainNo,
+          trainName: context?.trainInfo?.trainName,
+          stations: context?.trainInfo?.stations,
+          trainInfo: context?.trainInfo
+        };
+        let pnrData = passengerInfo;
+        pnrData.trainInfo.dt = passengerInfo.journeyDate;
+        setPnrData(pnrData);
+        setPassengerInfo(passengerInfo);
+        localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
       }
-      if(location.state.searchBy === 'TRAIN'){
-        context?.trainInfo?.stations.forEach(element => {
-          let istTime = convertUtcToIst(element.arrival.replace(' UTC', ''));
-          element.schArrivalDate = istTime.split(" ")[0];
-          element.schArrivalTime = istTime.split(" ")[1];
-          element.halt = element.haltMinutes;
-        });
-        console.log(context);
-        if(context?.trainInfo?.stations){
-          let passengerInfo = {
-            journeyDate: context?.trainInfo?.travelDate,
-            trainNo: context?.trainInfo?.trainNo,
-            trainName: context?.trainInfo?.trainName,
-            stations: context?.trainInfo?.stations,
-            trainInfo:context?.trainInfo
-          };
-          let pnrData = passengerInfo;
-          pnrData.trainInfo.dt = passengerInfo.journeyDate;
-          setPnrData(pnrData);
-          setPassengerInfo(passengerInfo);
-          localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
-        }
-              
-           
-        }
+
+
+    }
 
 
 
-    }, []);
-  
+  }, []);
+
   const getRestaurantsInfo = (e) => {
     let stationData = pnrData.stations[e.target.value];
     console.log(dayjs().unix());
@@ -158,7 +157,7 @@ const PNRInfo = () => {
           passengerInfo["halt"] = stationData["halt"];
           passengerInfo["code"] = stationData["code"];
           passengerInfo["stationName"] = stationData["name"];
-        
+
           setPassengerInfo({ ...passengerInfo });
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
           setOutletData(response.data.body);
@@ -173,17 +172,17 @@ const PNRInfo = () => {
     let scheduledDate = selectedStationData.schArrivalDate + " " + selectedStationData.schArrivalTime;
     let scheduledunixTime = dayjs(scheduledDate).subtract(eachOutlet.Order_Timing, "minute").unix();
     let currentDate = dayjs().unix();
-  // if (currentDate < scheduledunixTime) {
-      passengerInfo["vendorId"] = eachOutlet["VendorId"];
-      passengerInfo["stationId"] = eachOutlet["Station_Id"];
-      passengerInfo["outletId"] = eachOutlet["_id"];
-     
-      dayjs.extend(customParseFormat);
-      const formattedDate = dayjs().format("YYYY-MM-DD hh:mm:ss");
-      passengerInfo["booking_Date"] = formattedDate;
-      passengerInfo["delivery_Date"] = scheduledDate;
-      setPassengerInfo({ ...passengerInfo });
-      localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+    // if (currentDate < scheduledunixTime) {
+    passengerInfo["vendorId"] = eachOutlet["VendorId"];
+    passengerInfo["stationId"] = eachOutlet["Station_Id"];
+    passengerInfo["outletId"] = eachOutlet["_id"];
+
+    dayjs.extend(customParseFormat);
+    const formattedDate = dayjs().format("YYYY-MM-DD hh:mm:ss");
+    passengerInfo["booking_Date"] = formattedDate;
+    passengerInfo["delivery_Date"] = scheduledDate;
+    setPassengerInfo({ ...passengerInfo });
+    localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
 
       const msg = checkDeliveryDateWithOutletData(scheduledDate, eachOutlet)
       if(msg == "" || msg == undefined)
@@ -215,85 +214,96 @@ const PNRInfo = () => {
   };
   return (
     <>
-      <SecondBanner></SecondBanner>
-   
+       
+
+      <div className="page-title-section">
+        <div className="container"><h2>Outlets</h2></div>
+      </div>
+
+      <div className="page-main-container">
+        <div className="container">
+
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
         </div>) : null}
-     
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                {isError && (
-                  <div className="jumbotron">
-                    <p className="text-center lead">PNR info not found. PNR data not found.</p>
+
+
+        <div className="row">
+          <div className="col-md-12">
+            {isError && (
+              <div className="jumbotron">
+                <p className="text-center lead">PNR info not found. PNR data not found.</p>
+              </div>
+            )}
+            {!isError && pnrData !== undefined && (
+              <>
+                <div class="outer-container">
+                  <table className="table table-bordered table-sm">
+                    <tbody>
+                      <tr>
+                        <td>Journey Date: </td>
+                        <td>{pnrData.trainInfo.dt}</td>
+                      </tr>
+                      <tr>
+                        <td>Train :</td>
+                        <td>
+                          {" "}
+                          {pnrData.trainInfo.trainNo} - {pnrData.trainInfo.name}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div className="card shadow px-3 py-4 my-4">
+                    <h4 className="card-title mb-4 text-center">Select your Boarding Station</h4>
+                    <div class="card-body stc_body">
+                      <select name="boarding_station" className="form-control" onChange={getRestaurantsInfo}>
+                        <option>Select Boarding Station</option>
+                        {pnrData.stations.map((eachData, index) => {
+                          return (
+                            <option key={index} value={index}>
+                              {eachData.name} {eachData.code} ( Arrival : {eachData.schArrivalDate} ,{" "}
+                              {eachData.schArrivalTime}, Halt : {eachData.halt})
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
                   </div>
-                )}
-                {!isError && pnrData !== undefined && (
-                  <>
-                  <div class="outer-container">
-                    <table className="table table-bordered table-sm">
-                      <tbody>
-                        <tr>
-                          <td>Journey Date: </td>
-                          <td>{pnrData.trainInfo.dt}</td>
-                        </tr>
-                        <tr>
-                          <td>Train :</td>
-                          <td>
-                            {" "}
-                            {pnrData.trainInfo.trainNo} - {pnrData.trainInfo.name}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="card shadow px-3 py-4 my-4">
-                      <h4 className="card-title mb-4 text-center">Select your Boarding Station</h4>
-                      <div class="card-body stc_body">
-                          <select name="boarding_station" className="form-control" onChange={getRestaurantsInfo}>
-                            <option>Select Boarding Station</option>
-                            {pnrData.stations.map((eachData, index) => {
-                              return (
-                                <option key={index} value={index}>
-                                  {eachData.name} {eachData.code} ( Arrival : {eachData.schArrivalDate} ,{" "}
-                                  {eachData.schArrivalTime}, Halt : {eachData.halt})
-                                </option>
-                              );
-                            })}
-                          </select>
+                </div>
+              </>
+            )}
+            <div class="outer-container">
+            <div class="row">
+              {outletData.length > 0 &&
+                outletData.map((eachOutlet) => {
+                  return (
+                    <>
+                    <div class="col-md-6">
+                      <div class="vendor-card shadow px-3 py-4">
+                        <div class="vendor-logo">
+                          <img src={eachOutlet.image} alt="outlets-images" />
                         </div>
-                    </div>
-                    </div>
-                  </>
-                )}
-               < div class="vendor-list-container">
-            {outletData.length > 0 &&
-                      outletData.map((eachOutlet) => {
-                        return (
-                          <>
-                          <div class="vendor-card shadow px-3 py-4">
-                          <div class="vendor-logo">
-                          <img src={eachOutlet.image} alt="outlets-images"/>
-                      </div>
-                      <div class="vendor-content">
+                        <div class="vendor-content">
                           <div class="vendor-name">{eachOutlet.OutletName}</div>
                           <div class="vendor-order">Min Order:{eachOutlet.Min_Order}</div>
                           <div class="card-text mt-2">Delivery Time {eachOutlet.Order_Timing} Min</div>
                           <a href="#" class="order-now-button" onClick={(event) => getMenubyRestaurant(event, eachOutlet)}>Order Now</a>
+                        </div>
                       </div>
                       </div>
-                      </>
-                        )
-               
-                      })
-                    }
-            </div>
-            
-            </div>
-              </div>
-            </div>      
-        <Toast ref={toast} />       
+                    </>
+                  )
 
+                })
+              }
+            </div>
+            </div>
+          </div>
+        </div>      
+        </div>
+      </div> 
+        <Toast ref={toast} />       
+        
     </>
   );
 };
