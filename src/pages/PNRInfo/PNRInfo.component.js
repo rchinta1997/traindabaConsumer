@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import dayjs from "../../helpers/dayjs-helpers";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
-import { toast } from "react-toastify";
+import { Toast } from 'primereact/toast';
 import styles from './PNRInfo.css';
 import cartContext from "../../Context/cart-context";
 
@@ -24,6 +24,7 @@ const PNRInfo = () => {
   const [loading, setLoading] = useState(false);
   const context = useContext(cartContext);
   //const [ contextData, setContextData ] = useContext(cartContext);
+  const toast = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -160,7 +161,7 @@ const PNRInfo = () => {
           setPassengerInfo({ ...passengerInfo });
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
           setOutletData(response.data.body);
-        }
+                  }
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -183,8 +184,17 @@ const PNRInfo = () => {
     setPassengerInfo({ ...passengerInfo });
     localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
 
-    checkDeliveryDateWithOutletData(scheduledDate, eachOutlet)
-    navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
+      const msg = checkDeliveryDateWithOutletData(scheduledDate, eachOutlet)
+      if(msg == "" || msg == undefined)
+      {
+        navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
+      }
+      else
+      {
+        toast.current.show({ severity: 'error', summary: 'Error', detail: msg, life: 3000 });
+   
+      }
+      //navigate("/RestaurantInfo", { state: { MenuData: eachOutlet } });
     /*} else {
       passengerInfo["VendorId"] = undefined;
       passengerInfo["StationId"] = undefined;
@@ -287,13 +297,12 @@ const PNRInfo = () => {
                 })
               }
             </div>
+            
             </div>
-          </div>
-        </div>
-        </div>
-      </div>
+              </div>
+            </div>      
+        <Toast ref={toast} />       
 
-      {/* <SecondBanner></SecondBanner> */}
     </>
   );
 };

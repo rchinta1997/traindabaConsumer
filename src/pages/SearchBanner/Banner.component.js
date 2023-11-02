@@ -135,12 +135,20 @@ const Banner = (props) => {
               >
                 <form method="post" id="train_form">
                   <div className="row">
-                    <div className="col-md-5">
+                    <div className="col-md-5 mb-1">
                       <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" />
                     </div>
                     <div className="col-md-3 boarding-date">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="pnr"
+                        id="pnr"
+                        placeholder="Enter PNR Number"
+                        onChange={(e) => setSearchValue(e.target.value)}
+                      ></input>
 
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                           placeholder="Boarding Date"
                           value={boardingDate}
@@ -148,12 +156,23 @@ const Banner = (props) => {
                           onChange={handleDateChange}
                           renderInput={(params) => <input {...params} />}
                         />
-                      </LocalizationProvider>
+                      </LocalizationProvider> */}
 
-                    </div>
+                    </div> 
+
+{/* <div className="col-md-8 col-sm-8 col-xs-12">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="pnr"
+                        id="pnr"
+                        placeholder="Enter PNR Number"
+                        onChange={(e) => setSearchValue(e.target.value)}
+                      ></input>
+                    </div> */}
 
                     <div className="col-md-4">
-                      <input type="submit" className="btn btn-primary btn-block" onClick={() => searchByTrainNo()} value="Order Food"></input>
+                      <input type="submit" className="btn btn-primary btn-block" onClick={() => searchByPNR()} value="Order Food"></input>
                     </div>
                   </div>
                 </form>
@@ -168,7 +187,7 @@ const Banner = (props) => {
               >
                 <form method="post" id="station_form">
                   <div className="row ">
-                    <div className="col-md-8 col-sm-8 col-xs-12">
+                    <div className="col-md-5 col-sm-8 col-xs-12 mb-1">
                       <input
                         type="text"
                         className="form-control"
@@ -177,8 +196,18 @@ const Banner = (props) => {
                         placeholder="Enter Station name"
                       ></input>
                     </div>
+                    <div className="col-md-3 col-sm-8 col-xs-12">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="pnr"
+                        id="pnr"
+                        placeholder="Enter PNR Number"
+                        onChange={(e) => setSearchValue(e.target.value)}
+                      ></input>
+                    </div>
                     <div className="col-md-4 col-sm-4 col-xs-12">
-                      <input type="submit" className="btn btn-primary btn-block" value="Order Food"></input>
+                      <input type="submit" className="btn btn-primary btn-block" value="Order Food"onClick={() => searchByPNR()}></input>
                     </div>
                   </div>
                 </form>
