@@ -314,10 +314,11 @@ footer a:hover{
 } 
 .page-title-section h2{
     font-size: 36px;
-    font-weight: 500;
+    font-weight:600;
 }
 .page-main-container{
-    padding: 30px 0px;
+    padding: 30px 0px 50px 0px;
+
 }
 
 
@@ -386,6 +387,18 @@ footer a:hover{
     }
     .xs-mt-15{
         margin-top: 15px !important;
+    }
+
+    .css-z3c6am-MuiFormControl-root-MuiTextField-root{
+        width: 100%;
+    }
+
+    .page-title-section{
+        padding:100px 0 25px 0;
+    }
+
+    .page-title-section h2{
+        font-size: 24px;
     }
 
 

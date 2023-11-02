@@ -91,6 +91,7 @@ const Checkout = () => {
     } else {
         return (
             <>
+            
                 <SecondBanner></SecondBanner>
                         <div className="container">
                             <form className="ritekhana-booking-form" id="checkout" onSubmit={finalConfirmation}>
