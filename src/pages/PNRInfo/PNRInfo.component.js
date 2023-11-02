@@ -216,11 +216,11 @@ const PNRInfo = () => {
   return (
     <>
       <SecondBanner></SecondBanner>
-      <div className="ritekhana-main-content">
+   
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
         </div>) : null}
-        <div className="outer-container">
+     
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -291,11 +291,9 @@ const PNRInfo = () => {
             
             </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <Toast ref={toast} />
-    
+            </div>      
+        <Toast ref={toast} />       
+
     </>
   );
 };

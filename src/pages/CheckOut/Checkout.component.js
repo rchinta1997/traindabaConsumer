@@ -92,8 +92,6 @@ const Checkout = () => {
         return (
             <>
                 <SecondBanner></SecondBanner>
-                <div className="ritekhana-main-content">
-                    <div className="ritekhana-main-section">
                         <div className="container">
                             <form className="ritekhana-booking-form" id="checkout" onSubmit={finalConfirmation}>
                                 <div className="row">
@@ -182,8 +180,6 @@ const Checkout = () => {
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div>
             </>
         );
     }

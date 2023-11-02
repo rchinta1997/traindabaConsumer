@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom'
 const RailTools = () => {
   return (
     <div className="ritekhana-main-section mb-5" id="rail_tools_area">
@@ -7,28 +8,28 @@ const RailTools = () => {
           <div className="ritekhana-services ritekhana-services-view1">
             <div className="row text-center">
               <div className="col-3">
-                <a href="">
+               <Link to="/pnrstatus">
                   <i className="fas fa-ticket-alt text-info"></i>
                   <p>PNR Status</p>
-                </a>
+                  </Link>
               </div>
               <div className="col-3">
-                <a href="">
+               <Link to="/trainrunningstatus">
                   <i className="fas fa-subway text-warning"></i>
                   <p>Train Running</p>
-                </a>
+                  </Link>
               </div>
               <div className="col-3">
-                <a href="">
+              <Link to="/trainschedule">
                   <i className="far fa-calendar-alt text-primary"></i>
                   <p>Train Schedule</p>
-                </a>
+                  </Link>
               </div>
               <div className="col-3">
-                <a href="">
+              <Link to="/livestation">
                   <i className="fas fa-exchange-alt text-secondary"></i>
                   <p>Live Station</p>
-                </a>
+                  </Link>
               </div>
             </div>
           </div>

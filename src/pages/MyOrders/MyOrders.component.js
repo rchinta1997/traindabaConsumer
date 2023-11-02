@@ -123,16 +123,14 @@ function getUserOrder()
   
   return (
     <>
-      <div className="ritekhana-main-content home-page">         
-  <div className="ritekhana-main-section ritekhana-services-view1-full" >
-     <div  style={{ height: '300px', overflow: 'auto' }}>
-     <div className="ritekhana-column-12 ritekhana-right-padd ritekhana-left-padd">                         
-        <div className="ritekhana-dashboard-box">            
-        <div className="ritekhana-fancy-title">
-                        <h2 className="ritekhana-color">My Orders</h2>                       
-                    </div>
-            <div className="ritekhana-recet-order-list">
-                <table>
+        
+        <div className="page-title-section">
+        <div className="container"><h2>My Orders</h2></div>
+        </div>
+        <div className="page-main-container">
+            <div className="container">
+            
+                <table className="table table-bordered">
                     <thead>
                         <tr>
                             <th>Booking Date</th>                          
@@ -172,13 +170,8 @@ function getUserOrder()
                                                         
                 </table>
             </div>
-        </div>       
+          </div>
 
-    </div>
-    
-     </div>
-     </div>
-     </div>
      <Toast ref={toast} />
      <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
                 header="Confirmation" icon="pi pi-exclamation-triangle" accept={confirm} reject={ignore} />

@@ -2,23 +2,35 @@ import React from "react";
 
 const DownloadLinks = () => {
     return (
-        <div className="ritekhana-main-section mt-5">
-        <div className="container">
-            <div className="row">
-                <div className="col-md-5 ritekhana-text-app">
-                    <small className="ritekhana-color">Download the Resturant app now</small>
-                    <h2>Hygiene food at your seat</h2>
-                    <p>Not at all like other occupation locales that abandon you out of the loop, Job Time alarms you the moment your application is seen.</p>
-                    <a href="#"><img src="https://traindhaba.com/assets/extra-images/appthumb-1.png" alt=""></img></a>
-                    <a href="#"><img src="https://traindhaba.com/assets/extra-images/appthumb-2.png" alt=""></img></a>
-                </div>
-                <div className="col-md-7">
-                    <img src="https://traindhaba.com/assets/extra-images/text-thumb-1.png" alt=""></img>
-                </div>
-
-            </div>
+        <section className="hygiene-section pdtb-50">
+  <div className="container">
+    <div className="row">
+      <div className="col-md-6">
+        <p className="fs-18 mt-3 red-color uppercase">
+          <b>Download the Restaurant app now!</b>
+        </p>
+        <h3 className="sub-heading uppercase">Hygiene food at your seat</h3>
+        <p>
+          Not at all like other occupation locales that abandon you out of the
+          loop, Job Time alarms you the moment your application is seen.
+        </p>
+        <div className="mt-4">
+          <a href="#">
+            <img src={require("../../Assets/Images/google-play.png")} alt="" />
+          </a>{" "}
+          &nbsp;{" "}
+          <a href="#">
+            <img src={require("../../Assets/Images/app-store.png")} alt="" />
+          </a>
         </div>
+      </div>
+      <div className="col-md-6 text-right xs-mt-30">
+        <img src={require("../../Assets/Images/food-img1.png")} alt="" />
+      </div>
     </div>
+  </div>
+</section>
+
     );
 }
 

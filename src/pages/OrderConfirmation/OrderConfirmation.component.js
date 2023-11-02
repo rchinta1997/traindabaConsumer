@@ -86,8 +86,7 @@ const OrderConfirmation = (props) => {
 
     return (
         <>
-            <div className="ritekhana-main-content">
-                <div className="ritekhana-main-section">
+           
                     <div className="container">
                         <form className="ritekhana-booking-form" id="checkout">
                             <div className="row">
@@ -159,8 +158,6 @@ const OrderConfirmation = (props) => {
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
         </>
     );
 };

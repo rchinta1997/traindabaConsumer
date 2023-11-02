@@ -8,10 +8,8 @@ const Cart = () => {
     return (
         <>
             <SecondBanner></SecondBanner>
-            <div className="ritekhana-main-content">
-                <div className="ritekhana-main-section">
+                <div className="container">
             <CartNav  isEditable={true} isCartPage={true}></CartNav>
-            </div>
             </div>
         </>
     );

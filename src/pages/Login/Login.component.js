@@ -352,7 +352,7 @@ useEffect(() => {
 
   return (
     <>   
-    <div className="ritekhana-main-content home-page">         
+      
   <div className="ritekhana-main-section ritekhana-services-view1-full" ref={elementRef}>
         <div className="container" >         
         {loggedIn}
@@ -533,7 +533,7 @@ useEffect(() => {
            
         </div>
     </div>
-   </div> 
+   
    <Toast ref={toast} />
     </>
   );

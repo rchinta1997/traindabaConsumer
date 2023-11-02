@@ -30,20 +30,22 @@ import "./Assets/css/color.css";
 import "./Assets/css/responsive.css";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation.component";
 import OrderStatus from "./pages/MyOrders/OrderStatus.component";
+import PnrStaus from "./pages/RailTools/PNRSataus.Component";
+import TrainRunningStatus from "./pages/RailTools/TrainRunningStatus.component";
+import LiveStation from "./pages/RailTools/LiveStation.component";
+import TrainSchedule from "./pages/RailTools/TrainSchedule.component";
 //import "./webpack.config";
 
 function App() {
     return (
         <GlobalState>
             <div className="App">
-                <div className="ritekhana-wrapper">
-                    <div id="header" className="fixed-top header-scrolled">
-                        <Navbar />
-                    </div>
+                <div id="header" className="fixed-top header-scrolled">
+                    <Navbar />
                 </div>
                 <Routes>
                     <Route path="/" element={<HomePage />}></Route>
-                    <Route path="/Login" element={<LoginPage />} />                   
+                    <Route path="/Login" element={<LoginPage />} />
                     <Route path="/PNRInfo" element={<PNRInfo />} />
                     <Route path="/RestaurantInfo" element={<Restaurants />} />
                     <Route path="/Cart" element={<Cart />} />
@@ -52,16 +54,20 @@ function App() {
                     <Route path="/OrderConfirmation" element={<OrderConfirmation />} />
                     <Route path="/TrackOrder" element={<TrackOrder />} />
                     <Route path="/MyOrders" element={<MyOrders />} />
-                    <Route path="/orderstatus" component={<OrderStatus/>} />
+                    <Route path="/orderstatus" component={<OrderStatus />} />
+                    <Route path="/pnrstatus" element={<PnrStaus />} />
+                    <Route path="/trainrunningstatus" element={<TrainRunningStatus />} />
+                    <Route path="/livestation" element={<LiveStation />} />
+                    <Route path="/trainschedule" element={<TrainSchedule />} />
                     <Route path="/Profile" element={<Profile />} />
                     <Route path="/Contact/:type" element={<Contact />} />
-                  
                 </Routes>
                 <Footer></Footer>
             </div>
-            <ToastContainer theme="dark" />;
+            <ToastContainer theme="dark" />
         </GlobalState>
     );
 }
+
 
 export default App;
