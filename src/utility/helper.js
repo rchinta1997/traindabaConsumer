@@ -120,11 +120,51 @@ function calculateTotalAmt(cart)
         return priceObj;
 }
 
+ function setDateTime  (date, str){
+   var sp = str.split(':');
+   date.setHours(parseInt(sp[0],10));
+   date.setMinutes(parseInt(sp[1],10));
+  // date.setSeconds(parseInt(sp[2],10));
+  console.log("setdatetime",date);
+   return date;
+}
+
 function checkDeliveryDateWithOutletData(scheduledDate, outletData)
 {
+   var msg = "";
    console.log("scheduledDate",scheduledDate);
    let _scheduleDate = new Date(scheduledDate);
    console.log("_scheduleDate",_scheduleDate);
+
+   const istDateTime = moment(new Date).tz('Asia/Kolkata');  
+   const istFormatDateTime = istDateTime.format('YYYY-MM-DD HH:mm');
+   const diffDays = moment(scheduledDate.split(" ")[0]).diff(moment(istFormatDateTime.split(" ")[0]),'days');
+   const diffMins = moment(scheduledDate).diff(moment(istFormatDateTime),'minutes');
+   console.log("istTime",istFormatDateTime)  //endDate.diff(startDate, 'days');Order_Timing Opening_Time Closing_Time
+   console.log("outletData=",outletData);
+   console.log("diffMins=",diffMins);
+   
+   if(diffMins >= outletData.Order_Timing)
+   {
+      var current = new Date();
+      const _scheduleTime = setDateTime(new Date(current), scheduledDate.split(" ")[1])
+      const start = setDateTime(new Date(current),  outletData.Opening_Time)
+      const end = setDateTime(new Date(current), outletData.Closing_Time);
+      if(_scheduleTime > start.getTime() &&  _scheduleTime < end.getTime())
+      {
+         console.log("-------_scheduleTime if------------")
+      }
+      else
+      {
+         console.log("-------_scheduleTime else------------")
+         msg = "Train arrival time should be between outlet closing time & opening time"
+      }
+   }
+   else
+   {
+      msg = "Train arrival time should be match with outlet order timing"
+   }
+   return msg;
 }
 
 export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate,convertDeliveryDate,checkDeliveryDateWithOutletData}
