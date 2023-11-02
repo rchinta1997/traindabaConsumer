@@ -162,7 +162,7 @@ const PNRInfo = () => {
           setPassengerInfo({ ...passengerInfo });
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
           setOutletData(response.data.body);
-        }
+                  }
       })
       .catch((error) => {
         console.error("There was an error!", error);
