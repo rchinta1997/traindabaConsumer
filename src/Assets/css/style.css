@@ -2370,6 +2370,10 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
+ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
+
+
+
 /**
 * Mobile Navigation 
 */
@@ -2380,6 +2384,9 @@ input[type=number]::-webkit-outer-spin-button {
   display: none;
   line-height: 0;
   transition: 0.5s;
+}
+.mobile-nav-close {
+    color: #333;
 }
 
 @media (max-width: 991px) {
@@ -2400,25 +2407,32 @@ input[type=number]::-webkit-outer-spin-button {
   left: 0;
   bottom: 0;
   background: rgba(45, 37, 38, 0.9);
-  transition: 0.3s;
+  transition: 0.75s;
+  padding-top: 80px;
   z-index: 999;
+  display: none;
+}
+.navbar-mobile.active{
+    display: block;
 }
 .navbar-mobile .mobile-nav-toggle {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 20px;
+  left: 185px;
+  z-index: 222;
 }
 .navbar-mobile ul {
   display: block;
   position: absolute;
-  top: 55px;
-  right: 15px;
-  bottom: 15px;
-  left: 15px;
-  padding: 10px 0;
+  width: 220px;
+  height: 100%;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  padding: 30px 0;
   background-color: #fff;
   overflow-y: auto;
-  transition: 0.3s;
+  transition: 0.75s;
 }
 .navbar-mobile > ul > li {
   padding: 0;
@@ -2430,6 +2444,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 10px 20px;
   font-size: 15px;
   color: #493c3e;
+  display: block;
 }
 .navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
   color: #e43c5c;
@@ -2440,8 +2455,8 @@ input[type=number]::-webkit-outer-spin-button {
 .navbar-mobile .dropdown ul {
   position: static;
   display: none;
-  margin: 10px 20px;
-  padding: 10px 0;
+  padding: 5px;
+  margin-bottom: 10px;
   z-index: 99;
   opacity: 1;
   visibility: visible;
@@ -2449,7 +2464,7 @@ input[type=number]::-webkit-outer-spin-button {
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
 }
 .navbar-mobile .dropdown ul li {
-  min-width: 200px;
+  min-width: 160px;
 }
 .navbar-mobile .dropdown ul a {
   padding: 10px 20px;
@@ -2661,6 +2676,10 @@ img {
     margin-right: 20px;
 }
 
+.vendor-logo img{
+    border-radius: 6px;
+}
+
 .order-now-button {
     background-color: #007bff;
     color: white;
@@ -2763,6 +2782,10 @@ img {
     font-size: 14px;
 }
 
+.ritekhana-dashboard-box{
+    margin-bottom: 0px !important;
+}
+
 @media screen and (max-width: 600px) {
 
     .vendor-list-container,
@@ -2777,4 +2800,33 @@ img {
         width: 100%;
         max-width: 100%;
     }
+
+    /* Profile */
+    .ritekhana-row {
+        margin: 0px 0px;
+    }
+    .ritekhana-column-3, .ritekhana-column-5, .ritekhana-column-4, .ritekhana-column-6{
+        width: 100%;
+    }
+    .ritekhana-priceplane-list > ul {
+        margin: 0px 0px 0px;
+        float: left;
+    }
+    .ritekhana-priceplane-list {
+        padding: 20px 0px 0px;
+        background-color: #f9f9f9;
+    }
+    .ritekhana-dashboard-nav:before{
+        display: none;
+    }
+    .ritekhana-right-padd{
+        padding-left:0px;
+    }
+    .ritekhana-dashboard-nav{
+        margin-bottom: 20px;
+    }
 }
+
+
+
+

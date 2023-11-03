@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import './Navbar.css'
 import { useNavigate } from "react-router-dom";
 import cartContext from "../../Context/cart-context";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
     var istokenexists = false;
@@ -17,15 +17,32 @@ const Navbar = (props) => {
         navigate("/cart");
     };
 
+    const [isToggled, setIsToggled] = useState(false);
+
+    const toggleMenu = () => {
+        setIsToggled(!isToggled);
+    };
 
 
     const routeClickHandler = (event, type) => {
-    
+
         if (type === "Login") {
             navigate("/Login");
         }
         else if (type === "TrackOrder") {
             navigate("/TrackOrder");
+        }
+        else if (type === "pnrstatus") {
+            navigate("/pnrstatus");
+        }
+        else if (type === "trainrunningstatus") {
+            navigate("/trainrunningstatus");
+        }
+        else if (type === "livestation") {
+            navigate("/livestation");
+        }
+        else if (type === "trainschedule") {
+            navigate("/trainschedule");
         }
         else if (type === "MyOrders") {
             navigate("/MyOrders");
@@ -58,224 +75,149 @@ const Navbar = (props) => {
     };
 
     return (
-        <div className="container d-flex align-items-center justify-content-between">
-            <a href="#" className="logo">
-                <img src="https://traindhaba.com/assets/images/logo.png" alt="" className="img-fluid" onClick={(event) => routeClickHandler(event, "Home")}></img>
-            </a>
-            <nav id="navbar" className="navbar">
-                <ul>
-                  
-                    {istokenexists ? <li>
-                        <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>
-                            Track Order{" "}
-                        </a>
-                    </li> :  <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
-                                            Login{" "}
-                                        </a>}                       
-                      
-                  
-                    {/* {istokenexists ? <li>
-                        <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
-                            My Orders{" "}
-                        </a>
-                    </li> : null} */}
-                    <li className="dropdown">
-                        <a href="#rail_tools_area">
-                            <span onClick={toggleProfile}>Rail Tools</span>
-                            {showProfile}
-                        </a>
-                        {showProfile && (
-                            <ul>
-                                <Link to="/pnrstatus">
+        <>
+            <div className="container d-flex align-items-center justify-content-between">
+                <a href="#" className="logo">
+                    <img src="https://traindhaba.com/assets/images/logo.png" alt="" className="img-fluid" onClick={(event) => routeClickHandler(event, "Home")}></img>
+                </a>
+                <nav id="navbar" className="navbar">
+                    <ul className="nav">
+                        {istokenexists ? <li>
+                            <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>
+                                Track Order{" "}
+                            </a>
+                        </li> : <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
+                            Login{" "}
+                        </a>}
+                        <li className="dropdown">
+                            <a href="#" className="dropdown-toggle">
+                                Rail Tools
+                            </a>
+                            <ul class="dropdown-menu">
                                 <li>
-                                    PNR Status
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "pnrstatus")}>
+                                        PNR Status{" "}
+                                    </a>
                                 </li>
-                                </Link>
-                                <Link to="/trainrunningstatus">
                                 <li>
-                                    Train Running Status
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "trainrunningstatus")}>
+                                        Train Running Status{" "}
+                                    </a>
                                 </li>
-                                </Link>
-                                <Link to="/livestation">
                                 <li>
-                                    Live Station
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "livestation")}>
+                                        Live Station{" "}
+                                    </a>
                                 </li>
-                                </Link>
-                                <Link to="/trainschedule">
                                 <li>
-                                  Train Schedule
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "trainschedule")}>
+                                        Train Schedule{" "}
+                                    </a>
                                 </li>
-                                </Link>
                             </ul>
-                        )}
-                    </li>
 
-                    {istokenexists ? <li className="dropdown">
-                        
-                        <a href="#" >
-                           My Account{" "}
-                        </a>
-                        <ul>
+                        </li>
+                        {istokenexists ? <li className="dropdown">
+                            <a href="#" className="dropdown-toggle">
+                                My Account{" "}
+                            </a>
+                            <ul class="dropdown-menu">
                                 <li>
-                                <a href="#" onClick={(event) => routeClickHandler(event, "Profile")}>
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "Profile")}>
                                         Profile{" "}
                                     </a>
                                 </li>
                                 <li>
-                                <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
                                         My Orders{" "}
                                     </a>
                                 </li>
                                 <li>
-                                <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
-                                            Logout{" "}
-
-                                        </a>
-                                </li>                            
-                            </ul>
-                    </li> : null}
-
-                    {/* { istokenexists ?<li>                           
-   
-
-    const routeClickHandler = (event, type) => {
-        if(type === "Login")
-        {
-            navigate("/Login");
-        }  
-        else if(type === "TrackOrder")  
-        {
-            navigate("/TrackOrder");       
-        }
-        else if(type === "MyOrders")  
-        {
-            navigate("/MyOrders");       
-        }
-        else if(type === "Profile")
-        {
-            navigate("/Profile");       
-        }
-        else if(type === "Logout")
-        {
-            localStorage.removeItem("token");
-            navigate("/Login");
-        }
-        else if(type === "OrderStatus")
-        {
-            navigate("/orderstatus");
-        }
-        else
-        {
-            navigate("/");
-        }     
-           
-        
-    }
-   
-    const _token = localStorage.getItem("token");
-    if(_token)
-    {
-        istokenexists = true;
-    }
-        return (
-            <div className="container d-flex align-items-center justify-content-between"> 
-                <a href="#" className="logo">
-                    <img src="https://traindhaba.com/assets/images/logo.png" alt="" className="img-fluid" onClick={(event) => routeClickHandler(event, "Home")}></img>
-                </a>
-    
-                <nav id="navbar" className="navbar">
-                    <ul>
-                        <li>                           
-                            <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>
-                                <i className="fa fa-user"></i> Track Order{" "}
-                            </a>
-                        </li>
-                        { istokenexists ?<li>
-                            <a href="#"  onClick={(event) => routeClickHandler(event, "MyOrders")}>
-                                <i className="fa fa-user"></i> My Orders{" "}
-                            </a>
-                        </li> : null }
-                        <li className="dropdown">
-                            <a href="#rail_tools_area">
-                                <span>Rail Tools</span> <i className="fa fa-solid fa-angle-down"></i>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="#">PNR Status</a>
-                                </li>
-                                <li>
-                                    <a href="#">Train Running Status</a>
-                                </li>
-                                <li>
-                                    <a href="#">Live Station</a>
-                                </li>
-                                <li>
-                                    <a href="#">Train Schedule</a>
+                                    <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
+                                        Logout{" "}
+                                    </a>
                                 </li>
                             </ul>
+                        </li> : null}
+                        <li>
+                            <a href="#!" onClick={ProceedToCart}>
+                                <i className="fa fa-shopping-cart"></i>
+                                <span className="cart-count">
+                                    {context.cart.reduce((count, curItem) => {
+                                        return count + curItem.quantity;
+                                    }, 0)}{" "}
+                                </span>
+                            </a>
                         </li>
-                                           
-                        {/* { istokenexists ?<li>                           
-                         <a href="#"  onClick={(event) => routeClickHandler(event, "Profile")}>
-                             <i className="fa fa-user"></i> Profile{" "}
-                         </a>
-                       </li>: null } */}
+                    </ul>
+                    <i className="fa fa-solid fa-bars mobile-nav-toggle" onClick={toggleMenu}></i>
+                </nav>
+            </div>
 
-
-                    {/* <li className="dropdown">
-                        <a href="#">
-                            <span className="fa fa-user" onClick={toggleProfile}>
-                                {showProfile}
-                            </span>
+            <div className={`navbar-mobile ${isToggled ? 'active' : ''}`} >
+                <i className="fa fa-solid fa-times mobile-nav-toggle" onClick={toggleMenu}></i>
+                <ul className="nav">
+                    {istokenexists ? <li>
+                        <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>
+                            Track Order{" "}
                         </a>
-                        {showProfile && (
-                            <ul>
-                                <li>
-                                    <a href="#">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings</a>
-                                </li>
-                                <li>
-                                    {istokenexists ? <li>
-                                        <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
-                                            Logout{" "}
+                    </li> : <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
+                        Login{" "}
+                    </a>}
+                    <li className="dropdown">
+                        <a href="#" className="dropdown-toggle">
+                            Rail Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "pnrstatus")}>
+                                    PNR Status{" "}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "trainrunningstatus")}>
+                                    Train Running Status{" "}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "livestation")}>
+                                    Live Station{" "}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "trainschedule")}>
+                                    Train Schedule{" "}
+                                </a>
+                            </li>
+                        </ul>
 
-                                        </a>
-                                    </li> : null}
-                                    {!istokenexists ? <li>
-                                        <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
-                                            Login{" "}
-                                        </a>
-                                    </li> : null}
-                                </li>
-                            </ul>
-                        )}
-
-                    </li> */}
-
-
-
-                    {/* { istokenexists ?<li>
-                            <a href="#"  onClick={(event) => routeClickHandler(event, "Logout")}>
-                                <i className="fa fa-user"></i> Logout{" "}
-                                <i></i>Settings
-                        { istokenexists ?<li>
-                            <a href="#"  onClick={(event) => routeClickHandler(event, "Logout")}>
-                                <i className="fa fa-user"></i> Logout{" "}
-                            </a>
-                        </li> : null }
-                        { !istokenexists ?<li>
-                         <a href="#" onClick={(event) => routeClickHandler(event, "Login")}>
-                             <i className="fa fa-user"></i> Login{" "}
-                         </a>
-                       </li>:null }
-                       
-                        */}
+                    </li>
+                    {istokenexists ? <li className="dropdown">
+                        <a href="#" className="dropdown-toggle">
+                            My Account{" "}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "Profile")}>
+                                    Profile{" "}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "MyOrders")}>
+                                    My Orders{" "}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onClick={(event) => routeClickHandler(event, "Logout")}>
+                                    Logout{" "}
+                                </a>
+                            </li>
+                        </ul>
+                    </li> : null}
                     <li>
                         <a href="#!" onClick={ProceedToCart}>
                             <i className="fa fa-shopping-cart"></i>
-                            <span className="cart-count" style={{ borderRadius: "6px" }}>
+                            <span className="cart-count">
                                 {context.cart.reduce((count, curItem) => {
                                     return count + curItem.quantity;
                                 }, 0)}{" "}
@@ -283,12 +225,9 @@ const Navbar = (props) => {
                         </a>
                     </li>
                 </ul>
-                <i className="fa fa-solid fa-bars mobile-nav-toggle"></i>
-            </nav>
-        </div>
+            </div>
+        </>
     );
-
-
 
 };
 
