@@ -151,12 +151,13 @@ const ChangePassword = () => {
 
     return (
         <>
+        
          <div>
          <div className="ritekhana-column-6 ritekhana-right-padd ritekhana-left-padd">                         
                 <div className="ritekhana-dashboard-box">                          
                 <span className="ritekhana-dashboard-section-title">Change Password</span>                             
                     {/* <form class="ritekhana-dashboard-form" method="post" action="https://traindhaba.com/post_change_password"> */}
-                    <Form className="ritekhana-dashboard-form" onSubmit={UpdatePassword}>
+                    <Form className="ritekhana-dashboard-form mt-3" onSubmit={UpdatePassword}>
                         <ul className="ritekhana-row">
                             <li className="ritekhana-column-12">
                                 <label>Old Password *</label>
