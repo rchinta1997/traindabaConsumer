@@ -13,7 +13,7 @@ const HowToOrderGuide = () => {
               <p className="fs-24 mt-3">Want to know how to Order Food in Train...</p>
             </div>
             <div className="col-md-4 xs-btn-center">
-              <button type="button" className="btn btn-primary btn-lg mt-4" data-toggle="modal" data-target=".bd-example-modal-lg">
+              <button type="button"  role="button" onClick={() => console.log('Button Clicked')} className="btn btn-primary btn-lg mt-4" data-bs-toggle="modal" data-bs-target="#bd-example-modal-lg">
                 Guide Me
               </button>
             </div>
@@ -22,7 +22,8 @@ const HowToOrderGuide = () => {
 
         
         <div
-          className="modal fade bd-example-modal-lg"
+          className="modal fade"
+          id="bd-example-modal-lg"
           tabIndex={-1}
           role="dialog"
           aria-labelledby="myLargeModalLabel"
@@ -37,7 +38,7 @@ const HowToOrderGuide = () => {
                 <button
                   type="button"
                   className="close"
-                  data-dismiss="modal"
+                  data-bs-dismiss="modal"
                   aria-label="Close"
                 >
                   <span aria-hidden="true">×</span>

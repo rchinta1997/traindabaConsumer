@@ -18,8 +18,14 @@ const Footer = () => {
         else if (type === "Feedback") {
             navigate("/Contact/Feedback");
         }
+
         else if (type === "Contact") {
             navigate("/Contact/Contact");
+        }
+
+        else if (type === "Aboutus"){
+            navigate("/Aboutus")
+
         }
 
 
@@ -38,7 +44,7 @@ const Footer = () => {
                                     <h5>Company</h5>
                                     <ul>
                                         <li>
-                                            <a href="#">About Us</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Aboutus")}>About Us</a>
                                         </li>
                                         <li>
                                             <a href="#">How it Works?</a>
@@ -69,6 +75,7 @@ const Footer = () => {
                                         <li>
                                             <a href="#">Offers</a>
                                         </li>
+
                                         <li>
                                             <a href="#" onClick={(event) => routeClickHandler(event, "Call_Back")}>Call back Request</a>
                                         </li>
@@ -78,6 +85,7 @@ const Footer = () => {
                                         <li>
                                             <a href="#" onClick={(event) => routeClickHandler(event, "Feedback")}>Feedback/Complaint</a>
                                         </li>
+
 
                                         <li>
                                         <a href="#" onClick={(event) => routeClickHandler(event, "Contact")}>Contact</a>

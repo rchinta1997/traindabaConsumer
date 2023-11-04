@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useContext,useRef } from "react";
+
+
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
+import ReactCaptcha from 'modern-react-captcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
+// import Captcha from "demos-react-captcha";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import {
@@ -42,9 +47,11 @@ const Contact = () => {
         emailID: '',
         mobileNumber: ''
       });
+
       const [captchaText, setCaptchaText] = useState(''); 
     const [userInput, setUserInput] = useState(''); 
     const canvasRef = useRef(null); 
+
 
       const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -248,6 +255,10 @@ const handleUserInputChange = (e) => {
           return false;
         }
       };
+  //     const handleSuccess = () => alert('Captcha matched!');
+	// const handleFailure = () => alert('Captcha does not match');
+
+
 
     return (
         <>
@@ -313,6 +324,7 @@ const handleUserInputChange = (e) => {
                                
                                 </div>
                                </li>
+
                                <li> <Button type="submit" color="primary" disabled={isLoading?true:false} >{ isLoading && <CircularProgress size={15} color="inherit" />} Send Message</Button> </li>
                            </ul>
                        </Form>

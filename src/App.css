@@ -152,11 +152,19 @@ header .container{
     max-height: 36px;
     margin-right: 5px;
 }
+blog-item-main-con{
+    display:"flex";
+    flex-direction:"row"
+
+
+}
 .blog-item{
     background-color: #FFF;
     border-radius: 8px;
     padding: 12px;
     box-shadow: 0px 3px 15px -3px rgba(0,0,0,0.1);
+    margin-right:10px !important;
+   
 }
 .blog-item h4{
     color: #DD2803;
@@ -484,3 +492,12 @@ footer a:hover{
 
 
 }
+.discover-bold-txt{
+    font-weight:bold;
+    color:black
+
+}
+.about-des-text{
+    color:black;
+}
+
