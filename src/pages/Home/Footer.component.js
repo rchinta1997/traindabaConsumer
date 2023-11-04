@@ -13,10 +13,13 @@ const Footer = () => {
             navigate("/Contact/Call back Request");
         }
         else if (type === "Cancellation") {
-            navigate("/Contact/Cancellation Order Request");
+            navigate("/Contact/Cancellation Order Request");  
         }
         else if (type === "Feedback") {
             navigate("/Contact/Feedback");
+        }
+        else if (type === "Contact") {
+            navigate("/Contact/Contact");
         }
 
 
@@ -67,16 +70,19 @@ const Footer = () => {
                                             <a href="#">Offers</a>
                                         </li>
                                         <li>
-                                            <a href="#">Call back Request</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Call_Back")}>Call back Request</a>
                                         </li>
                                         <li>
-                                            <a href="#">Cancellation Request</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Cancellation")}>Cancellation Request</a>
                                         </li>
                                         <li>
-                                            <a href="#">Feedback/Complaint</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Feedback")}>Feedback/Complaint</a>
                                         </li>
+
                                         <li>
-                                            <a href="#">Contact</a>
+                                        <a href="#" onClick={(event) => routeClickHandler(event, "Contact")}>Contact</a>
+
+                                           
                                         </li>
                                     </ul>
                                 </div>
