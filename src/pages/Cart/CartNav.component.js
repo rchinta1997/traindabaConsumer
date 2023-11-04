@@ -33,7 +33,6 @@ const CartNav = (props) => {
     };
     return (
         <>
-
             <div className="container">
                 <div className="row">
                     {context.cart.length <= 0 && <p>No Item in the Cart!</p>}

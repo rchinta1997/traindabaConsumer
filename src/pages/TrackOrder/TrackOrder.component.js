@@ -106,10 +106,11 @@ const TrackOrder = () => {
                         </div>
                     </div>
 
-                    <div className='row'>
-                        <div className='col-md-8 offset-md-2'>
+                    <div className='row mt-5'>
+                        <div className='col-md-12'>
                             {Object.keys(MyOrders).length !== 0 ?
                                 <div className="order-list">
+                                    <div className="table-responsive">
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
@@ -146,6 +147,7 @@ const TrackOrder = () => {
                                         })}
 
                                     </table>
+                                    </div>
                                 </div> : null}
                         </div>
                     </div>

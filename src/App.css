@@ -72,6 +72,21 @@ header{
     min-height: 100vh;
     background: url(../src/Assets/Images/header-bg.png) no-repeat left top;
     background-size: cover;
+    position: relative;
+}
+header::before, .page-title-section::before{
+    background-color: rgba(0, 0, 0, 0.08);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    z-index: 0;
+}
+header .container{
+    position: relative;
+    z-index: 2;
 }
 .header-title{
     color: #FFF;
@@ -267,6 +282,10 @@ footer a:hover{
     height: 46px;
     width: 100%;
     border-radius: 0px;
+    padding: 0.375rem 0.75rem;
+}
+.home-seach-container .mantine-Input-wrapper input[type="search"]::placeholder{
+    color: rgba(73, 80, 89, 0.85);
 }
 .home-seach-container .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 11.5px 14px;
@@ -275,12 +294,12 @@ footer a:hover{
     border-radius: 0px;
 }
 .home-seach-container .btn-primary{
-    background: #DD2803;
-    border-color: #DD2803;
+    background: #c72403;
+    border-color: #c72403;
 }
 .home-seach-container .btn-primary:hover, .home-seach-container .btn-primary:focus{
-    background: #c72403;
-    border-color:#c72403;
+    background: #DD2803;
+    border-color:#DD2803;
 }
 .partner{
     color: #FFF;
@@ -303,13 +322,14 @@ footer a:hover{
     color: #454545 !important;
 }
 .cart-count{
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
     border-radius: 50%;
     background-color: #DD2803;
     text-align: center;
     color: #FFFFFF;
-    margin-left: 2px;
+    margin-left: 4px;
+    display: inline-block;
 }
 .mobile-nav-toggle {
     color: #454545 !important;
@@ -319,6 +339,7 @@ footer a:hover{
     padding: 120px 0 50px 0;
     background: linear-gradient(90deg, rgba(241,35,4,1) 0%, rgba(249,129,50,1) 100%);
     color: #FFFFFF;
+    position: relative;
 } 
 .page-title-section h2{
     font-size: 36px;
@@ -328,6 +349,17 @@ footer a:hover{
     padding: 30px 0px 50px 0px;
 
 }
+.shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+.table thead th {
+    background: #f6f8fa;
+}
+.mantine-Input-wrapper input[type="search"]{
+    padding: 0.375rem 0.75rem;
+}
+
 
 
 @media screen and (max-width: 767px) {
@@ -407,6 +439,13 @@ footer a:hover{
 
     .page-title-section h2{
         font-size: 24px;
+    }
+
+    .home-seach-container .nav-link{
+        padding: 0.5rem 0.5rem;
+    }
+    .home-seach-container .btn {
+        margin-top: 5px;
     }
 
 
