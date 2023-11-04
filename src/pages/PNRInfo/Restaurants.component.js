@@ -94,135 +94,94 @@ const Restaurants = (props) => {
 
     return (
         <>
-<div className="page-title-section">
-                <div className="container"><h2>Outlets</h2></div>
+            <div className="page-title-section">
+                <div className="container"><h2>{outletData.OutletName}</h2></div>
             </div>
             <div className="page-main-container">
-                    <div className="container">
-                        <div className="row wi-100">
-                            <div className="col-md-9">
-                                <h5>{outletData.OutletName}</h5> <br></br>
-                                {/* Veg NonVeg */}
-                                <div className='container'>
-                                    <div className="row">
-                                        <div className="radio-button-group">
+                <div className="container">
 
-                                            <div className="radio-button">
-                                                <label>
-                                                    <input
-                                                        type="radio"
-                                                        value="all"
-                                                        checked={selectedRange === 'all'}
-                                                        onChange={handleRangeChange}
+                    <div className="row">
+                        <div className="col-md-9">
 
-                                                        className="radio-input-group"
-                                                    />
-                                                    All Items
-                                                </label>
-                                            </div>
-                                            <div className="radio-button">
+                            <div class="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    value="all"
+                                    id="all"
+                                    checked={selectedRange === 'all'}
+                                    onChange={handleRangeChange}
+                                    className="radio-input-group"
+                                />
+                                <label class="form-check-label" for="all"> &nbsp;All Items</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    value="veg"
+                                    id="veg"
+                                    checked={selectedRange === 'veg'}
+                                    onChange={handleRangeChange}
+                                    className="radio-input-group"
+                                />
+                                <label class="form-check-label" for="veg"> &nbsp;Veg</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    value="nonveg"
+                                    id="nonveg"
+                                    checked={selectedRange === 'nonveg'}
+                                    onChange={handleRangeChange}
+                                    className="radio-input-group"
+                                />
+                                <label class="form-check-label" for="nonveg"> &nbsp;Non Veg</label>
+                            </div>
+                           <p>Min Order : <b>{outletData.Min_Order}</b> &nbsp;&nbsp;&nbsp; Min Timing : <b>{outletData.Order_Timing}</b></p>
+                        </div>
+                        <div className="col-md-3 text-right">
+                            {context.cart.length > 0 &&
+                                    <a href="#!" onClick={ProceedToCart} className="proceed-btn">
+                                        Proceed to Cart
+                                    </a>
 
-                                                <label className="pl-2">
-                                                    <input
-                                                        type="radio"
-                                                        value="veg"
-                                                        checked={selectedRange === 'veg'}
-                                                        onChange={handleRangeChange}
+                            }
+                        </div>
+                    </div>
 
-                                                        className="radio-input-group"
-                                                    />
-                                                    Veg
-                                                </label>
-                                            </div>
-                                            <div className="radio-button">
+                    <div className="row">
 
-                                                <label className="pl-2">
-                                                    <input
-                                                        type="radio"
-                                                        value="nonveg"
-                                                        checked={selectedRange === 'nonveg'}
-                                                        onChange={handleRangeChange}
+                        {filteredItems.map((eachData, index) => {
+                            return (
+                                <div key={index} className="col-md-6">
 
-                                                        className="radio-input-group"
+                                    <div class="vendor-food-card shadow px-3 py-3">
+                                        <div class="vendor-food-content">
+                                            {eachData.Is_Vegetarian && (
+                                                    <>
+                                                        <img className="food-type-icon" src={require("../../Assets/Images/veg.png")}
+                                                        />
+                                                    </>
+                                                )}
+                                            {eachData.Is_Non_Vegetarian && (
+                                                <img className="food-type-icon" src={require("../../Assets/Images/non-veg.png")}
+                                                />
+                                            )}
 
-                                                    />
-                                                    Non Veg
-                                                </label>
-                                            </div>
+                                                <p class="font-wight vendor-food-desc">{eachData.Item_Name}<br></br><small>{eachData.Description}</small></p>
+                                                <p class="food-price">₹ {eachData.Selling_Price}</p>
+                                        </div>
+                                        <div class="vendor-food-logo">
+                                            <img className="cart-item__image" src={require("../../Assets/Images/placeholder-img.jpg")} />
+                                            <a href="javascript:;" onClick={context.addItemToCart.bind(this, eachData)} class="btn btn-white">ADD +</a>
                                         </div>
                                     </div>
-
+                                    
                                 </div>
-
-                                Min Order : <b>{outletData.Min_Order}</b> <br></br>
-                                Min Timing : <b>{outletData.Order_Timing}</b>
-                            </div>
-                            <div className="col-md-3">
-                                {context.cart.length > 0 &&
-                                    <div className="ritekhana-listing-loadmore-btn">
-                                        <a href="#!" onClick={ProceedToCart} className="ritekhana-bgcolor">
-                                            Proceed to Cart
-                                        </a>
-                                    </div>
-
-                                }
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="ritekhana-listing-style3 ritekhana-row">
-
-                                    {filteredItems.map((eachData, index) => {
-                                        return (
-                                            <div key={index} className="ritekhana-column-12">
-                                                <figure>
-                                                    {/* <img className="cart-item__image" src={process.env.REACT_APP_API_URL+"/files/"+ eachData.Logo_Id?.filename} /> */}
-                                                    <img className="cart-item__image" src={require("../../Assets/Images/no-image-icon.png")} />
-                                                </figure>
-                                                <div className="ritekhana-listing-style3-text">
-                                                    <div>
-                                                        <div className="wi-3 il-flex">
-                                                            {eachData.Is_Vegetarian && (
-                                                                <>
-                                                                    <img
-                                                                        style={{ width: "20px", paddingRight: "2px" }}
-                                                                        src={require("../../Assets/Images/veg.png")}
-                                                                    />
-                                                                </>
-                                                            )}
-                                                            {eachData.Is_Non_Vegetarian && (
-                                                                <img
-                                                                    style={{ width: "20px", paddingRight: "2px" }}
-                                                                    src={require("../../Assets/Images/non-veg.png")}
-                                                                />
-                                                            )}
-                                                        </div>
-                                                        <div className="wi-50 il-flex" >
-                                                            {eachData.Item_Name}
-                                                            <a
-                                                                href="javascript:;"
-                                                                onClick={context.addItemToCart.bind(this, eachData)}
-                                                                className="ritekhana-bgcolor"
-                                                            >
-                                                                <i className="fa fa-plus"></i>
-                                                            </a>
-                                                        </div>
-                                                        <div className="wi-3 il-flex">
-
-                                                        </div>
-                                                    </div>
-                                                    <div className="wi-100"><small>{eachData.Description}</small></div>
-                                                    <div className="wi-20"><strong className="ritekhana-bgcolor">₹ {eachData.Selling_Price}</strong></div>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        </div>
+                            );
+                        })}
                     </div>
-                    </div>
+                </div>
+            </div>
             <Toast ref={toast} />
         </>
     );
