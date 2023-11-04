@@ -67,14 +67,15 @@ const Footer = () => {
                                             <a href="#">Offers</a>
                                         </li>
                                         <li>
-                                            <a href="#">Call back Request</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Call_Back")}>Call back Request</a>
                                         </li>
                                         <li>
-                                            <a href="#">Cancellation Request</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Cancellation")}>Cancellation Request</a>
                                         </li>
                                         <li>
-                                            <a href="#">Feedback/Complaint</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Feedback")}>Feedback/Complaint</a>
                                         </li>
+
                                         <li>
                                             <a href="#">Contact</a>
                                         </li>

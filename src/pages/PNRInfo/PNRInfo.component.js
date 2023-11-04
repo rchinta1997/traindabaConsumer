@@ -226,6 +226,7 @@ const PNRInfo = () => {
       <div className="page-main-container">
         <div className="container">
 
+
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
         </div>) : null}
@@ -287,7 +288,7 @@ const PNRInfo = () => {
                         {eachOutlet.image ? (
                           <img src={eachOutlet.image} alt="outlets-images" />
                         ) : (
-                          <img src={require("../../Assets/Images/outlet-placeholder.PNG")} alt="" />
+                          <img src={require("../../Assets/Images/placeholder-img.jpg")} alt="" />
                         )}
                         </div>
                         <div class="vendor-content">
