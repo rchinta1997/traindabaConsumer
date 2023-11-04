@@ -5448,6 +5448,7 @@ button.close {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5;
+  color:red;
 }
 
 .modal-body {

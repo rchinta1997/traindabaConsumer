@@ -34,6 +34,7 @@ import PnrStaus from "./pages/RailTools/PNRSataus.Component";
 import TrainRunningStatus from "./pages/RailTools/TrainRunningStatus.component";
 import LiveStation from "./pages/RailTools/LiveStation.component";
 import TrainSchedule from "./pages/RailTools/TrainSchedule.component";
+import AboutComponent from "./pages/About/About.component";
 //import "./webpack.config";
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
                     <Route path="/trainschedule" element={<TrainSchedule />} />
                     <Route path="/Profile" element={<Profile />} />
                     <Route path="/Contact/:type" element={<Contact />} />
+                    <Route path="/Aboutus" element={<AboutComponent />} />
                 </Routes>
                 <Footer></Footer>
             </div>
