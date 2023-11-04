@@ -33,10 +33,12 @@ const CartNav = (props) => {
     };
     return (
         <>
-
-            <div className="container">
+            <div className="row">
+            <div className="col-md-12">{context.cart.length <= 0 && <p className="text-center">No Item in the Cart!</p>}</div>
+            </div>
+           
                 <div className="row">
-                    {context.cart.length <= 0 && <p>No Item in the Cart!</p>}
+                
                     {context.cart.length > 0 && (
                         <div className="col-md-12">
                             <div className="ritekhana-recet-order-list">
@@ -130,7 +132,6 @@ const CartNav = (props) => {
                         </div>
                     )}
                 </div>
-            </div>
 
         </>
     );

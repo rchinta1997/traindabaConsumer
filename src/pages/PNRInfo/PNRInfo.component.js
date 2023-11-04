@@ -212,6 +212,9 @@ const PNRInfo = () => {
       throw error;
     }
   };
+
+
+
   return (
     <>
        
@@ -222,6 +225,7 @@ const PNRInfo = () => {
 
       <div className="page-main-container">
         <div className="container">
+
 
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
@@ -279,9 +283,13 @@ const PNRInfo = () => {
                   return (
                     <>
                     <div class="col-md-6">
-                      <div class="vendor-card shadow px-3 py-4">
+                      <div class="vendor-card shadow px-3 py-3">
                         <div class="vendor-logo">
+                        {eachOutlet.image ? (
                           <img src={eachOutlet.image} alt="outlets-images" />
+                        ) : (
+                          <img src={require("../../Assets/Images/placeholder-img.jpg")} alt="" />
+                        )}
                         </div>
                         <div class="vendor-content">
                           <div class="vendor-name">{eachOutlet.OutletName}</div>

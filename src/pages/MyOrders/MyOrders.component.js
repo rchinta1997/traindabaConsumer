@@ -129,7 +129,7 @@ function getUserOrder()
         </div>
         <div className="page-main-container">
             <div className="container">
-            
+            <div className="table-responsive">
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -157,7 +157,7 @@ function getUserOrder()
                                     <td>{element.Order_Status_Id.OrderStatus}</td>
                                     <td>
                                       {element.Order_Id != null && 
-                                       <button className="btn btn-danger" onClick={()=>cancelOrder(element._id)}  disabled={element.Order_Status_Id._id=='6355de60ac2a790da5f8a791'}>Cancel</button> 
+                                       <button className="btn btn-danger btn-sm" onClick={()=>cancelOrder(element._id)}  disabled={element.Order_Status_Id._id=='6355de60ac2a790da5f8a791'}>Cancel</button> 
                                       } &nbsp;
                                      
                                     </td>
@@ -169,6 +169,7 @@ function getUserOrder()
                         }):null}
                                                         
                 </table>
+                </div>
             </div>
           </div>
 
