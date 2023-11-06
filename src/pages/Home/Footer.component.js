@@ -126,7 +126,7 @@ const Footer = () => {
                                 <p>North East Ave Building, Second Floor #2 Plot 470 & 471, Rd Number 26A, Ayyappa Society, Madhapur, Telangana 500081</p>
 
                                 <p>Phone: 040- 40077374</p>
-                                <p>Email:support@traindhaba.com</p>
+                                <p>Email: support@traindhaba.com</p>
                                 <p>For partners enquires: info@traindhaba.com</p>
                             </div>
                         </div>
@@ -138,7 +138,7 @@ const Footer = () => {
                         <div className="col-md-6">
                             Train Dhaba © 2022, All Right Reserved - by <a href="#">Aagama</a>
                         </div>
-                        <div className="col-md-6 text-end xs-text-center xs-mt-15">
+                        <div className="col-md-6 social-icons xs-mt-15">
                             <ul className="social-icons">
                                 <li>Follow us on:</li>
                                 <li>

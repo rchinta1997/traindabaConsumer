@@ -10,7 +10,7 @@ const VendorRegistration = () => {
         <h3 className="sub-heading light-yellow uppercase">
           Are You A Restaurant Owner?
         </h3>
-        <p className="fs-18 mt-3">
+        <p className="fs-18 mt-3 text-white">
           Take your business online with TrainDhaba, an IRCTC approved
           e-caterers &amp; become an authorized vendor of IRCTC to deliver food
           on train. And grow your business widely.
