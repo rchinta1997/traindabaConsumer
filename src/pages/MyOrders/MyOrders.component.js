@@ -156,7 +156,7 @@ function getUserOrder()
                                     <td>{element.Payment_Mode}</td>
                                     <td>{element.Order_Status_Id.OrderStatus}</td>
                                     <td>
-                                      {element.Order_Id != null && 
+                                      {element.Order_Id != null && element.Order_Status_Id._id=='6355de1eac2a790da5f8a78e' &&
                                        <button className="btn btn-danger btn-sm" onClick={()=>cancelOrder(element._id)}  disabled={element.Order_Status_Id._id=='6355de60ac2a790da5f8a791'}>Cancel</button> 
                                       } &nbsp;
                                      

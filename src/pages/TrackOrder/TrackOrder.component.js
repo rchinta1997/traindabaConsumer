@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -10,6 +10,7 @@ import {
     Button,
 } from "reactstrap";
 import styles from './TrackOrder.css';
+import { Toast } from 'primereact/toast';
 import { convertDateTimeToIST, convertDateToIST, convertIsoToIst, convertDeliveryDate } from '../../utility/helper'
 
 
@@ -20,6 +21,7 @@ const TrackOrder = () => {
     const [MyOrders, setOrders] = useState([])
     const navigate = useNavigate();
     const location = useLocation();
+    const toast = useRef(null);
 
     useEffect(() => {
         console.log(location.state?.orderId);
@@ -55,6 +57,8 @@ const TrackOrder = () => {
                     //setPassengerInfo(passengerInfo);
                     localStorage.setItem("MyOrders", JSON.stringify(response.data.body));
                 } else {
+                    toast.current.show({ severity: 'error', summary: 'Error', detail: 'Your OrderID is not found in our system', life: 3000 });
+     
                     //setIsError(true);
                     //setPnrData(undefined);
                 }
@@ -153,7 +157,7 @@ const TrackOrder = () => {
                     </div>
                 </div>
             </div>
-
+            <Toast ref={toast} />
 
         </>
 
