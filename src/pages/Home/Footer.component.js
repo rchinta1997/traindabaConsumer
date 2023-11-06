@@ -27,7 +27,33 @@ const Footer = () => {
             navigate("/Aboutus")
 
         }
+        else if (type === 'TermsAndConditions'){
+            navigate("/TermsAndConditions")
+        }
+        else if (type === "Faq"){
+            navigate("/Faq")
+        }
+        else if (type === "PrivacyPolicy"){
+            navigate("/PrivacyPolicy")
+        }
+        else if (type === "Disclaimer"){
+            navigate("/Disclaimer")
+        }
 
+        else if (type === "PureVegFood"){
+            navigate("/PureVegFood")
+
+        }
+        else if (type === "NonVegFood"){
+            navigate("/NonVegFood")
+            
+        }
+        else if (type === "Career"){
+            navigate("/Career")
+        }
+        else if (type === "JainFood"){
+            navigate("/JainFood")
+        }
 
 
     }
@@ -50,19 +76,19 @@ const Footer = () => {
                                             <a href="#">How it Works?</a>
                                         </li>
                                         <li>
-                                            <a href="#">Career</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Career")}>Career</a>
                                         </li>
                                         <li>
-                                            <a href="#">Terms & Conditions</a>
+                                            <a href="#"  onClick={(event) => routeClickHandler(event, "TermsAndConditions")}>Terms & Conditions</a>
                                         </li>
                                         <li>
-                                            <a href="#">Privacy Policy</a>
+                                            <a href="#"  onClick={(event) => routeClickHandler(event, "PrivacyPolicy")}>Privacy Policy</a>
                                         </li>
                                         <li>
-                                            <a href="#">Desclaimer</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Disclaimer")}>Desclaimer</a>
                                         </li>
                                         <li>
-                                            <a href="#">FAQs</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Faq")}>FAQs</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -108,10 +134,13 @@ const Footer = () => {
                                             <a href="#">Customer Reviews</a>
                                         </li>
                                         <li>
-                                            <a href="#">Pure Veg Food</a>
+                                            <a href="#"  onClick={(event) => routeClickHandler(event, "PureVegFood")}>Pure Veg Food</a>
                                         </li>
                                         <li>
-                                            <a href="#">Non Veg Food</a>
+                                            <a href="#"  onClick={(event) => routeClickHandler(event, "NonVegFood")}>Non Veg Food</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"  onClick={(event) => routeClickHandler(event, "JainFood")}>Jain Food</a>
                                         </li>
                                         <li>
                                             <a href="#">Train Dhaba Blog</a>
@@ -142,13 +171,13 @@ const Footer = () => {
                             <ul className="social-icons">
                                 <li>Follow us on:</li>
                                 <li>
-                                    <a href="#"><i className="fab fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.facebook.com/traindhaba/" target="_blank"><i className="fab fa-facebook" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
                                     <a href="#"><i className="fab fa-twitter" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="train_dhaba"><i className="fab fa-instagram" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
                                     <a href="#"><i className="fab fa-youtube" aria-hidden="true"></i></a>
