@@ -14,6 +14,7 @@ const Cart = () => {
             </div>
             <div className="page-main-container">
                 <div className="container">
+                
                     <CartNav isEditable={true} isCartPage={true}></CartNav>
                 </div>
             </div>

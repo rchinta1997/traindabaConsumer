@@ -18,7 +18,7 @@ import {
     Button,
   } from "reactstrap";
   import { Toast } from 'primereact/toast';
-
+ 
 const Contact = () => {
     // const { search } = useLocation();
     // const match = search.match(/type=(.*)/);
@@ -39,14 +39,18 @@ const Contact = () => {
         message: '',
         mobileNumber: '',
         user_Id: '',
-        userType_Id: '' 
+        userType_Id: '',
+        captcha:'', 
       });
 
       const [errors, setErrors] = useState({
         emailID: '',
         mobileNumber: ''
       });
-      
+
+      const [captchaText, setCaptchaText] = useState(''); 
+    const [userInput, setUserInput] = useState(''); 
+    const canvasRef = useRef(null); 
 
 
       const handleInputChange = (event) => {
@@ -55,6 +59,7 @@ const Contact = () => {
         };
 
     const UpdateConfirmation = (event) => {
+     
         event.preventDefault();
         // Perform form validation
         // If there are no errors, you can proceed with form submission
@@ -62,10 +67,11 @@ const Contact = () => {
           setIsLoading(true);
           setTimeout(()=>{
             setIsLoading(false);
+            navigate("/")
           },5000);
 
         console.log("came to update form");
-        event.preventDefault();
+       // event.preventDefault();
         console.log('Form Data:', formData);
         // console.log("name value",e.target.name);
         // console.log("data value",e.target.value);
@@ -91,9 +97,60 @@ const Contact = () => {
           });
          console.log("formdata",formData);
       }     
-   
+
+      const canvas = canvasRef.current; 
+      const ctx = canvas.getContext('2d'); 
+      initializeCaptcha(ctx); 
+     
        //sendenquiry();
   }, [location.state]);
+
+  const drawCaptchaOnCanvas = (ctx, captcha) => { 
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
+    const textColors = ['rgb(0,0,0)', 'rgb(130,130,130)']; 
+    const letterSpace = 150 / captcha.length; 
+    for (let i = 0; i < captcha.length; i++) { 
+        const xInitialSpace = 25; 
+        ctx.font = '20px Roboto Mono'; 
+        ctx.fillStyle = textColors[Math.floor( 
+            Math.random() * 2)]; 
+        ctx.fillText( 
+            captcha[i], 
+            xInitialSpace + i * letterSpace, 
+              
+            // Randomize Y position slightly 
+            Math.floor(Math.random() * 16 + 25), 
+            100 
+        ); 
+    } 
+}; 
+
+const generateRandomChar = (min, max) => 
+String.fromCharCode(Math.floor 
+    (Math.random() * (max - min + 1) + min)); 
+
+const generateCaptchaText = () => { 
+let captcha = ''; 
+for (let i = 0; i < 3; i++) { 
+    captcha += generateRandomChar(65, 90); 
+    captcha += generateRandomChar(97, 122); 
+    //captcha += generateRandomChar(48, 57); 
+} 
+return captcha.split('').sort( 
+    () => Math.random() - 0.5).join(''); 
+}; 
+
+const initializeCaptcha = (ctx) => { 
+  setUserInput(''); 
+  const newCaptcha = generateCaptchaText(); 
+  setCaptchaText(newCaptcha); 
+  drawCaptchaOnCanvas(ctx, newCaptcha); 
+  return false;
+}; 
+
+const handleUserInputChange = (e) => { 
+  setUserInput(e.target.value); 
+}; 
 
   function sendenquiry()
   {
@@ -173,6 +230,16 @@ const Contact = () => {
  
           newErrors.emailID = 'Invalid email address';
         }
+        else if(!formData.captcha)
+        {
+          toast.current.show({ severity: 'error', summary: 'Error', detail: 'Please enter captcha', life: 3000 });
+          newErrors.captcha = 'Invalid captcha';
+        }
+        else if(formData.captcha && captchaText != formData.captcha)
+        {
+          toast.current.show({ severity: 'error', summary: 'Error', detail: 'Please enter valid captcha', life: 3000 });
+          newErrors.captcha = 'Invalid captcha';
+        }
     
         
         setErrors(newErrors);
@@ -234,11 +301,30 @@ const Contact = () => {
                                    <Input type="text" name="mobileNumber" placeholder="phone" required="" id="mobileNumber" value={formData.mobileNumber} onChange={handleInputChange} onBlur={checkValidation}/>
                                     {/* <span className="error">{errors.mobileNumber}</span> */}
                                </li>
+                              
                                <li>
                                    <i class="fa fa-envelope"></i>
                                    <textarea placeholder="Message" name="message" id="message" value={formData.message} onChange={handleInputChange}></textarea>
                                </li>
+                               <li>
+                               <div className="float-left"> 
+                               <canvas ref={canvasRef} 
+                                    width="200"
+                                    height="70"
+                                    className="border border-primary float-left"
+                                    > 
+              
+                                </canvas> 
+                                <button type="button" className="btn btn-primary m-auto" id="reload-button" onClick={ 
+                                    () => initializeCaptcha( 
+                                        canvasRef.current.getContext('2d'))}> 
+                                    Reload 
+                                </button> 
+                                <Input type="text" placeholder="Catcha"  name="captcha" required="" id="captcha" value={formData.captcha} onChange={handleInputChange} onBlur={checkValidation}/>
                                
+                                </div>
+                               </li>
+
                                <li> <Button type="submit" color="primary" disabled={isLoading?true:false} >{ isLoading && <CircularProgress size={15} color="inherit" />} Send Message</Button> </li>
                            </ul>
                        </Form>
