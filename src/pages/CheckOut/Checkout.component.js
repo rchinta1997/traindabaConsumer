@@ -98,7 +98,7 @@ const Checkout = () => {
 
                 <div className="page-main-container">
                     <div className="container">
-                        
+                    <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
                         <form id="checkout" onSubmit={finalConfirmation}>
                             <div className="row">
                                 <div className="col-md-4">

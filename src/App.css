@@ -11,6 +11,10 @@ body {
     padding: 0;
 }
 
+a{
+    text-decoration: none !important;
+}
+
 .pdtb-50{
     padding-top: 50px;
     padding-bottom: 50px;
@@ -19,6 +23,10 @@ body {
 .pdtb-80{
     padding-top: 80px;
     padding-bottom: 80px;
+}
+
+.text-white{
+    color: #FFF;
 }
 
 img{
@@ -130,6 +138,9 @@ header .container{
     margin-bottom:20px;
     font-weight: 600;
 }
+.order-food-item img{
+    max-height: 100px;
+}
 
 .testimonial-section{
     background: url(../src/Assets/Images/testimonial-bg.png) no-repeat left center;
@@ -152,11 +163,19 @@ header .container{
     max-height: 36px;
     margin-right: 5px;
 }
+blog-item-main-con{
+    display:"flex";
+    flex-direction:"row"
+
+
+}
 .blog-item{
     background-color: #FFF;
     border-radius: 8px;
     padding: 12px;
     box-shadow: 0px 3px 15px -3px rgba(0,0,0,0.1);
+    margin-right:10px !important;
+   
 }
 .blog-item h4{
     color: #DD2803;
@@ -167,7 +186,7 @@ header .container{
     color: #646464;
 }
 .guide-section{
-    color: #FFF;
+    /* color: #FFF; */
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -395,6 +414,34 @@ footer a:hover{
 .history-back-btn{
     margin-bottom: 10px;
 }
+.ritekhana-contact-form form input[type="text"]#captcha{
+    padding-left: 15px;
+}
+.ritekhana-contact-form form ul, .ritekhana-login-box ul{
+    margin: 0;
+    padding-left: 0;
+}
+
+.discover-bold-txt{
+    font-weight:bold;
+    color:black
+
+}
+.about-des-text{
+    color:black;
+}
+.login-container{
+    padding-top: 100px;
+}
+.ritekhana-login-box h2 {
+    font-size: 24px !important;
+    margin-bottom: 20px !important;
+}
+
+.social-icons{
+    text-align: right;
+}
+
 
 @media screen and (max-width: 767px) {
 
@@ -482,5 +529,28 @@ footer a:hover{
         margin-top: 5px;
     }
 
+    .ritekhana-contact-form form{
+        padding: 30px !important;
+    }
+    .ritekhana-contact-form{
+        margin-bottom: 0px !important;
+    }
+
+    #header.header-scrolled, #header.header-inner-pages {
+        padding: 10px 0 !important;
+    }
+    .ritekhana-login-box {
+        width: 100% !important;
+        padding: 20px !important;
+        margin-bottom: 30px !important;
+    }
+    .login-container {
+        padding-top: 78px;
+    }
+
+    .social-icons{
+        text-align: center;
+    }
 
 }
+

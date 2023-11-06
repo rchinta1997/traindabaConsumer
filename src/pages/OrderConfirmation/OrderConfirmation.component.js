@@ -91,7 +91,7 @@ const OrderConfirmation = (props) => {
 
             <div className="page-main-container">
                 <div className="container">
-                
+                <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
                     <form className="ritekhana-booking-form float-unset" id="checkout">
                         <div className="row">
                             <div className="col-md-6">

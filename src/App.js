@@ -28,12 +28,23 @@ import "./Assets/css/plugin.css";
 import "./Assets/css/style.css";
 import "./Assets/css/color.css";
 import "./Assets/css/responsive.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation.component";
 import OrderStatus from "./pages/MyOrders/OrderStatus.component";
 import PnrStaus from "./pages/RailTools/PNRSataus.Component";
 import TrainRunningStatus from "./pages/RailTools/TrainRunningStatus.component";
 import LiveStation from "./pages/RailTools/LiveStation.component";
 import TrainSchedule from "./pages/RailTools/TrainSchedule.component";
+import AboutComponent from "./pages/About/About.component";
+import TermsAndConditionsComponent from "./pages/TermsAndConditions/TermsAndConditions.component";
+import FaqComponent from "./pages/Faq/Faq.components";
+import PrivacyPolicyComponent from "./pages/PrivacyPloicy/PrivacyPolicy.component";
+import DisclaimerComponent from "./pages/Disclaimer/Disclaimer.component";
+import NonVegComponent from "./pages/NonVeg/NonVeg.component";
+import PureVegComponent from "./pages/PureVeg/Pureveg.component";
+import CareerComponent from "./pages/Career/Career.component";
+import JainFoodComponent from "./pages/JainFood/JainFood.component";
 //import "./webpack.config";
 
 function App() {
@@ -61,6 +72,15 @@ function App() {
                     <Route path="/trainschedule" element={<TrainSchedule />} />
                     <Route path="/Profile" element={<Profile />} />
                     <Route path="/Contact/:type" element={<Contact />} />
+                    <Route path="/Aboutus" element={<AboutComponent />} />
+                    <Route path="/TermsAndConditions" element={<TermsAndConditionsComponent />} />
+                    <Route path="/Faq" element={<FaqComponent />} />
+                    <Route path="/PrivacyPolicy" element={<PrivacyPolicyComponent />} />
+                    <Route path="/Disclaimer" element={<DisclaimerComponent />} />
+                    <Route path="/NonVegFood" element ={<NonVegComponent />} />
+                    <Route path="/PureVegFood" element={<PureVegComponent />} />
+                    <Route path="/Career" element ={<CareerComponent />} />
+                    <Route path="/JainFood" element={<JainFoodComponent />} />
                 </Routes>
                 <Footer></Footer>
             </div>

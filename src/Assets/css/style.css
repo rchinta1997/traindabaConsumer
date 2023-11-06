@@ -2772,7 +2772,7 @@ input[type=number]::-webkit-outer-spin-button {
 #header.header-scrolled,
 #header.header-inner-pages {
     background: #282c2f;
-    padding: 12px 0;
+    padding: 0px 0;
 }
 
 
@@ -3585,4 +3585,12 @@ img {
     .ritekhana-dashboard-nav {
         margin-bottom: 20px;
     }
+}
+
+.ritekhana-login-box input[type="text"], .ritekhana-login-box input[type="number"], .ritekhana-login-box input[type="email"], .ritekhana-login-box input[type="password"]{
+    background-color: #ffffff;
+    color: #454545;
+}
+ol, ul {
+    padding-left: 0rem !important;
 }

@@ -89,7 +89,7 @@ function AutocompleteComponent(props) {
         value={value}
         onChange={handleChange}
         label=""
-        placeholder="Search by Train Number"
+        placeholder="Enter Train Number"
         loading={loading.toString()}
       />
     </div>
