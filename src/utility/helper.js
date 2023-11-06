@@ -157,12 +157,14 @@ function checkDeliveryDateWithOutletData(scheduledDate, outletData)
       else
       {
          console.log("-------_scheduleTime else------------")
-         msg = "Train arrival time should be between outlet closing time & opening time"
+         //msg = "Train arrival time should be between outlet closing time & opening time"
+         msg = "Your ordering time is not within Outlet service window.";
       }
    }
    else
    {
-      msg = "Train arrival time should be match with outlet order timing"
+      //msg = "Train arrival time should be match with outlet order timing"
+      msg = "Your ordering time is not within Outlet service window.";
    }
    return msg;
 }
