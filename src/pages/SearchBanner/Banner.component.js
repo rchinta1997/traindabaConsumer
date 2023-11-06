@@ -95,7 +95,7 @@ const Banner = (props) => {
                 aria-controls="pills-contact"
                 aria-selected="false"
               >
-                Search by Station
+                Order by Station
               </a>
             </li>
           </ul>
@@ -193,7 +193,7 @@ const Banner = (props) => {
                         className="form-control"
                         name="station"
                         id="station"
-                        placeholder="Enter Station name"
+                        placeholder="Enter Station Name"
                       ></input>
                     </div>
                     <div className="col-md-3 col-sm-8 col-xs-12">

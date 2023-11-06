@@ -347,18 +347,16 @@ const Login = () => {
   return (
     <>
       
-      <div className="ritekhana-main-section ritekhana-services-view1-full" ref={elementRef}>
+      <div className="login-container" ref={elementRef}>
         <div className="container" >
           {loggedIn}
           {/* <button onClick={scrollToElement}>Scroll to Element</button> */}
           {isLoginPage && !loggedIn && !isForgotPassword ?
             <div className="row">
               <div className="col-12 col-md-12">
-                <div className="ritekhana-fancy-title">
-                  <h2 className="ritekhana-color">Login</h2>
-                </div>
                 <div className="ritekhana-login-box-wrap">
                   <div className="ritekhana-login-box">
+                    <h2 className="ritekhana-color">Login</h2>
                     <ul className="login_row">
                       <Form className="form" onSubmit={handleLoginSubmit}>
                         <FormGroup>
@@ -410,12 +408,9 @@ const Login = () => {
           {!isLoginPage && !loggedIn && !isForgotPassword ?
             <div className="row">
               <div className="col-12 col-md-12">
-                <div className="ritekhana-fancy-title">
-                  <h2 className="ritekhana-color">SignUp</h2>
-                </div>
-
                 <div className="ritekhana-login-box-wrap">
                   <div className="ritekhana-login-box">
+                  <h2 className="ritekhana-color">SignUp</h2>
                     <ul className="login_row">
                       <Form className="form" onSubmit={handleSignupSubmit}>
                         <FormGroup>
@@ -499,13 +494,10 @@ const Login = () => {
           {isForgotPassword ?
             <div className="row">
               <div className="col-12 col-md-12">
-                <div className="ritekhana-fancy-title">
-                  <h2 className="ritekhana-color">Forgot Password</h2>
-                </div>
                 <div className="ritekhana-login-box-wrap">
                   <div className="ritekhana-login-box">
                     <div class="fg_password" >
-                      <h2>Forgot Password</h2>
+                      <h2 className="ritekhana-color">Forgot Password</h2>
                       <ul>
                         <li><Input type="email" placeholder="Email Address" id="email" name="email" value={email}
                           onChange={handleForgotPasswordEmail} required="" /> <i className="login-box-iconin email far fa-envelope"></i></li>
@@ -513,7 +505,7 @@ const Login = () => {
                         <div className="forgot-pass">
                           <a href="#" className="ritekhana-header-btn" id="reset_pwd" onClick={handleForgotPasswordSubmit} disabled={isLoading ? true : false} >{isLoading && <CircularProgress size={15} color="inherit" />}Reset Password</a>
                         </div>
-                        <div className="forgot-pass">
+                        <div className="forgot-pass d-flex align-items-center">
                           <a href="javascript:;" className="login_show" onClick={handleLogin}>Click here to Login</a><br></br>
                         </div>
                       </ul>
