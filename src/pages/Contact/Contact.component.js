@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useContext,useRef } from "react";
 
-
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import ReactCaptcha from 'modern-react-captcha';
-// import ReCAPTCHA from 'react-google-recaptcha';
-// import Captcha from "demos-react-captcha";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import {
