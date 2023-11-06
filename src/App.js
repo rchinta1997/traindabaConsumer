@@ -28,6 +28,8 @@ import "./Assets/css/plugin.css";
 import "./Assets/css/style.css";
 import "./Assets/css/color.css";
 import "./Assets/css/responsive.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation.component";
 import OrderStatus from "./pages/MyOrders/OrderStatus.component";
 import PnrStaus from "./pages/RailTools/PNRSataus.Component";
