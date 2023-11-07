@@ -45,7 +45,9 @@ import NonVegComponent from "./pages/NonVeg/NonVeg.component";
 import PureVegComponent from "./pages/PureVeg/Pureveg.component";
 import CareerComponent from "./pages/Career/Career.component";
 import JainFoodComponent from "./pages/JainFood/JainFood.component";
-//import "./webpack.config";
+import HowToOrderFoodComponent from "./pages/HowToOrderFood/HowToOrderFood.component";
+import OffersComponent from "./pages/Offers/Offers.component";
+//imprt "./webpack.config";
 
 function App() {
     return (
@@ -81,6 +83,8 @@ function App() {
                     <Route path="/PureVegFood" element={<PureVegComponent />} />
                     <Route path="/Career" element ={<CareerComponent />} />
                     <Route path="/JainFood" element={<JainFoodComponent />} />
+                    <Route path="/HowToOrderFood" element={<HowToOrderFoodComponent />} />
+                    <Route path="/Offers" element={<OffersComponent />} />
                 </Routes>
                 <Footer></Footer>
             </div>

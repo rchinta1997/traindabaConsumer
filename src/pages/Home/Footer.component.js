@@ -54,6 +54,15 @@ const Footer = () => {
         else if (type === "JainFood"){
             navigate("/JainFood")
         }
+        else if (type === "HowToOrderFood"){
+            navigate("/HowToOrderFood")
+        }
+        else if (type === "Offers"){
+            navigate("/Offers")
+        }
+        else if (type === "TrackOrder"){
+            navigate("/TrackOrder")
+        }
 
 
     }
@@ -73,7 +82,7 @@ const Footer = () => {
                                             <a href="#" onClick={(event) => routeClickHandler(event, "Aboutus")}>About Us</a>
                                         </li>
                                         <li>
-                                            <a href="#">How it Works?</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "HowToOrderFood")}>How To Order Food</a>
                                         </li>
                                         <li>
                                             <a href="#" onClick={(event) => routeClickHandler(event, "Career")}>Career</a>
@@ -96,10 +105,10 @@ const Footer = () => {
                                     <h5>Help & Support</h5>
                                     <ul>
                                         <li>
-                                            <a href="#">Track Order</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "TrackOrder")}>Track Order</a>
                                         </li>
                                         <li>
-                                            <a href="#">Offers</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Offers")}>Offers</a>
                                         </li>
                                         <li>
                                             <a href="#" onClick={(event) => routeClickHandler(event, "Call_Back")}>Call back Request</a>
@@ -131,7 +140,7 @@ const Footer = () => {
                                     <h5>Other Link</h5>
                                     <ul>
                                         <li>
-                                            <a href="#">Customer Reviews</a>
+                                            <a href="#customer-reviews">Customer Reviews</a>
                                         </li>
                                         <li>
                                             <a href="#"  onClick={(event) => routeClickHandler(event, "PureVegFood")}>Pure Veg Food</a>
@@ -143,7 +152,7 @@ const Footer = () => {
                                             <a href="#"  onClick={(event) => routeClickHandler(event, "JainFood")}>Jain Food</a>
                                         </li>
                                         <li>
-                                            <a href="#">Train Dhaba Blog</a>
+                                            <a href="#blog-section">Train Dhaba Blog</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -171,16 +180,16 @@ const Footer = () => {
                             <ul className="social-icons">
                                 <li>Follow us on:</li>
                                 <li>
-                                    <a href="https://www.facebook.com/traindhaba/" target="_blank"><i className="fab fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.facebook.com/traindhaba" target="_blank"><i className="fab fa-facebook" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i className="fab fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="https://twitter.com/traindhaba" target="_blank"><i className="fab fa-twitter" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="train_dhaba"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/company/traindhaba/" target="_blank"><i className="fab fa-linkedin" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i className="fab fa-youtube" aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/train_dhaba/" target="_blank"><i className="fab fa-instagram" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </div>

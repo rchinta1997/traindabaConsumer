@@ -158,7 +158,7 @@ const ChangePassword = () => {
                 <span className="ritekhana-dashboard-section-title">Change Password</span>                             
                     {/* <form class="ritekhana-dashboard-form" method="post" action="https://traindhaba.com/post_change_password"> */}
                     <Form className="ritekhana-dashboard-form mt-3" onSubmit={UpdatePassword}>
-                        <ul className="ritekhana-row">
+                        <ul className="ritekhana-row pl-0">
                             <li className="ritekhana-column-12">
                                 <label>Old Password *</label>
                                 <input type="password" name="old_password" id="old_password" value={formData.old_password} onChange={handleInputChange} placeholder="Old Password" required="" />

@@ -194,7 +194,7 @@ const Profile = () => {
                       <div className="ritekhana-dashboard-box">
                         <span className="ritekhana-dashboard-section-title">Profile</span>
                         <div className="ritekhana-priceplane-list">
-                          <ul>
+                          <ul className="pl-0">
                             <li>{userData.emailID}</li>
                             <li>{userData.mobileNumber}</li>
                           </ul>
@@ -208,7 +208,7 @@ const Profile = () => {
                       <div className="ritekhana-dashboard-box">
                         <span className="ritekhana-dashboard-section-title">Edit Profile</span>
                         <Form className="ritekhana-dashboard-form" onSubmit={UpdateConfirmation}>
-                          <ul className="ritekhana-row mt-2">
+                          <ul className="ritekhana-row mt-2 pl-0">
                             <li className="ritekhana-column-12">
                               <label>Email *</label>
                               <Input type="text" placeholder="Email" name="email" required="" id="email" value={formData.email} onChange={handleInputChange} onBlur={checkValidation} />
