@@ -1,44 +1,23 @@
 import React from 'react'
 
 const PurevegComponent = () => {
-  return (
-    <div>
-         <div className="ritekhana-subheader-view1">
-    <span className="ritekhana-banner-transparent"></span>
-    <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-                <h1>Pure Veg Food</h1>
+    return (
+        <>
+            <div className="page-title-section">
+                <div className="container"><h2>Pure Veg Food</h2></div>
             </div>
+            <div className="page-main-container">
+                <div className="container">
+                    <p>Train dhaba has tied-up with exclusive Veg vendors (where non-veg is not at all cooked) to provide a pure veg food
+                        to the customer's.
 
-            <ul className="ritekhana-breadcrumb">
+                    </p>
 
-                <li>Home</li>
-                <li><i className="fa fa-angle-right"></i> Pure Veg Food </li>
-            </ul>
-        </div>
-    </div>
-    <div>
-    {/* <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="ritekhana-contact-form">
-                       <p>Train Dhaba and the Vendor shall collectively be referred to as "Parties and individually as "Party, as the case may be.
-
-                        </p>
-                      
-                       </div>
                 </div>
             </div>
-        </div> */}
-    </div>
-   
-   
-</div> 
-<p>Coming soon</p>
-      
-    </div>
-  )
+        </>
+
+    )
 }
 
 export default PurevegComponent

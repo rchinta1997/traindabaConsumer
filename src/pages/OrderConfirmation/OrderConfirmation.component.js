@@ -94,7 +94,7 @@ const OrderConfirmation = (props) => {
                 <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
                     <form className="ritekhana-booking-form float-unset" id="checkout">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-lg-6 col-md-12">
                                 <div className="ritekhana-dashboard-box mb-3">
                                     <span className="ritekhana-dashboard-section-title">Train Details</span>
                                     <div className="ritekhana-account-packages mt-3">
@@ -116,7 +116,7 @@ const OrderConfirmation = (props) => {
                                 </div>
 
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-lg-6 col-md-12">
                                 <div className="ritekhana-dashboard-box mb-3">
                                     <span className="ritekhana-dashboard-section-title">Order Details</span>
                                     <div className="ritekhana-account-packages mt-3">

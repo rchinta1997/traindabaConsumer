@@ -1,12 +1,12 @@
 import React from 'react'
 
-const DisclaimerComponent = () => {
+const OffersComponent = () => {
   return (
     
     <>
            
            <div className="page-title-section">
-                <div className="container"><h2>Disclaimer</h2></div>
+                <div className="container"><h2>Offers</h2></div>
             </div>
             <div className="page-main-container">
                 <div className="container">
@@ -17,4 +17,4 @@ const DisclaimerComponent = () => {
   )
 }
 
-export default DisclaimerComponent
+export default OffersComponent

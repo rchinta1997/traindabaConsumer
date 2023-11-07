@@ -188,7 +188,7 @@ const FinalConfirmation = () => {
             <div className="container">
             <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
             <div className="row">
-                 <div className="col-md-4">
+                 <div className="col-lg-4 col-md-12">
                  <div className="ritekhana-dashboard-box mb-3">
                         <span className="ritekhana-dashboard-section-title">Confirm your deatils</span>
                         <div className="ritekhana-account-packages mt-3">
@@ -204,7 +204,7 @@ const FinalConfirmation = () => {
                         </div>
                     </div>
                  </div>
-                 <div className="col-md-8">
+                 <div className="col-lg-8 col-md-12">
                  <div className="row">
                         <div className="col-md-12">
                             <CartNav isEditable={false}></CartNav>

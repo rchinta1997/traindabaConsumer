@@ -98,91 +98,95 @@ const Checkout = () => {
 
                 <div className="page-main-container">
                     <div className="container">
-                    <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
+                        <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
                         <form id="checkout" onSubmit={finalConfirmation}>
                             <div className="row">
-                                <div className="col-md-4">
+                                <div className="col-lg-4 col-md-12">
 
-                                <div className="ritekhana-dashboard-box mb-3">
-                                    <span className="ritekhana-dashboard-section-title">Customer Details</span>
-                                    <div className="ritekhana-account-packages">
-                                    <table class="table table-bordered mb-3 mt-3">
-                                        <tr>
-                                            <td>PNR : <strong>{passengerInfo.pnrNumber}</strong></td>
-                                            <td>DATE : <strong>{passengerInfo.journeyDate}</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>COACH : <strong>{passengerInfo.coachPosition}</strong></td>
-                                            <td>SEAT : <strong>{passengerInfo.berthNo}</strong></td>
-                                        </tr>
-                                    </table>
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <div className="form-group">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Passenger Name"
-                                                        pattern="^[a-zA-Z ]+$"
-                                                        name="passengerName"
-                                                        id="passengerName"
-                                                        className="form-control"
-                                                        required
-                                                        //onKeyUp={(e)=>updateKeyValue('passengerName',e.target.value)}
-                                                        onChange={handleChange}
-                                                        value={passengerInfo.passengerName}
-                                                    //defaultValue={passengerInfo.passengerName}
-                                                    ></input>
+                                    <div className="ritekhana-dashboard-box mb-3">
+                                        <span className="ritekhana-dashboard-section-title">Customer Details</span>
+                                        <div className="ritekhana-account-packages">
+                                            <table class="table table-bordered mb-3 mt-3">
+                                                <tr>
+                                                    <td>PNR : <strong>{passengerInfo.pnrNumber}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>DATE : <strong>{passengerInfo.journeyDate}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>COACH : <strong>{passengerInfo.coachPosition}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SEAT : <strong>{passengerInfo.berthNo}</strong></td>
+                                                </tr>
+                                            </table>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Passenger Name"
+                                                            pattern="^[a-zA-Z ]+$"
+                                                            name="passengerName"
+                                                            id="passengerName"
+                                                            className="form-control"
+                                                            required
+                                                            //onKeyUp={(e)=>updateKeyValue('passengerName',e.target.value)}
+                                                            onChange={handleChange}
+                                                            value={passengerInfo.passengerName}
+                                                        //defaultValue={passengerInfo.passengerName}
+                                                        ></input>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Email"
+                                                            className="form-control"
+                                                            name="email"
+                                                            id="email"
+                                                            required
+                                                            // onKeyUp={(e)=>updateKeyValue('email',e.target.value)} 
+                                                            onChange={handleChange}
+                                                            value={passengerInfo.email}
+                                                        //defaultValue={passengerInfo.email}
+                                                        >
+                                                        </input>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-md-12">
-                                                <div className="form-group">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Email"
-                                                        className="form-control"
-                                                        name="email"
-                                                        id="email"
-                                                        required
-                                                        // onKeyUp={(e)=>updateKeyValue('email',e.target.value)} 
-                                                        onChange={handleChange}
-                                                        value={passengerInfo.email}
-                                                    //defaultValue={passengerInfo.email}
-                                                    >
-                                                    </input>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Mobile Number"
+                                                            pattern="^[6789]\d{9,9}$"
+                                                            name="mobileNumber"
+                                                            className="form-control"
+                                                            id="mobileNumber"
+                                                            min="10"
+                                                            maxLength="10"
+                                                            minLength="10"
+                                                            required
+                                                            //onKeyUp={(e)=>updateKeyValue('mobileNumber',e.target.value)}
+                                                            onChange={handleChange}
+                                                            value={passengerInfo.mobileNumber}
+                                                        //defaultValue={passengerInfo.mobileNumber}
+                                                        ></input>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                <div className="form-group">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Mobile Number"
-                                                        pattern="^[6789]\d{9,9}$"
-                                                        name="mobileNumber"
-                                                        className="form-control"
-                                                        id="mobileNumber"
-                                                        min="10"
-                                                        maxLength="10"
-                                                        minLength="10"
-                                                        required
-                                                        //onKeyUp={(e)=>updateKeyValue('mobileNumber',e.target.value)}
-                                                        onChange={handleChange}
-                                                        value={passengerInfo.mobileNumber}
-                                                    //defaultValue={passengerInfo.mobileNumber}
-                                                    ></input>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <div className="form-group">
-                                                    <textarea type="text" placeholder="Instructions" className="form-control" name="instructions" onKeyUp={(e) => updateKeyValue('instructions', e.target.value)} defaultValue={passengerInfo.instructions}></textarea>
+                                                <div className="col-md-12">
+                                                    <div className="form-group">
+                                                        <textarea type="text" placeholder="Instructions" className="form-control" name="instructions" onKeyUp={(e) => updateKeyValue('instructions', e.target.value)} defaultValue={passengerInfo.instructions}></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                <div className="col-md-8">
+                                <div className="col-lg-8 col-md-12">
                                     <CartNav isEditable={true} isCartPage={false} onData={handleDataFromCart}></CartNav>
 
                                     <div className="row">

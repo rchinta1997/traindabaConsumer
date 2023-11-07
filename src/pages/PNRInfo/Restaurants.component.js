@@ -101,9 +101,9 @@ const Restaurants = (props) => {
                 <div className="container">
                 <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
                     <div className="row">
-                        <div className="col-md-9">
+                        <div className="col-md-7">
 
-                            <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline pl-0">
                                 <input
                                     type="radio"
                                     value="all"
@@ -138,7 +138,7 @@ const Restaurants = (props) => {
                             </div>
                            <p>Min Order : <b>{outletData.Min_Order}</b> &nbsp;&nbsp;&nbsp; Min Timing : <b>{outletData.Order_Timing}</b></p>
                         </div>
-                        <div className="col-md-3 text-right">
+                        <div className="col-md-5 text-right">
                             {context.cart.length > 0 &&
                                     <a href="#!" onClick={ProceedToCart} className="proceed-btn">
                                         Proceed to Cart

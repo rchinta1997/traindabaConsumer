@@ -305,7 +305,7 @@ const Contact = () => {
                         </div>
                         <div className="row mt-3 mb-3">
                         <div className="col-sm-12">
-                          <Input type="text" placeholder="Catcha" name="captcha" required="" id="captcha" value={formData.captcha} onChange={handleInputChange} onBlur={checkValidation} />
+                          <Input type="text" placeholder="Enter CAPTCHA" name="captcha" required="" id="captcha" value={formData.captcha} onChange={handleInputChange} onBlur={checkValidation} />
                         </div>
                       </div>
                     </li>

@@ -110,7 +110,7 @@ const TravelBlog = () => {
   };
 
   return (
-    <section className="blog-section pdtb-80">
+    <section className="blog-section pdtb-80" id="blog-section">
       <div className="container">
         <div className="row mb-4">
           <div className="col-md-8 offset-md-2 text-center">
