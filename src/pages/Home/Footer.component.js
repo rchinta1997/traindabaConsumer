@@ -94,7 +94,7 @@ const Footer = () => {
                                             <a href="#"  onClick={(event) => routeClickHandler(event, "PrivacyPolicy")}>Privacy Policy</a>
                                         </li>
                                         <li>
-                                            <a href="#" onClick={(event) => routeClickHandler(event, "Disclaimer")}>Desclaimer</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "Disclaimer")}>Disclaimer</a>
                                         </li>
                                         <li>
                                             <a href="#" onClick={(event) => routeClickHandler(event, "Faq")}>FAQs</a>
