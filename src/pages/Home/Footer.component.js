@@ -63,6 +63,18 @@ const Footer = () => {
         else if (type === "TrackOrder"){
             navigate("/TrackOrder")
         }
+        else if (type === "blogSection"){
+            navigate("/")
+        }
+        else if (type === "customerReviews"){
+            navigate("/")
+        }
+        else if (type === "RestaurentSignup"){
+            navigate("/RestaurentSignUp")
+        }
+        else if (type === "TourOperatorSignup"){
+            navigate("/TourOperatorSignup")
+        }
 
 
     }
@@ -131,16 +143,16 @@ const Footer = () => {
                                     <h5>Partnerships</h5>
                                     <ul className="mb-3">
                                         <li>
-                                            <a href="#">Restaurent Signup</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "RestaurentSignup")}>Restaurent Signup</a>
                                         </li>
                                         <li>
-                                            <a href="#">Tour Operator Signup</a>
+                                            <a href="#" onClick={(event) => routeClickHandler(event, "TourOperatorSignup")}>Tour Operator Signup</a>
                                         </li>
                                     </ul>
                                     <h5>Other Link</h5>
                                     <ul>
                                         <li>
-                                            <a href="#customer-reviews">Customer Reviews</a>
+                                            <a href="#customer-reviews" onClick={(event) => routeClickHandler(event, "customerReviews")}>Customer Reviews</a>
                                         </li>
                                         <li>
                                             <a href="#"  onClick={(event) => routeClickHandler(event, "PureVegFood")}>Pure Veg Food</a>
@@ -152,7 +164,7 @@ const Footer = () => {
                                             <a href="#"  onClick={(event) => routeClickHandler(event, "JainFood")}>Jain Food</a>
                                         </li>
                                         <li>
-                                            <a href="#blog-section">Train Dhaba Blog</a>
+                                            <a href="#blog-section" onClick={(event) => routeClickHandler(event, "blogSection")}>Train Dhaba Blog</a>
                                         </li>
                                     </ul>
                                 </div>
