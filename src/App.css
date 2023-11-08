@@ -459,6 +459,16 @@ footer a:hover{
 tbody, td, tfoot, th, thead, tr{
     border-color:#dee2e6 !important;
 }
+.btn-primary, .btn-primary:focus{
+    background-color: rgb(99, 102, 241);
+    border-color: rgb(99, 102, 241);
+}
+
+.btn-primary:hover {
+    background-color: rgb(60, 62, 187);
+    border-color: rgb(60, 62, 187);
+}
+
 @media screen and (max-width: 1024px) {
     header{
         min-height: auto;

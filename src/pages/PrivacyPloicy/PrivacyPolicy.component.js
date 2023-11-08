@@ -4,7 +4,7 @@ const PrivacyPolicyComponent = () => {
     return (
         <>
             <div className="page-title-section">
-                <div className="container"><h2>Privacy Ploicy</h2></div>
+                <div className="container"><h2>Privacy Policy</h2></div>
             </div>
             <div className="page-main-container">
                 <div className="container">
