@@ -28,38 +28,50 @@ const Navbar = (props) => {
 
         if (type === "Login") {
             navigate("/Login");
+            setIsToggled(false);
         }
         else if (type === "TrackOrder") {
             navigate("/TrackOrder");
+            setIsToggled(false);
         }
         else if (type === "pnrstatus") {
             navigate("/pnrstatus");
+            setIsToggled(false);
         }
         else if (type === "trainrunningstatus") {
             navigate("/trainrunningstatus");
+            setIsToggled(false);
         }
         else if (type === "livestation") {
             navigate("/livestation");
+            setIsToggled(false);
+            
         }
         else if (type === "trainschedule") {
             navigate("/trainschedule");
+            setIsToggled(false);
         }
         else if (type === "MyOrders") {
             navigate("/MyOrders");
+            setIsToggled(false);
         }
         else if (type === "My Account") {
             //navigate("/Profile");
+            setIsToggled(false);
         }
         else if (type === "Logout") {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             navigate("/Login");
+            setIsToggled(false);
         }
         else if (type === "Profile") {
             navigate("/Profile");
+            setIsToggled(false);
         }
         else {
             navigate("/");
+            setIsToggled(false);
         }
 
 
