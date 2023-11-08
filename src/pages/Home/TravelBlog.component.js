@@ -67,12 +67,12 @@ const TravelBlog = () => {
     {
       title: "Vishakapatnam",
       date: "22 MAY 2022",
-      image: require("../../Assets/Images/blog-2.png"),
+      image: require("../../Assets/Images/blog-3.png"),
     },
     {
       title: "Ooty",
       date: "24 MAY 2022",
-      image: require("../../Assets/Images/blog-3.png"),
+      image: require("../../Assets/Images/blog-2.png"),
     },
   ];
 

@@ -505,7 +505,7 @@ const Login = () => {
                         <div className="forgot-pass">
                           <a href="#" className="ritekhana-header-btn" id="reset_pwd" onClick={handleForgotPasswordSubmit} disabled={isLoading ? true : false} >{isLoading && <CircularProgress size={15} color="inherit" />}Reset Password</a>
                         </div>
-                        <div className="forgot-pass d-flex align-items-center">
+                        <div className="forgot-pass d-flex align-items-center py-3">
                           <a href="javascript:;" className="login_show" onClick={handleLogin}>Click here to Login</a><br></br>
                         </div>
                       </ul>
