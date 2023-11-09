@@ -129,44 +129,70 @@ function calculateTotalAmt(cart)
    return date;
 }
 
+function filterOutletsBasedOnTrainArrivalTime(scheduledDate,outlets)
+{
+   let filteredOutletData = [];
+   outlets.forEach((element) => {
+       if(checkDeliveryDateWithOutletData(scheduledDate,element) == "")
+       {
+         filteredOutletData.push(element);
+       }
+   });
+   return filteredOutletData;
+}
+
 function checkDeliveryDateWithOutletData(scheduledDate, outletData)
 {
    var msg = "";
-   console.log("scheduledDate",scheduledDate);
-   let _scheduleDate = new Date(scheduledDate);
-   console.log("_scheduleDate",_scheduleDate);
-
-   const istDateTime = moment(new Date).tz('Asia/Kolkata');  
-   const istFormatDateTime = istDateTime.format('YYYY-MM-DD HH:mm');
-   const diffDays = moment(scheduledDate.split(" ")[0]).diff(moment(istFormatDateTime.split(" ")[0]),'days');
-   const diffMins = moment(scheduledDate).diff(moment(istFormatDateTime),'minutes');
-   console.log("istTime",istFormatDateTime)  //endDate.diff(startDate, 'days');Order_Timing Opening_Time Closing_Time
-   console.log("outletData=",outletData);
-   console.log("diffMins=",diffMins);
+   try{
+      console.log("scheduledDate",scheduledDate);
+      let _scheduleDate = new Date(scheduledDate);
+      console.log("_scheduleDate",_scheduleDate);
    
-   if(diffMins >= outletData.Order_Timing)
-   {
-      var current = new Date();
-      const _scheduleTime = setDateTime(new Date(current), scheduledDate.split(" ")[1])
-      const start = setDateTime(new Date(current),  outletData.Opening_Time)
-      const end = setDateTime(new Date(current), outletData.Closing_Time);
-      if(_scheduleTime > start.getTime() &&  _scheduleTime < end.getTime())
+      const istDateTime = moment(new Date).tz('Asia/Kolkata');  
+      const istFormatDateTime = istDateTime.format('YYYY-MM-DD HH:mm');
+      const diffDays = moment(scheduledDate.split(" ")[0]).diff(moment(istFormatDateTime.split(" ")[0]),'days');
+      const diffMins = moment(scheduledDate).diff(moment(istFormatDateTime),'minutes');
+      console.log("istTime",istFormatDateTime)  //endDate.diff(startDate, 'days');Order_Timing Opening_Time Closing_Time
+      console.log("outletData=",outletData);
+      console.log("diffMins=",diffMins);
+      
+      if(diffMins >= outletData.Order_Timing)
       {
-         console.log("-------_scheduleTime if------------")
+         var current = new Date();
+         const _scheduleTime = setDateTime(new Date(current), scheduledDate.split(" ")[1])
+         const start = setDateTime(new Date(current),  outletData.Opening_Time)
+         const end = setDateTime(new Date(current), outletData.Closing_Time);
+         if(_scheduleTime > start.getTime() &&  _scheduleTime < end.getTime())
+         {
+            console.log("-------_scheduleTime if------------")
+         }
+         else
+         {
+            console.log("-------_scheduleTime else------------")
+            //msg = "Train arrival time should be between outlet closing time & opening time"
+            msg = "Your ordering time is not within Outlet service window.";
+         }
       }
       else
       {
-         console.log("-------_scheduleTime else------------")
-         //msg = "Train arrival time should be between outlet closing time & opening time"
+         //msg = "Train arrival time should be match with outlet order timing"
          msg = "Your ordering time is not within Outlet service window.";
       }
    }
-   else
+   catch(error)
    {
-      //msg = "Train arrival time should be match with outlet order timing"
-      msg = "Your ordering time is not within Outlet service window.";
+      console.log(error);
+      msg = "Something went wrong please try again!"
    }
+   
    return msg;
 }
 
-export  {convertDateToIST,convertDateTimeToIST,convertIsoToIst,calculateTotalAmt,convertLocalDate,convertDeliveryDate,checkDeliveryDateWithOutletData}
+export  {convertDateToIST,
+         convertDateTimeToIST,
+         convertIsoToIst,calculateTotalAmt,
+         convertLocalDate,convertDeliveryDate,
+         checkDeliveryDateWithOutletData,
+         filterOutletsBasedOnTrainArrivalTime
+      }

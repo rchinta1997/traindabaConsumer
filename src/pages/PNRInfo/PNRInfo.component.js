@@ -10,7 +10,7 @@ import cartContext from "../../Context/cart-context";
 
 import { format, parse } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
-import { checkDeliveryDateWithOutletData } from "../../utility/helper"
+import { checkDeliveryDateWithOutletData,filterOutletsBasedOnTrainArrivalTime } from "../../utility/helper"
 
 // const cryptoHelper = require("../../helpers/crypto-helper");
 // const cryptoHelperInstance = new cryptoHelper();
@@ -157,10 +157,22 @@ const PNRInfo = () => {
           passengerInfo["halt"] = stationData["halt"];
           passengerInfo["code"] = stationData["code"];
           passengerInfo["stationName"] = stationData["name"];
-
+          let scheduledDate = stationData["schArrivalDate"] + " " + stationData["schArrivalTime"];
           setPassengerInfo({ ...passengerInfo });
           localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
-          setOutletData(response.data.body);
+          console.log("============scheduledDate=============",scheduledDate)
+          let filteredOutlets = filterOutletsBasedOnTrainArrivalTime(scheduledDate,response.data.body);
+          if(filteredOutlets && filteredOutlets.length > 0)
+          {
+            setOutletData(filteredOutlets);
+          }
+          else 
+          {
+            setOutletData([]);
+            toast.current.show({ severity: 'error', summary: 'Error', detail: "During the expected delivery time no Outlets provide service", life: 3000 });
+          }
+          
+          //response.data.body);
                   }
       })
       .catch((error) => {
