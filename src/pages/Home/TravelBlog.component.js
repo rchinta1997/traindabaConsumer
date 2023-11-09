@@ -77,12 +77,10 @@ const TravelBlog = () => {
   ];
 
   const settings = {
-    centerMode: true,
-    centerPadding: '60px',
+    // centerMode: true,
+    // centerPadding: '60px',
     dots:true,
-    nextArrow: null, // Disable next arrow
-    prevArrow: null, // Disable previous arrow
-    
+   
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -91,22 +89,41 @@ const TravelBlog = () => {
     autoplaySpeed:1000,
     swipeToSlide: true,
     responsive: [
-     
       {
-        breakpoint: 5000,// Medium devices (tablets, landscape mobile)
+        breakpoint: 1200,
+
         settings: {
-        slidesToShow: 2,
-        swipeToSlide: true,
+          slidesToShow: 3,
+          dots: true,
+
+          arrows: false,
         },
       },
+
       {
-        breakpoint: 600, // Mobile devices
+        breakpoint: 991,
+
         settings: {
-        slidesToShow: 1,
-        swipeToSlide: true,
+          slidesToShow: 2,
+
+          dots: true,
+
+          arrows: false,
         },
       },
-    ]
+
+      {
+        breakpoint: 500,
+
+        settings: {
+          slidesToShow: 1,
+
+          dots: true,
+
+          arrows: false,
+        },
+      },
+    ],
   };
 
   return (
