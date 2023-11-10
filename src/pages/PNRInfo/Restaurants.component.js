@@ -1,15 +1,20 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import _ from "lodash";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SecondBanner from "../SearchBanner/SecondBanner.component";
 import CartContext from "../../Context/cart-context";
 import { Toast } from 'primereact/toast';
 
 const Restaurants = (props) => {
     const location = useLocation();
-    const context = useContext(CartContext);
     const navigate = useNavigate();
+
+
+    const localOutletInfo= JSON.parse(localStorage.getItem("EachOutletInfo"))
+    const localSearchValue = JSON.parse(localStorage.getItem('SearchValue'))
+   
+    const context = useContext(CartContext);
 
     const [menuItems, setMenuItems] = useState([]);
     const [outletData, setOutletData] = useState({});
@@ -92,6 +97,10 @@ const Restaurants = (props) => {
             });
     }, []);
 
+    const navigateToBack= () =>{
+    navigate("/PNRInfo", { state: { searchBy: "PNR", search: localSearchValue, MenuData: localOutletInfo } });
+    }
+
     return (
         <>
             <div className="page-title-section">
@@ -99,7 +108,7 @@ const Restaurants = (props) => {
             </div>
             <div className="page-main-container">
                 <div className="container">
-                <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
+                <p onClick={navigateToBack} className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</p>
                     <div className="row">
                         <div className="col-md-7">
 

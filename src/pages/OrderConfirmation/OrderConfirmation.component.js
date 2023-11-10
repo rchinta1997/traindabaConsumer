@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import cartContext from "../../Context/cart-context";
 import dayjs from "../../helpers/dayjs-helpers";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -8,6 +8,7 @@ import timezone from "dayjs/plugin/timezone";
 import axios from "axios";
 
 const OrderConfirmation = (props) => {
+    const navigate= useNavigate()
     const [orderData, setOrderData] = useState({});
     const [outletName, setOutletName] = useState(null);
     const [currentDate, setCurrentDate] = useState();
@@ -80,7 +81,9 @@ const OrderConfirmation = (props) => {
 
 
 
-
+    const navigateToBack=() =>{
+        navigate("/Pay")
+    }
 
 
     return (
@@ -91,7 +94,7 @@ const OrderConfirmation = (props) => {
 
             <div className="page-main-container">
                 <div className="container">
-                <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
+                <p className="btn btn-outline-default mb-3" onClick={navigateToBack}><i className="fas fa-angle-left" aria-hidden="true"></i> Back</p>
                     <form className="ritekhana-booking-form float-unset" id="checkout">
                         <div className="row">
                             <div className="col-lg-6 col-md-12">

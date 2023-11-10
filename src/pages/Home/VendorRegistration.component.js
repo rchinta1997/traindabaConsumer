@@ -17,7 +17,7 @@ const VendorRegistration = () => {
         </p>
       </div>
       <div className="col-md-4 xs-btn-center">
-        <a href="https://traindhaba.com/contact" className="btn btn-primary btn-lg mt-5 xs-mt-15">
+        <a href="https://traindhaba.com/contact" target="_blank" className="btn btn-primary btn-lg mt-5 xs-mt-15">
           Sign Up?
         </a>
       </div>

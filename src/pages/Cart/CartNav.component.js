@@ -13,13 +13,15 @@ const CartNav = (props) => {
     const sendDataToParent = () => {
 
         props.onData(inputData);
-        console.log(inputData);
     };
     useEffect(() => {
         setIsEditable(props.isEditable);
         setIsCartPage(props.isCartPage);
         setItemTotal(props.itemTotal);
         setInputData(props);
+        // props.onData(inputData);
+
+
     }, [context]);
 
     const ProceedToCart = () => {

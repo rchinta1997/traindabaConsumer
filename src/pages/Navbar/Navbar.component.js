@@ -14,7 +14,8 @@ const Navbar = (props) => {
     }, [context]);
 
     const ProceedToCart = () => {
-        navigate("/cart");
+        navigate("/Cart");
+        setIsToggled(false);
     };
 
     const [isToggled, setIsToggled] = useState(false);
