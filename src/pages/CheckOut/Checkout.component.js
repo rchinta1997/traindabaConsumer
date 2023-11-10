@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
-import SecondBanner from "../SearchBanner/SecondBanner.component";
 import { useLocation, useNavigate } from "react-router-dom";
+import SecondBanner from "../SearchBanner/SecondBanner.component";
 import CartNav from "../Cart/CartNav.component";
 import cartContext from "../../Context/cart-context";
 import axios from "axios";
@@ -20,6 +20,12 @@ const Checkout = () => {
     const [mobile, setMobile] = useState(0);
     const [gst, setGST] = useState(5);
     const [dataFromCart, setDataFromCart] = useState('');
+
+
+
+    const navigateToBack=() =>{
+        navigate("/Cart")
+    }
 
     // Function to receive data from the cart component
     const handleDataFromCart = (data) => {
@@ -56,7 +62,7 @@ const Checkout = () => {
         });*/
         console.log(passengerInfo);
     };
-    useEffect(() => {
+        useEffect(() => {
         console.log("process.env.GST=" + process.env.RAZORPAY_SECRET);
         setPassengerInfo(JSON.parse(localStorage.getItem("PassengerInfo")));
         const priceObj = calculateTotalAmt(context.cart);
@@ -73,7 +79,7 @@ const Checkout = () => {
     function percentage(partialValue, totalValue) {
         return (partialValue * totalValue) / 100;
     }
-
+   
     function round(num, decimalPlaces = 0) {
         if (num < 0)
             return -round(-num, decimalPlaces);
@@ -98,7 +104,8 @@ const Checkout = () => {
 
                 <div className="page-main-container">
                     <div className="container">
-                        <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
+                        
+                        <p onClick={navigateToBack} className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</p>
                         <form id="checkout" onSubmit={finalConfirmation}>
                             <div className="row">
                                 <div className="col-lg-4 col-md-12">

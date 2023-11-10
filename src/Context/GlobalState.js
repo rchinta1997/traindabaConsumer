@@ -1,9 +1,17 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import CartContext from "./cart-context";
 import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART, REMOVE_CART_ITEM } from "./reducers";
 
 const GlobalState = (props) => {
-    const [cartState, dispatch] = useReducer(cartItemsReducer, { cart: [] });
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || { cart: [] };
+
+    const [cartState, dispatch] = useReducer(cartItemsReducer, storedCart);
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cartState));
+    }, [cartState]);
+
+
 
     const addItemToCart = (menuItem) => {
         setTimeout(() => {

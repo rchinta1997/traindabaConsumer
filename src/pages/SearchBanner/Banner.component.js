@@ -31,6 +31,7 @@ const Banner = (props) => {
     console.log(context);
   };
   function searchByPNR() {
+    localStorage.setItem("SearchValue", JSON.stringify(searchValue))
     navigate("/PNRInfo", { state: { searchBy: "PNR", search: searchValue } });
   }
   function searchByTrainNo() {

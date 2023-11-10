@@ -195,6 +195,7 @@ const PNRInfo = () => {
     passengerInfo["delivery_Date"] = scheduledDate;
     setPassengerInfo({ ...passengerInfo });
     localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+    localStorage.setItem("EachOutletInfo", JSON.stringify(eachOutlet))
 
       const msg = checkDeliveryDateWithOutletData(scheduledDate, eachOutlet)
       if(msg == "" || msg == undefined)
@@ -225,6 +226,10 @@ const PNRInfo = () => {
     }
   };
 
+  const navigateToBack=() =>{
+    navigate("/")
+}
+
 
 
   return (
@@ -238,7 +243,7 @@ const PNRInfo = () => {
       <div className="page-main-container">
         <div className="container">
 
-        <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
+        <p className="btn btn-outline-default mb-3" onClick={navigateToBack}><i className="fas fa-angle-left" aria-hidden="true"></i> Back</p>
 
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
@@ -292,10 +297,10 @@ const PNRInfo = () => {
             <div class="outer-container">
             <div class="row">
               {outletData.length > 0 &&
-                outletData.map((eachOutlet) => {
+                outletData.map((eachOutlet, index) => {
                   return (
                     <>
-                    <div class="col-md-6">
+                    <div class="col-md-6" key={index}>
                       <div class="vendor-card shadow px-3 py-3">
                         <div class="vendor-logo">
                         {eachOutlet.image ? (

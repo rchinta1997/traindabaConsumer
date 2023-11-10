@@ -177,6 +177,9 @@ const FinalConfirmation = () => {
     async function payOnline() {
         await sendRequest(0);
     }
+    const navigateToBack= () =>{
+        navigate("/Checkout")
+    }
     return (
         <>
 
@@ -186,7 +189,7 @@ const FinalConfirmation = () => {
 
             <div className="page-main-container">
             <div className="container">
-            <a href="/" className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</a>
+            <p onClick={navigateToBack} className="btn btn-outline-default mb-3"><i className="fas fa-angle-left" aria-hidden="true"></i> Back</p>
             <div className="row">
                  <div className="col-lg-4 col-md-12">
                  <div className="ritekhana-dashboard-box mb-3">
