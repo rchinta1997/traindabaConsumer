@@ -70,10 +70,10 @@ const Footer = () => {
             navigate("/")
         }
         else if (type === "RestaurentSignup"){
-            navigate("/RestaurentSignUp")
+            navigate("/RestaurentSignUp/SignUp")
         }
         else if (type === "TourOperatorSignup"){
-            navigate("/TourOperatorSignup")
+            navigate("/TourOperatorSignUp/SignUp")
         }
 
 

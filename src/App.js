@@ -47,6 +47,8 @@ import CareerComponent from "./pages/Career/Career.component";
 import JainFoodComponent from "./pages/JainFood/JainFood.component";
 import HowToOrderFoodComponent from "./pages/HowToOrderFood/HowToOrderFood.component";
 import OffersComponent from "./pages/Offers/Offers.component";
+import RestaurantSignupComponent from "./pages/RestaurantSignup/RestaurantSignup.component";
+import TourOperatorSignupComponent from "./pages/TourOperatorSignup/TourOperatorSignup.component";
 //imprt "./webpack.config";
 
 function App() {
@@ -85,6 +87,10 @@ function App() {
                     <Route path="/JainFood" element={<JainFoodComponent />} />
                     <Route path="/HowToOrderFood" element={<HowToOrderFoodComponent />} />
                     <Route path="/Offers" element={<OffersComponent />} />
+                    <Route path="/RestaurentSignUp/:type" element={<RestaurantSignupComponent />} />
+                    <Route path="/TourOperatorSignUp/:type" element={<TourOperatorSignupComponent />} />
+
+
                 </Routes>
                 <Footer></Footer>
             </div>
