@@ -5,6 +5,7 @@ import cartContext from "../../Context/cart-context";
 import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
+    const currentPath = window.location.pathname;
     var istokenexists = false;
     const context = useContext(cartContext);
     const [showProfile, setShowProfile] = useState(false);
@@ -23,6 +24,9 @@ const Navbar = (props) => {
     const toggleMenu = () => {
         setIsToggled(!isToggled);
     };
+      const navigateToNewTab = (path) => {
+        window.open(path, '_blank');
+      };
 
 
     const routeClickHandler = (event, type) => {
@@ -53,17 +57,26 @@ const Navbar = (props) => {
             setIsToggled(false);
         }
         else if (type === "MyOrders") {
-            navigate("/MyOrders");
+            navigateToNewTab("/MyOrders");
             setIsToggled(false);
-        }
+          } 
         else if (type === "My Account") {
             //navigate("/Profile");
             setIsToggled(false);
         }
         else if (type === "Logout") {
+            // localStorage.removeItem("token");
+            // localStorage.removeItem("user");
+            // navigate("/Login");
+            // setIsToggled(false);
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-            navigate("/Login");
+            // Check if the user is on the MyOrders page, if yes, navigate to home
+            if (currentPath === "/MyOrders") {
+                navigate("/");
+            } else {
+                navigate("/Login");
+            }
             setIsToggled(false);
         }
         else if (type === "Profile") {
@@ -77,7 +90,7 @@ const Navbar = (props) => {
 
 
     }
-
+    
     const _token = localStorage.getItem("token");
     if (_token) {
         istokenexists = true;

@@ -28,6 +28,27 @@ const PNRInfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+
+    // Function to handle the storage event
+    const handleStorageChange = () => {
+      const _token = localStorage.getItem("token");
+      if (!(_token)) {
+          // If token is not present, navigate to the login page
+          
+          navigate("/Login");
+      }
+  };
+
+  useEffect(() => {
+      // Add an event listener for the "storage" event
+      window.addEventListener("storage", handleStorageChange);
+
+      // Clean up the event listener on component unmount
+      return () => {
+          window.removeEventListener("storage", handleStorageChange);
+      };
+  }, []);
+
   const convertUtcToIst = (inputDate) => {
     // Parse the input date as UTC
     const parsedDateUtc = parse(inputDate, 'yyyy-MM-dd HH:mm', new Date(), {

@@ -9,6 +9,25 @@ import { Toast } from 'primereact/toast';
 const Restaurants = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
+      // Function to handle the storage event
+      const handleStorageChange = () => {
+        const _token = localStorage.getItem("token");
+        if (!(_token)) {
+            // If token is not present, navigate to the login page
+            
+            navigate("/Login");
+        }
+    };
+
+    useEffect(() => {
+        // Add an event listener for the "storage" event
+        window.addEventListener("storage", handleStorageChange);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
+    }, []);
 
 
     const localOutletInfo= JSON.parse(localStorage.getItem("EachOutletInfo"))
