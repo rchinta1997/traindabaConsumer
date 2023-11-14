@@ -133,7 +133,7 @@ const TourOperatorSignupComponent = () => {
       function sendenquiry() {
     
         axios
-          .post(process.env.REACT_APP_API_URL + `/enquiry/sendenquiry`, formData)
+          .post(process.env.REACT_APP_API_URL + `/enquiry/sendtourenquiry`, formData)
           .then((response) => {
             if (response.data.success) {
               console.log("=============== enquiry sent successfully===============")

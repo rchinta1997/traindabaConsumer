@@ -33,8 +33,8 @@ const RestaurantSignupComponent = () => {
       const [userInput, setUserInput] = useState('');
       const canvasRef = useRef(null);
       
-    
-    
+      
+        
       const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
@@ -135,7 +135,7 @@ const RestaurantSignupComponent = () => {
       function sendenquiry() {
     
         axios
-          .post(process.env.REACT_APP_API_URL + `/enquiry/sendenquiry`, formData)
+          .post(process.env.REACT_APP_API_URL + `/enquiry/sendrestenquiry`, formData)
           .then((response) => {
             if (response.data.success) {
               console.log("=============== enquiry sent successfully===============")
