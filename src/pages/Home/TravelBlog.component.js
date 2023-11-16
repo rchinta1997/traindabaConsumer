@@ -54,7 +54,7 @@
 
 // export default TravelBlog;
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 
 const TravelBlog = () => {
@@ -125,6 +125,24 @@ const TravelBlog = () => {
       },
     ],
   };
+
+  const travelRef = useRef(null);
+  let ele = document.getElementById("customer-reviews")
+
+
+  useEffect(() => {
+      // Check if the ref exists and scroll to it
+      if (travelRef.current) {
+        console.log("ref-ele", travelRef.current.offsetTop)
+      
+            window.scrollTo({
+                top: ele,
+                behavior: "smooth"
+            });
+            window.scrollBy(0,-85)
+      
+      }
+  },[travelRef]);
 
   return (
     <section className="blog-section pdtb-80" id="blog-section">

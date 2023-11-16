@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 const Testimonials = () => {
+  const customerReviewRef = useRef(null);
+
+  useEffect(() => {
+      // Check if the ref exists and scroll to it
+      if (customerReviewRef.current) {
+        console.log("ref-ele", customerReviewRef.current.offsetTop)
+        let ele = document.getElementById("customer-reviews")
+      
+            window.scrollTo({
+                top: ele,
+                behavior: "smooth"
+            });
+            window.scrollBy(0,-85)
+      
+      }
+  },[customerReviewRef]);
   return (
     <>
-    <section className="testimonial-section pdtb-50" id="customer-reviews">
+    <section className="testimonial-section pdtb-70" id="customer-reviews" ref={customerReviewRef}>
   <div className="container">
     <div className="row">
       <div className="col-md-8 offset-md-2">

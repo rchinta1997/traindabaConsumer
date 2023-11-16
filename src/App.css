@@ -14,12 +14,19 @@ body {
 a{
     text-decoration: none !important;
 }
+.pdtb-70{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
 
 .pdtb-50{
     padding-top: 50px;
     padding-bottom: 50px;
 }
-
+.pdtb-60{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
 .pdtb-80{
     padding-top: 80px;
     padding-bottom: 80px;
@@ -144,6 +151,8 @@ header .container{
 
 .testimonial-section{
     background: url(../src/Assets/Images/testimonial-bg.png) no-repeat left center;
+    scroll-behavior: smooth;
+    
 }
 .testimonial-item{
     padding:30px;
