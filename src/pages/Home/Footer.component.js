@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect, useRef ,useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
-
+    // const [scrollToDiv,setScrollToDiv] = useState(false)
     const navigate = useNavigate();
     const location = useLocation();
-
+   
     const routeClickHandler = (event, type) => {
         // navigate("/TrackOrder",{ state: { orderId: orderId }});
 
         if (type === "Call_Back") {
             navigate("/Contact/Call back Request");
+        }
+        else if (type === "CustomerReviews"){
+            navigate('/')
+
         }
         else if (type === "Cancellation") {
             navigate("/Contact/Cancellation Order Request");  
@@ -66,9 +70,7 @@ const Footer = () => {
         else if (type === "blogSection"){
             navigate("/")
         }
-        else if (type === "customerReviews"){
-            navigate("/")
-        }
+        
         else if (type === "RestaurentSignup"){
             navigate("/RestaurentSignUp/SignUp")
         }
@@ -78,6 +80,35 @@ const Footer = () => {
 
 
     }
+    // const moveBy = (event)=>{
+    //     console.log("scroll by 100",100)
+    //     // window.scrollBy(0,2270 )
+    //     routeClickHandler(event, "CustomerReviews")
+        
+    //     let ele = document.getElementById("customer-reviews")
+    //     setTimeout(()=>{
+    //         window.scrollTo({
+    //             top: ele,
+    //             behavior: "smooth"
+    //         });
+    //         window.scrollBy(0,-85)
+    //     },1000)
+       
+    //   }
+//     useEffect(()=>{
+       
+//   },[scrollToDiv])
+
+    // useEffect(() => {
+    //     const customerReviewsSection = document.getElementById("customer-reviews");
+    //     if (customerReviewsSection) {
+    //       customerReviewsSection.scrollIntoView({
+    //         behavior: "smooth",
+    //         inline:'start',
+    //         block:'start',
+    //       });
+    //     }
+    //   }, [location.pathname]);
 
 
     return (
@@ -152,7 +183,8 @@ const Footer = () => {
                                     <h5>Other Link</h5>
                                     <ul>
                                         <li>
-                                            <a href="#customer-reviews" onClick={(event) => routeClickHandler(event, "customerReviews")}>Customer Reviews</a>
+                                        {/* onClick={(event) =>routeClickHandler(event, "CustomerReviews")} */}
+                                            <a  href='#customer-reviews'  onClick={(e)=>{routeClickHandler(e, "CustomerReviews")}}>Customer Reviews</a>
                                         </li>
                                         <li>
                                             <a href="#"  onClick={(event) => routeClickHandler(event, "PureVegFood")}>Pure Veg Food</a>

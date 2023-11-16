@@ -44,6 +44,7 @@
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "^5.0.1",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.0.8",
@@ -80,7 +81,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
   }
 }
