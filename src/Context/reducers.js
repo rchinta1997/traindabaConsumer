@@ -5,6 +5,7 @@ export const REMOVE_ITEM = "REMOVE_ITEM";
 export const UPDATE_ITEM = "UPDATE_ITEM";
 export const EMPTY_CART = "EMPTY_CART";
 export const REMOVE_CART_ITEM = "REMOVE_CART_ITEM";
+export const SET_TRAIN_INFO = "SET_TRAIN_INFO";
 
 const addItemToCart = (menuItem, state) => {
     const updatedCart = [...state.cart];
@@ -101,6 +102,11 @@ export const cartItemsReducer = (state, action) => {
             return setCartEmpty(action.actionType, state);
         case REMOVE_CART_ITEM:
             return RemoveCartItemInCart(action.itemId, state);
+        case SET_TRAIN_INFO:
+            return {
+             ...state,
+             trainInfo: action.trainInfo,
+            };
         default:
             return state;
     }

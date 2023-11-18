@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 
 function AutocompleteComponent(props) {
   const [value, setValue] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const context = useContext(cartContext);
@@ -44,7 +44,7 @@ function AutocompleteComponent(props) {
 
   const handleChange = (newValue) => {
       setValue(newValue);
-      if(newValue){
+            if(newValue){
         let array = newValue?.split("-");
         if(newValue && newValue.split("-").length > 1){ 
           let trainNo = array[0];
@@ -74,6 +74,7 @@ function AutocompleteComponent(props) {
             }
           })
           props.onData(context.trainInfo);
+          props.getTheTrainNbrValue(newValue)
           console.log("in auto completed");
           console.log(context);
         }
@@ -83,7 +84,7 @@ function AutocompleteComponent(props) {
 
   return (
     <div>
-  
+
       <Autocomplete
         data={suggestions}
         value={value}

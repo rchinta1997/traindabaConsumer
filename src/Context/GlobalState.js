@@ -1,12 +1,12 @@
 import React, { useState, useReducer, useEffect } from "react";
 import CartContext from "./cart-context";
-import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART, REMOVE_CART_ITEM } from "./reducers";
+import { cartItemsReducer, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, EMPTY_CART, REMOVE_CART_ITEM, SET_TRAIN_INFO } from "./reducers";
 
 const GlobalState = (props) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || { cart: [] };
 
     const [cartState, dispatch] = useReducer(cartItemsReducer, storedCart);
-
+    
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cartState));
     }, [cartState]);
@@ -48,6 +48,11 @@ const GlobalState = (props) => {
             dispatch({ type: EMPTY_CART, actionType:actionType });
         }, 700);
     };
+    const updateTrainInfo = (newTrainInfo) => {
+        dispatch({ type: SET_TRAIN_INFO, trainInfo: newTrainInfo });
+    };
+
+   
     return (
         <CartContext.Provider
             value={{
@@ -57,6 +62,8 @@ const GlobalState = (props) => {
                 removeCartItemInCart: removeCartItemInCart,
                 updateItemInCart: updateItemInCart,
                 setEmptyCart: setEmptyCart,
+                trainInfo: cartState.trainInfo,
+                updateTrainInfo: updateTrainInfo,
             }}
         >
             {props.children}

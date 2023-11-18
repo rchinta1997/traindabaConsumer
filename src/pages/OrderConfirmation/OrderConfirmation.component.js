@@ -16,23 +16,23 @@ const OrderConfirmation = (props) => {
     const context = useContext(cartContext);
 
       // Function to handle the storage event
-      const handleStorageChange = () => {
-        const _token = localStorage.getItem("token");
-        if (!(_token)) {
-            // If token is not present, navigate to the login page
+    const handleStorageChange = () => {
+    const _token = localStorage.getItem("token");
+    if (!(_token)) {
+    // If token is not present, navigate to the login page
             
-            navigate("/Login");
-        }
+    navigate("/Login");
+    }
     };
 
     useEffect(() => {
-        // Add an event listener for the "storage" event
-        window.addEventListener("storage", handleStorageChange);
+    // Add an event listener for the "storage" event
+    window.addEventListener("storage", handleStorageChange);
 
-        // Clean up the event listener on component unmount
-        return () => {
-            window.removeEventListener("storage", handleStorageChange);
-        };
+    // Clean up the event listener on component unmount
+    return () => {
+    window.removeEventListener("storage", handleStorageChange);
+    };
     }, []);
 
 
@@ -42,7 +42,7 @@ const OrderConfirmation = (props) => {
         console.log(location.state.res);
                 let amount = '';
         let orderDetails = location.state.res?.orderDetails;
-        if (typeof orderDetails == 'object') {
+                if (typeof orderDetails == 'object') {
             if (typeof orderDetails?.Booking_Date == 'string') {
                 dayjs.extend(customParseFormat);
                 orderDetails.Booking_Date = dayjs().format('YYYY-MM-DD HH:mm');
@@ -171,6 +171,14 @@ const OrderConfirmation = (props) => {
                                     </span>
                                 </h6>
                             </div>
+                            {/* <div class="col-md-12 ml-4">
+                                <h6 className="mb-3">
+                                    OutletName:{" "}
+                                    <span className="final_total">
+                                        <b>{orderData.MenuItems[0].outletName} </b> &nbsp;
+                                    </span>
+                                </h6>
+                            </div> */}
                         </div>
                         <div className="row">
                             <div className="col-md-12">
