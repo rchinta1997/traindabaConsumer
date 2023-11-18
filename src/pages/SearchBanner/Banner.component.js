@@ -17,9 +17,16 @@ const Banner = (props) => {
   const [boardingDate, setBoardingDate] = useState(new Date());
   const [trainInfo, setTrainInfo] = useState({});
   const [type, setType] = useState("trainno");
+  const [searchStationName, setSearchStationName] = useState("stationName")
+  const [trainNbrValue, setTrainNbrValue] = useState('')
+  
 
   const selectedData = (trainInfo) => {
-    context.trainInfo = trainInfo;
+    // dispatch({ type: SET_TRAIN_INFO, trainInfo: trainInfo });
+    context?.updateTrainInfo(trainInfo)
+    // context.trainInfo = {...trainInfo};
+    // console.log("onselectData-inBanner", context?.trainInfo, context)
+    // console.log("final-context", context)
   }
   const today = new Date();
   const handleDateChange = (val) => {
@@ -43,6 +50,15 @@ const Banner = (props) => {
     console.log("in banner component");
     console.log(context);
   }, [context]);
+
+
+  const searchByStationName= () =>{
+
+  }
+  const getTheTrainNbrValue= (trainBrSearchValue) =>{
+    setTrainNbrValue(trainBrSearchValue)
+
+  }
 
   return (
 
@@ -137,7 +153,7 @@ const Banner = (props) => {
                 <form method="post" id="train_form">
                   <div className="row">
                     <div className="col-md-5 mb-1">
-                      <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" />
+                      <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" getTheTrainNbrValue={ getTheTrainNbrValue} />
                     </div>
                     <div className="col-md-3 boarding-date">
                     <input
@@ -173,7 +189,8 @@ const Banner = (props) => {
                     </div> */}
 
                     <div className="col-md-4">
-                      <input type="submit" className="btn btn-primary btn-block" onClick={() => searchByPNR()} value="Order Food"></input>
+                      <input type="submit" className="btn btn-primary btn-block" onClick={() => trainNbrValue ?  searchByTrainNo() : searchByPNR()}
+                      value="Order Food"></input>
                     </div>
                   </div>
                 </form>

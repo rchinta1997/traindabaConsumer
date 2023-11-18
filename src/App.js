@@ -52,7 +52,7 @@ import TourOperatorSignupComponent from "./pages/TourOperatorSignup/TourOperator
 //imprt "./webpack.config";
 
 function App() {
-    return (
+        return (
         <GlobalState>
             <div className="App">
                 <div id="header" className="fixed-top header-scrolled">
@@ -62,7 +62,7 @@ function App() {
                     <Route path="/" element={<HomePage />}></Route>
                     <Route path="/Login" element={<LoginPage />} />
                     <Route path="/PNRInfo" element={<PNRInfo />} />
-                    <Route path="/RestaurantInfo" element={<Restaurants />} />
+                                   <Route path="/RestaurantInfo" element={<Restaurants />} />
                     <Route path="/Cart" element={<Cart />} />
                     <Route path="/CheckOut" element={<Checkout />} />
                     <Route path="/Pay" element={<FinalConfirmation />} />

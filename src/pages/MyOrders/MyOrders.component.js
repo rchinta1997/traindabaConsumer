@@ -112,6 +112,8 @@ function getUserOrder()
               
           } else {
               //setIsError(true);
+              setOrders([]);
+
               //setPnrData(undefined);
           }
       })
