@@ -9,12 +9,14 @@ import dayjs from 'dayjs';
 function AutocompleteComponent(props) {
   const [value, setValue] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+    const [stationNamesArr, setStationNamesArr] = useState([])
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const context = useContext(cartContext);
 
   useEffect(() => {
-    
+    if (props.name === "TRAINNO"){
+        
     if (value.trim() === '') {
       setSuggestions([]);
       return;
@@ -30,6 +32,7 @@ function AutocompleteComponent(props) {
                     response.data.body.trains.forEach(element => {
                       list.push(element.trainNo+ "-"+element.trainName );
                     });
+                    console.log("train-list", list)
                     setSuggestions(list);
                   }
               }
@@ -40,46 +43,75 @@ function AutocompleteComponent(props) {
         console.log(context);
       });
     }
+
+    }
+  
   }, [value, context]);
+  const handleChange = async (newValue) => {
+    setValue(newValue);
 
-  const handleChange = (newValue) => {
-      setValue(newValue);
-            if(newValue){
-        let array = newValue?.split("-");
-        if(newValue && newValue.split("-").length > 1){ 
-          let trainNo = array[0];
-          let trainName = array[1];      
-          context.trainInfo = {
-              "trainNo" : trainNo,
-              "trainName" : trainName,
-              "travelDate" : dayjs(new Date()).format('YYYY-MM-DD')
-          }
-          axios.get(process.env.REACT_APP_API_URL + `/Irctc/getStationsForTrainNo/${trainNo}:${context.trainInfo.travelDate}`)
-        .then((response) => {
-          if(response && response?.data?.body){
-              if(response?.data?.success){
-                if(response?.data?.body?.stations && response?.data?.body?.stations.length>0){
-                  let startingSttn = response.data?.body?.stations[0].code;
-                  context.trainInfo.startStation = startingSttn;
-                  console.log(context);
-                  axios.get(process.env.REACT_APP_API_URL + `/Irctc/getStationsWithScheduleForTrainNo/${trainNo}:${context.trainInfo.travelDate}:${context.trainInfo.startStation}`)
-                  .then((response) => {
-                    if(response && response?.data?.body){
-                      console.log(response);
-                      context.trainInfo.stations = response?.data?.body.stations;
-                    }});
+    if (newValue && props.name === 'TRAINNO') {
+      const array = newValue?.split("-");
+      if (newValue && newValue.split("-").length > 1) {
+        const trainNo = array[0];
+        const trainName = array[1];
+        context.trainInfo = {
+          "trainNo": trainNo,
+          "trainName": trainName,
+          "travelDate": dayjs(new Date()).format('YYYY-MM-DD')
+        };
 
-                }
-              }
+        try {
+          const stationsResponse = await axios.get(process.env.REACT_APP_API_URL + `/Irctc/getStationsForTrainNo/${trainNo}:${context.trainInfo.travelDate}`);
+
+          if (stationsResponse && stationsResponse.data.body && stationsResponse.data.success) {
+            const startingSttn = stationsResponse.data.body.stations[0].code;
+            context.trainInfo.startStation = startingSttn;
+
+            const scheduleResponse = await axios.get(process.env.REACT_APP_API_URL + `/Irctc/getStationsWithScheduleForTrainNo/${trainNo}:${context.trainInfo.travelDate}:${context.trainInfo.startStation}`);
+
+            if (scheduleResponse && scheduleResponse.data.body) {
+              context.trainInfo.stations = scheduleResponse.data.body.stations;
             }
-          })
+          }
+
           props.onData(context.trainInfo);
-          props.getTheTrainNbrValue(newValue)
+          props.getTheTrainNbrValue(newValue);
           console.log("in auto completed");
           console.log(context);
+        } catch (error) {
+          console.error('Error fetching data:', error);
         }
       }
-  };
+    } 
+
+      if (newValue && props.name === 'STATIONNAME') {
+        try {
+          const response = await axios.get('http://localhost:8080' +`/stations/getStationsByName/${newValue}`);
+          console.log("station-res", response.data.success, response.data.body);
+          let list = [];
+          if(response?.data?.body && response?.data?.body?.length > 0){
+
+
+          response.data.body.forEach(element => {
+            list.push(element.StationName );
+          setSuggestions(list);
+
+        })
+
+        props.getTheStaionName(newValue)
+
+      }
+
+    }
+         catch (error) {
+          console.error('Error fetching station names:', error);
+        }
+      
+    
+  }
+
+}
 
 
   return (
@@ -90,7 +122,7 @@ function AutocompleteComponent(props) {
         value={value}
         onChange={handleChange}
         label=""
-        placeholder="Enter Train Number"
+        placeholder={props.placeholder}
         loading={loading.toString()}
       />
     </div>
