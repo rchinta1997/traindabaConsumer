@@ -87,7 +87,7 @@ function AutocompleteComponent(props) {
 
       if (newValue && props.name === 'STATIONNAME') {
         try {
-          const response = await axios.get('http://localhost:8080' +`/stations/getStationsByName/${newValue}`);
+          const response = await axios.get(process.env.REACT_APP_API_URL +`/stations/getStationsByName/${newValue}`);
           console.log("station-res", response.data.success, response.data.body);
           let list = [];
           if(response?.data?.body && response?.data?.body?.length > 0){
