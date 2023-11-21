@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import AutocompleteComponent from "../../utility/autocomplete.component";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -6,6 +6,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import cartContext from "../../Context/cart-context";
 import dayjs from "dayjs";
+import axios from "axios";
+import { Toast } from 'primereact/toast';
+
 
 
 const Banner = (props) => {
@@ -18,6 +21,10 @@ const Banner = (props) => {
   const [trainInfo, setTrainInfo] = useState({});
   const [type, setType] = useState("trainno");
   const [searchStationName, setSearchStationName] = useState("stationName")
+  const [stationNameValue, setStationNameValue] = useState('')
+  const toast = useRef(null);
+
+
   const [trainNbrValue, setTrainNbrValue] = useState('')
   
 
@@ -28,7 +35,7 @@ const Banner = (props) => {
     // console.log("onselectData-inBanner", context?.trainInfo, context)
     // console.log("final-context", context)
   }
-  const today = new Date();
+    const today = new Date();
   const handleDateChange = (val) => {
     if (val[0] !== null && val[1] === null) {
       setBoardingDate((current) => new Date(current.getFullYear() + 1, 1));
@@ -44,6 +51,24 @@ const Banner = (props) => {
   function searchByTrainNo() {
     navigate("/PNRInfo", { state: { searchBy: "TRAIN", search: context.trainInfo.trainNo + ":" + context.trainInfo.travelDate } });
   }
+  function searchByStationName(){
+      try {
+        const result =  searchByTrainNoAndPnr();
+        console.log("result", result)
+    
+        if (result) {
+          console.log("searchValue", searchValue)
+          navigate("/PNRInfo", { state: { searchBy: "PNR", search: searchValue } });
+          
+        } else {
+          toast.current.show({ severity: 'error', summary: 'Error', detail: "Choose the correct PNR", life: 3000 });
+          console.log("Search failed");
+        }
+      } catch (error) {
+            console.error(error);
+      }
+    
+  }
 
 
   useEffect(() => {
@@ -51,16 +76,55 @@ const Banner = (props) => {
     console.log(context);
   }, [context]);
 
+console.log("stationName", searchValue)
 
-  const searchByStationName= () =>{
 
+
+const checkPnrNumber = async (value) => {
+  return axios
+    .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${value}`)
+    .then((response) => {
+      console.log("===============searchByPNR===============");
+      console.log(response.data, "pnr-res-banner");
+      if (response.data.success) {
+        const newArr = response.data.body.stations
+        console.log("newArr", newArr)
+        return newArr;
+      } else {
+      }
+    });
+};
+
+const searchByTrainNoAndPnr = async () => {
+  try {
+    const to = await checkPnrNumber(searchValue);
+    console.log(to, "to");
+
+    // Use some to check if stationNameValue exists in any of the objects
+    return to.some(each => each.name === stationNameValue);
+  } catch (err) {
+    console.error(err);
+    // Return false in case of an error
+    return false;
   }
+};
+
+
+
+
   const getTheTrainNbrValue= (trainBrSearchValue) =>{
     setTrainNbrValue(trainBrSearchValue)
 
   }
 
+  const getTheStationName= (newData) =>{
+    console.log("station-name-getting", newData)
+    setStationNameValue(newData)
+  }
+  
+
   return (
+    <>
 
     <header>
       <div class="container">
@@ -153,7 +217,7 @@ const Banner = (props) => {
                 <form method="post" id="train_form">
                   <div className="row">
                     <div className="col-md-5 mb-1">
-                      <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" getTheTrainNbrValue={ getTheTrainNbrValue} />
+                      <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" getTheTrainNbrValue={ getTheTrainNbrValue} name="TRAINNO" placeholder="Enter Train Number" />
                     </div>
                     <div className="col-md-3 boarding-date">
                     <input
@@ -204,15 +268,9 @@ const Banner = (props) => {
                 aria-labelledby="pills-contact-tab"
               >
                 <form method="post" id="station_form">
-                  <div className="row ">
-                    <div className="col-md-5 col-sm-8 col-xs-12 mb-1">
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="station"
-                        id="station"
-                        placeholder="Enter Station Name"
-                      ></input>
+                  <div className="row">
+                  <div className="col-md-5 mb-1">
+                      <AutocompleteComponent type={searchStationName}  className="col-md-4" getTheStaionName={ getTheStationName} name='STATIONNAME' placeholder="Enter Station Name" />
                     </div>
                     <div className="col-md-3 col-sm-8 col-xs-12">
                       <input
@@ -224,9 +282,13 @@ const Banner = (props) => {
                         onChange={(e) => setSearchValue(e.target.value)}
                       ></input>
                     </div>
+                   
                     <div className="col-md-4 col-sm-4 col-xs-12">
-                      <input type="submit" className="btn btn-primary btn-block" value="Order Food"onClick={() => searchByPNR()}></input>
+                      <input type="submit" className="btn btn-primary btn-block" value="Order Food" onClick={() => searchByStationName()}></input>
                     </div>
+
+                   
+
                   </div>
                 </form>
               </div>
@@ -246,6 +308,11 @@ const Banner = (props) => {
         </p>
       </div>
     </header>
+     <div>
+     <Toast ref={toast} />   
+</div>
+</>
+
     // <div className="ritekhana-banner-one ">
 
 
@@ -402,6 +469,8 @@ const Banner = (props) => {
     //     </div>
     //   </div>
     // </div>
+   
+    
 
   );
 };

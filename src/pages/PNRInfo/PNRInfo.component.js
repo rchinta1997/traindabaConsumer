@@ -28,8 +28,10 @@ const PNRInfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log("pnr-data", pnrData, location?.state?.stationName)
 
-    // Function to handle the storage event
+
+  // Function to handle the storage event
     const handleStorageChange = () => {
       const _token = localStorage.getItem("token");
       if (!(_token)) {
@@ -82,11 +84,13 @@ const PNRInfo = () => {
     }, 8000);
 
     if (location.state.searchBy === 'PNR') {
+      console.log("location.state.search", location.state.search)
       axios
         .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
         .then((response) => {
           console.log("===============searchByPNR===============")
           console.log(response.data.body)
+          console.log("response", response)
           if (response.data.success) {
             setLoading(false);
             setIsError(false);
@@ -157,6 +161,61 @@ const PNRInfo = () => {
 
 
     }
+    // if(location.state.searchBy === 'STATIONAME'){
+    //   axios
+    //   // .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
+    //   // .get(process.env.REACT_APP_BASE_URL + "/stations/getAllStations")
+    //   .get(process.env.REACT_APP_BASE_URL + '/Outlets/getAllOutlets')
+    //   .then((response) => {
+    //     console.log("===============searchByPNR===============")
+    //     // console.log(response.data.body)
+    //     if (response.data.success) {
+    //       setLoading(false);
+    //       setIsError(false);
+    //       setPnrData(response.data.body);
+    //       console.log("all-res",  response.data)
+    //       // let passengerInfo = {
+    //       //   pnrNumber: location.state.search,
+    //       //   user_Id: "",
+    //       //   name: "",
+    //       //   email: "",
+    //       //   mobileNumber: "",
+    //       //   vendorId: "",
+    //       //   outletId: "",
+    //       //   Comment: "",
+    //       //   pnr: "",
+    //       //   booking_Date: "",
+    //       //   delivery_Date: "",
+    //       //   stationCode: "",
+    //       //   stationName: "",
+    //       //   journeyDate: response.data.body.trainInfo.dt,
+    //       //   coachPosition: response.data.body.seatInfo.coach,
+    //       //   berthNo: response.data.body.seatInfo.berth,
+    //       //   noOfSeats: response.data.body.seatInfo.noOfSeats,
+    //       //   trainNo: response.data.body.trainInfo.trainNo,
+    //       //   trainName: response.data.body.trainInfo.name
+    //       // };
+    //       // let userdata = localStorage.getItem("user");
+    //       // if (userdata) {
+    //       //   let user = JSON.parse(userdata);
+    //       //   passengerInfo.email = user.emailID;
+    //       //   passengerInfo.mobileNumber = user.mobileNumber;
+    //       // }
+
+    //       // setPassengerInfo(passengerInfo);
+    //       // localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
+    //       // console.log("PassengerInfo", JSON.parse(localStorage.getItem("PassengerInfo")));
+    //     } else {
+    //       setIsError(true);
+    //       setPnrData(undefined);
+    //       setLoading(false);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("There was an error!", error);
+    //   });
+
+    // }
 
 
 
@@ -253,6 +312,8 @@ const PNRInfo = () => {
 
 
 
+
+
   return (
     <>
        
@@ -269,8 +330,6 @@ const PNRInfo = () => {
         {loading ? (<div className="loader-container">
           <div className="spinner"></div>
         </div>) : null}
-
-
         <div className="row">
           <div className="col-md-12">
             {isError && (
@@ -291,7 +350,7 @@ const PNRInfo = () => {
                         <td>Train :</td>
                         <td>
                           {" "}
-                          {pnrData.trainInfo.trainNo} - {pnrData.trainInfo.name}
+                          {pnrData.trainInfo.trainNo} - {pnrData.trainInfo.trainName}
                         </td>
                       </tr>
                     </tbody>
