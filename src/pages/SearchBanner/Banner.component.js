@@ -26,14 +26,10 @@ const Banner = (props) => {
 
 
   const [trainNbrValue, setTrainNbrValue] = useState('')
-  
+
 
   const selectedData = (trainInfo) => {
-    // dispatch({ type: SET_TRAIN_INFO, trainInfo: trainInfo });
     context?.updateTrainInfo(trainInfo)
-    // context.trainInfo = {...trainInfo};
-    // console.log("onselectData-inBanner", context?.trainInfo, context)
-    // console.log("final-context", context)
   }
     const today = new Date();
   const handleDateChange = (val) => {
@@ -48,27 +44,8 @@ const Banner = (props) => {
     localStorage.setItem("SearchValue", JSON.stringify(searchValue))
     navigate("/PNRInfo", { state: { searchBy: "PNR", search: searchValue } });
   }
-  function searchByTrainNo() {
-    navigate("/PNRInfo", { state: { searchBy: "TRAIN", search: context.trainInfo.trainNo + ":" + context.trainInfo.travelDate } });
-  }
-  function searchByStationName(){
-      try {
-        const result =  searchByTrainNoAndPnr();
-        console.log("result", result)
-    
-        if (result) {
-          console.log("searchValue", searchValue)
-          navigate("/PNRInfo", { state: { searchBy: "PNR", search: searchValue } });
-          
-        } else {
-          toast.current.show({ severity: 'error', summary: 'Error', detail: "Choose the correct PNR", life: 3000 });
-          console.log("Search failed");
-        }
-      } catch (error) {
-            console.error(error);
-      }
-    
-  }
+ 
+ 
 
 
   useEffect(() => {
@@ -95,21 +72,75 @@ const checkPnrNumber = async (value) => {
     });
 };
 
-const searchByTrainNoAndPnr = async () => {
+const searchByStationNameAndPnr = async () => {
   try {
     const to = await checkPnrNumber(searchValue);
     console.log(to, "to");
+    // if (trainNbrValue){
+    // return to?.map(each => each?.trainNo?.toLowerCase()).includes(trainNbrValue?.toLowerCase());
 
-    // Use some to check if stationNameValue exists in any of the objects
-    return to.some(each => each.name === stationNameValue);
+
+    // }
+
+    // return to.map(each => each.name).includes(stationNameValue)
+    return to?.map(each => each?.name?.toLowerCase()).includes(stationNameValue?.toLowerCase());
+
   } catch (err) {
     console.error(err);
-    // Return false in case of an error
     return false;
   }
 };
 
+const searchByTrainNoAndPnr = async () => {
+  try {
+    const to = await checkPnrNumber(searchValue);
+    console.log(to, "to");
+    return to?.map(each => each?.trainNo).includes(trainNbrValue);
 
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};
+
+async function matchingTrainNoAndPnr() {
+  try {
+    const result = await searchByTrainNoAndPnr();
+    console.log("result", result);
+
+    if (result) {
+      console.log("searchValue", searchValue);
+      // navigate("/PNRInfo", { state: { searchBy: "PNR", search: searchValue } });
+    navigate("/PNRInfo", { state: { searchBy: "TRAIN", search: context.trainInfo.trainNo + ":" + context.trainInfo.travelDate } });
+
+    }
+    // else if (result  === undefined){
+    //   toast.current.show({
+    //     severity: 'error',
+    //     summary: 'Error',
+    //     detail: "Server Error",
+    //     life: 3000
+    //   });
+    // }
+    
+    else {
+      toast.current.show({
+        severity: 'error',
+        summary: 'Error',
+        detail: "Enter the correct Train number or PNR",
+        life: 3000
+      });
+      console.log("Search failed");
+    }
+    
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const searchByTrainNo = async () => {
+  await matchingTrainNoAndPnr();
+};
 
 
   const getTheTrainNbrValue= (trainBrSearchValue) =>{
@@ -121,7 +152,44 @@ const searchByTrainNoAndPnr = async () => {
     console.log("station-name-getting", newData)
     setStationNameValue(newData)
   }
+
+
+  async function matchingStationNameAndPnr() {
+    try {
+      const result = await searchByStationNameAndPnr();
+      console.log("result", result);
   
+      if (result) {
+        console.log("searchValue", searchValue);
+        navigate("/PNRInfo", { state: { searchBy: "PNR", search: searchValue } });
+      }
+      // else if (result  === undefined){
+      //   toast.current.show({
+      //     severity: 'error',
+      //     summary: 'Error',
+      //     detail: "Server Error",
+      //     life: 3000
+      //   });
+      // }
+      
+      else {
+        toast.current.show({
+          severity: 'error',
+          summary: 'Error',
+          detail: "Enter the correct station name or PNR",
+          life: 3000
+        });
+        console.log("Search failed");
+      }
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const searchByStationName = async () => {
+    await matchingStationNameAndPnr();
+  };
 
   return (
     <>
@@ -214,7 +282,12 @@ const searchByTrainNoAndPnr = async () => {
                 role="tabpanel"
                 aria-labelledby="pills-profile-tab"
               >
-                <form method="post" id="train_form">
+                <form  id="train_form" onSubmit={(e) =>{
+                   e.preventDefault()
+                   searchByTrainNo()}
+
+                }
+                 >
                   <div className="row">
                     <div className="col-md-5 mb-1">
                       <AutocompleteComponent type={type} onData={selectedData} className="col-md-4" getTheTrainNbrValue={ getTheTrainNbrValue} name="TRAINNO" placeholder="Enter Train Number" />
@@ -253,7 +326,7 @@ const searchByTrainNoAndPnr = async () => {
                     </div> */}
 
                     <div className="col-md-4">
-                      <input type="submit" className="btn btn-primary btn-block" onClick={() => trainNbrValue ?  searchByTrainNo() : searchByPNR()}
+                      <input type="submit" className="btn btn-primary btn-block"
                       value="Order Food"></input>
                     </div>
                   </div>
@@ -267,7 +340,10 @@ const searchByTrainNoAndPnr = async () => {
                 role="tabpanel"
                 aria-labelledby="pills-contact-tab"
               >
-                <form method="post" id="station_form">
+                <form  onSubmit={(e) => {
+        e.preventDefault(); 
+        searchByStationName();
+      }} id="station_form">
                   <div className="row">
                   <div className="col-md-5 mb-1">
                       <AutocompleteComponent type={searchStationName}  className="col-md-4" getTheStaionName={ getTheStationName} name='STATIONNAME' placeholder="Enter Station Name" />
@@ -284,7 +360,7 @@ const searchByTrainNoAndPnr = async () => {
                     </div>
                    
                     <div className="col-md-4 col-sm-4 col-xs-12">
-                      <input type="submit" className="btn btn-primary btn-block" value="Order Food" onClick={() => searchByStationName()}></input>
+                      <input type="submit" className="btn btn-primary btn-block" value="Order Food" />
                     </div>
 
                    

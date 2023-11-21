@@ -161,63 +161,6 @@ const PNRInfo = () => {
 
 
     }
-    // if(location.state.searchBy === 'STATIONAME'){
-    //   axios
-    //   // .get(process.env.REACT_APP_API_URL + `/Irctc/searchByPNR/${location.state.search}`)
-    //   // .get(process.env.REACT_APP_BASE_URL + "/stations/getAllStations")
-    //   .get(process.env.REACT_APP_BASE_URL + '/Outlets/getAllOutlets')
-    //   .then((response) => {
-    //     console.log("===============searchByPNR===============")
-    //     // console.log(response.data.body)
-    //     if (response.data.success) {
-    //       setLoading(false);
-    //       setIsError(false);
-    //       setPnrData(response.data.body);
-    //       console.log("all-res",  response.data)
-    //       // let passengerInfo = {
-    //       //   pnrNumber: location.state.search,
-    //       //   user_Id: "",
-    //       //   name: "",
-    //       //   email: "",
-    //       //   mobileNumber: "",
-    //       //   vendorId: "",
-    //       //   outletId: "",
-    //       //   Comment: "",
-    //       //   pnr: "",
-    //       //   booking_Date: "",
-    //       //   delivery_Date: "",
-    //       //   stationCode: "",
-    //       //   stationName: "",
-    //       //   journeyDate: response.data.body.trainInfo.dt,
-    //       //   coachPosition: response.data.body.seatInfo.coach,
-    //       //   berthNo: response.data.body.seatInfo.berth,
-    //       //   noOfSeats: response.data.body.seatInfo.noOfSeats,
-    //       //   trainNo: response.data.body.trainInfo.trainNo,
-    //       //   trainName: response.data.body.trainInfo.name
-    //       // };
-    //       // let userdata = localStorage.getItem("user");
-    //       // if (userdata) {
-    //       //   let user = JSON.parse(userdata);
-    //       //   passengerInfo.email = user.emailID;
-    //       //   passengerInfo.mobileNumber = user.mobileNumber;
-    //       // }
-
-    //       // setPassengerInfo(passengerInfo);
-    //       // localStorage.setItem("PassengerInfo", JSON.stringify(passengerInfo));
-    //       // console.log("PassengerInfo", JSON.parse(localStorage.getItem("PassengerInfo")));
-    //     } else {
-    //       setIsError(true);
-    //       setPnrData(undefined);
-    //       setLoading(false);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("There was an error!", error);
-    //   });
-
-    // }
-
-
 
   }, []);
 
