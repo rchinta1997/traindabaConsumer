@@ -1,4 +1,4 @@
-import React, { useState , useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "../Navbar/Navbar.component";
 import Banner from "../SearchBanner/Banner.component";
 import DownloadLinks from "./DownloadLinks.component";
@@ -17,67 +17,54 @@ import TrackOrder from "../TrackOrder/TrackOrder.component";
 import cartContext from "../../Context/cart-context";
 import Contact from "../Contact/Contact.component";
 
-
 const HomePage = () => {
-  
   const context = useContext(cartContext);
-  console.log("====HomePage======")
+  console.log("====HomePage======");
   const _token = localStorage.getItem("token");
-  console.log("====_token======"+_token)
+  console.log("====_token======" + _token);
 
-  useEffect(() => {
-    
-    
-  }, [context]);
-  if(_token)
-  {
+  useEffect(() => {}, [context]);
+  if (_token) {
     return (
       <>
-        
         <Banner></Banner>
-    
-         {/* <PNRInfo></PNRInfo>     
+
+        {/* <PNRInfo></PNRInfo>     
         <OrderConfirmation></OrderConfirmation>     
         <Restaurants></Restaurants>   
         <TrackOrder></TrackOrder>     
                */}
-          
-          <HowToOrder></HowToOrder>         
-          {/* <RailTools></RailTools> */}
-          <Testimonials></Testimonials>
-          <VendorRegistration></VendorRegistration>
-          <DownloadLinks></DownloadLinks>
-          <TravelBlog></TravelBlog>
-       
+
+        <HowToOrder></HowToOrder>
+        {/* <RailTools></RailTools> */}
+        <Testimonials></Testimonials>
+        <VendorRegistration></VendorRegistration>
+        {/* <DownloadLinks></DownloadLinks> */}
+        <TravelBlog></TravelBlog>
+
         <HowToOrderGuide></HowToOrderGuide>
-       
       </>
     );
-  }
-  else
-  {
+  } else {
     return (
       <>
-        
-         <Banner></Banner> 
-      
+        <Banner></Banner>
+
         {/* <PNRInfo></PNRInfo>     
         <OrderConfirmation></OrderConfirmation>     
         <Restaurants></Restaurants>            */}
-          <Login></Login>  
-          <HowToOrder></HowToOrder>       
-          {/* <RailTools></RailTools> */}
-          <Testimonials></Testimonials>
-          <VendorRegistration></VendorRegistration>
-          <DownloadLinks></DownloadLinks>
-          <TravelBlog></TravelBlog>
-  
+        <Login></Login>
+        <HowToOrder></HowToOrder>
+        {/* <RailTools></RailTools> */}
+        <Testimonials></Testimonials>
+        <VendorRegistration></VendorRegistration>
+        {/* <DownloadLinks></DownloadLinks> */}
+        <TravelBlog></TravelBlog>
+
         <HowToOrderGuide></HowToOrderGuide>
-       
       </>
     );
   }
- 
 };
 
 export default HomePage;
