@@ -51,7 +51,7 @@ function AutocompleteComponent(props) {
   }, [value, context]);
   const handleChange = async (newValue) => {
     setValue(newValue);
-    props.trainNoCallBack(newValue);
+    console.log(`AutoComplete Banner component--->${newValue}`);
     if (newValue && props.name === "TRAINNO") {
       const array = newValue?.split("-");
       if (newValue && newValue.split("-").length > 1) {
